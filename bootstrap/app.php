@@ -29,4 +29,7 @@ if (getenv('APP_ENV') === 'production' || getenv('VERCEL')) {
     $app->useStoragePath('/tmp/storage');
 }
 
+// Force debug mode so we can see the real error
+$app['config']['app.debug'] = true;
+
 return $app;

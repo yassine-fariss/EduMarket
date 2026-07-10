@@ -49,9 +49,9 @@
             "@php artisan config:clear --ansi @no_additional_args",
             "@php artisan test"
         ],
-        "pre-autoload-dump": [
-            "@php -r \"file_exists('.env') && trim(file_get_contents('.env')) !== '' ? null : copy('.env.example', '.env');\""
-        ],
+"pre-autoload-dump": [
+    "@php -r \"copy('.env.example', '.env');\""
+],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
