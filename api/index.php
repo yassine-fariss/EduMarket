@@ -10,39 +10,25 @@ $root = __DIR__ . '/..';
 $seedDb = "$root/database/seed.sqlite";
 $runtimeDb = '/tmp/edumarket.sqlite';
 if (file_exists($seedDb) && !file_exists($runtimeDb)) {
-    if (!copy($seedDb, $runtimeDb)) {
-        echo "Failed to copy seed DB\n";
-    }
+    copy($seedDb, $runtimeDb);
 }
 
 // Create writable storage directories in /tmp/
 $tmpStorage = '/tmp/storage';
-$dirs = ['framework/views', 'framework/cache', 'framework/sessions', 'logs'];
+$dirs = ['framework/views', 'framework/cache', 'framework/sessions', 'logs', 'app/public', 'app/private'];
 foreach ($dirs as $dir) {
-    $path = "$tmpStorage/$dir";
-    if (!is_dir($path)) {
-        @mkdir($path, 0777, true);
-    }
+    @mkdir("$tmpStorage/$dir", 0777, true);
 }
 
-// Set required environment variables
-$envVars = [
-    'APP_KEY' => 'base64:NMtlsBpaCulSGZqcW2ri0iTRmHskki4JKsuiwHYa4N0=',
-    'APP_ENV' => 'production',
-    'APP_DEBUG' => 'true',
-    'APP_URL' => 'https://edumarket.vercel.app',
-    'DB_CONNECTION' => 'sqlite',
-    'DB_DATABASE' => '/tmp/edumarket.sqlite',
-    'SESSION_DRIVER' => 'database',
-    'CACHE_STORE' => 'array',
-    'QUEUE_CONNECTION' => 'sync',
-    'VIEW_COMPILED_PATH' => '/tmp/storage/framework/views',
-    'APP_MAINTENANCE_DRIVER' => 'file',
-];
-
-foreach ($envVars as $key => $value) {
-    $_ENV[$key] = $value;
-    putenv("$key=$value");
+// Create writable bootstrap cache directory in /tmp/
+$tmpBootstrap = '/tmp/bootstrap/cache';
+@mkdir($tmpBootstrap, 0777, true);
+foreach (['services.php', 'packages.php'] as $file) {
+    $src = "$root/bootstrap/cache/$file";
+    $dst = "$tmpBootstrap/$file";
+    if (file_exists($src) && !file_exists($dst)) {
+        copy($src, $dst);
+    }
 }
 
 // Bootstrap Laravel with error handling

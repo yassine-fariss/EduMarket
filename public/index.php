@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 define('LARAVEL_START', microtime(true));
 
 // Determine if the application is in maintenance mode...
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+// Check /tmp/ first (Vercel writable path), then the default path
+$maintenance = '/tmp/storage/framework/maintenance.php';
+if (!file_exists($maintenance)) {
+    $maintenance = __DIR__.'/../storage/framework/maintenance.php';
+}
+if (file_exists($maintenance)) {
     require $maintenance;
 }
 
