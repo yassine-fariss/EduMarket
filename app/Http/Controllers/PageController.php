@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class PageController extends Controller
+{
+    public function home(): View
+    {
+        $featured = Product::with('category')
+            ->where('status', 'active')
+            ->inRandomOrder()
+            ->take(8)
+            ->get();
+
+        $newest = Product::with('category')
+            ->where('status', 'active')
+            ->latest()
+            ->take(8)
+            ->get();
+
+        $categories = Category::withCount('products')
+            ->orderBy('name')
+            ->get();
+
+        return view('home', compact('featured', 'newest', 'categories'));
+    }
+
+    public function about(): View
+    {
+        return view('about');
+    }
+
+    public function contact(): View
+    {
+        return view('contact');
+    }
+
+    public function contactSubmit(Request $request)
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'subject' => ['required', 'string', 'max:255'],
+            'message' => ['required', 'string', 'max:5000'],
+        ]);
+
+        return back()->with('success', 'Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.');
+    }
+}
