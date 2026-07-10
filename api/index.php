@@ -15,8 +15,7 @@ if (file_exists($seedDb) && !file_exists($runtimeDb)) {
 
 // Create writable storage directories in /tmp/
 $tmpStorage = '/tmp/storage';
-$dirs = ['framework/views', 'framework/cache', 'framework/sessions', 'logs', 'app/public', 'app/private'];
-foreach ($dirs as $dir) {
+foreach (['framework/views', 'framework/cache', 'framework/sessions', 'logs', 'app/public', 'app/private'] as $dir) {
     @mkdir("$tmpStorage/$dir", 0777, true);
 }
 
@@ -31,9 +30,30 @@ foreach (['services.php', 'packages.php'] as $file) {
     }
 }
 
-// Redirect Laravel cache paths to /tmp/ via env vars (read by normalizeCachePath)
-$_ENV['APP_SERVICES_CACHE'] = '/tmp/bootstrap/cache/services.php';
-$_ENV['APP_PACKAGES_CACHE'] = '/tmp/bootstrap/cache/packages.php';
+// Set all environment variables for Laravel (Vercel may not load .env)
+$env = [
+    'APP_KEY' => 'base64:NMtlsBpaCulSGZqcW2ri0iTRmHskki4JKsuiwHYa4N0=',
+    'APP_ENV' => 'production',
+    'APP_DEBUG' => 'true',
+    'APP_URL' => 'https://edumarket.vercel.app',
+    'DB_CONNECTION' => 'sqlite',
+    'DB_DATABASE' => '/tmp/edumarket.sqlite',
+    'SESSION_DRIVER' => 'database',
+    'CACHE_STORE' => 'array',
+    'QUEUE_CONNECTION' => 'sync',
+    'VIEW_COMPILED_PATH' => '/tmp/storage/framework/views',
+    'LOG_CHANNEL' => 'stderr',
+    'LOG_LEVEL' => 'error',
+    'APP_MAINTENANCE_DRIVER' => 'file',
+    'BROADCAST_CONNECTION' => 'log',
+    'FILESYSTEM_DISK' => 'local',
+    'APP_SERVICES_CACHE' => '/tmp/bootstrap/cache/services.php',
+    'APP_PACKAGES_CACHE' => '/tmp/bootstrap/cache/packages.php',
+];
+foreach ($env as $key => $value) {
+    $_ENV[$key] = $value;
+    putenv("$key=$value");
+}
 
 // Bootstrap Laravel with error handling
 try {
