@@ -50,7 +50,7 @@
             "@php artisan test"
         ],
         "pre-autoload-dump": [
-            "@php -r \"file_exists('.env') && file_get_contents('.env') !== '' ? null : copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') && trim(file_get_contents('.env')) !== '' ? null : copy('.env.example', '.env');\""
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

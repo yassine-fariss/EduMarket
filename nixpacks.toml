@@ -1,7 +1,0 @@
-[phases.install]
-cmds = [
-    "mkdir -p /var/log/nginx && mkdir -p /var/cache/nginx",
-    "APP_URL=http://localhost composer install --ignore-platform-reqs --no-scripts",
-    "APP_URL=http://localhost php artisan package:discover --ansi",
-    "npm install",
-]
