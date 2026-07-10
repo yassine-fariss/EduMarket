@@ -27,9 +27,9 @@ $app = Application::configure(basePath: dirname(__DIR__))
 if (getenv('APP_ENV') === 'production' || getenv('VERCEL')) {
     $app->useBootstrapPath('/tmp/bootstrap');
     $app->useStoragePath('/tmp/storage');
+    $app->booted(function () {
+        config(['app.debug' => true]);
+    });
 }
-
-// Force debug mode so we can see the real error
-$app['config']['app.debug'] = true;
 
 return $app;
