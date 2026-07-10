@@ -20,7 +20,7 @@ foreach ($dirs as $dir) {
     @mkdir("$tmpStorage/$dir", 0777, true);
 }
 
-// Create writable bootstrap cache directory in /tmp/
+// Create writable bootstrap cache directory in /tmp/ and copy cache files
 $tmpBootstrap = '/tmp/bootstrap/cache';
 @mkdir($tmpBootstrap, 0777, true);
 foreach (['services.php', 'packages.php'] as $file) {
@@ -30,6 +30,10 @@ foreach (['services.php', 'packages.php'] as $file) {
         copy($src, $dst);
     }
 }
+
+// Redirect Laravel cache paths to /tmp/ via env vars (read by normalizeCachePath)
+$_ENV['APP_SERVICES_CACHE'] = '/tmp/bootstrap/cache/services.php';
+$_ENV['APP_PACKAGES_CACHE'] = '/tmp/bootstrap/cache/packages.php';
 
 // Bootstrap Laravel with error handling
 try {
