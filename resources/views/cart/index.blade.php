@@ -201,19 +201,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (cb) cb(data);
             } else {
                 showToast(data.message, 'danger');
+                if (btn) btn.disabled = false;
             }
         })
-        .catch(() => showToast('Erreur réseau.', 'danger'))
-        .finally(() => { if (btn) btn.disabled = false; });
+        .catch(() => {
+            showToast('Erreur réseau.', 'danger');
+            if (btn) { btn.disabled = false; btn.innerHTML = btn.dataset.originalHtml; }
+        });
     }
 
     function getInput(pid) { return document.querySelector('.cart-qty-input[data-product-id="' + pid + '"]'); }
     function getRow(pid) { const inp = getInput(pid); return inp ? inp.closest('tr') : null; }
+    function setSpin(btn, spin) {
+        if (spin) {
+            btn.dataset.originalHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+        } else {
+            btn.disabled = false;
+            btn.innerHTML = btn.dataset.originalHtml || btn.innerHTML;
+        }
+    }
 
     // Quantity UP
     table.addEventListener('click', e => {
         const btn = e.target.closest('.qty-up');
-        if (!btn) return;
+        if (!btn || btn.disabled) return;
         const pid = btn.dataset.productId;
         const input = getInput(pid);
         if (!input) return;
@@ -221,9 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const val = parseInt(input.value);
         if (val >= max) return;
         const newVal = val + 1;
-        btn.disabled = true;
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
-        api(updateUrl, { product_id: pid, quantity: newVal }, null, data => {
+        setSpin(btn, true);
+        api(updateUrl, { product_id: pid, quantity: newVal }, btn, data => {
             input.value = newVal;
             const row = getRow(pid);
             if (row) row.querySelector('.cart-subtotal').textContent = data.subtotal.toFixed(2) + ' €';
@@ -237,16 +249,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Quantity DOWN — if quantity would become 0, remove after confirmation
     table.addEventListener('click', e => {
         const btn = e.target.closest('.qty-down');
-        if (!btn) return;
+        if (!btn || btn.disabled) return;
         const pid = btn.dataset.productId;
         const input = getInput(pid);
         if (!input) return;
         const val = parseInt(input.value);
         if (val <= 1) {
             if (!confirm('Retirer ce produit du panier ?')) return;
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
-            api(removeUrl, { product_id: pid }, null, () => {
+            setSpin(btn, true);
+            api(removeUrl, { product_id: pid }, btn, () => {
                 const row = getRow(pid);
                 if (row) row.remove();
                 showToast('Produit retiré du panier.', 'success');
@@ -255,9 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         const newVal = val - 1;
-        btn.disabled = true;
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
-        api(updateUrl, { product_id: pid, quantity: newVal }, null, data => {
+        setSpin(btn, true);
+        api(updateUrl, { product_id: pid, quantity: newVal }, btn, data => {
             input.value = newVal;
             const row = getRow(pid);
             if (row) row.querySelector('.cart-subtotal').textContent = data.subtotal.toFixed(2) + ' €';
@@ -271,19 +281,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Remove product
     table.addEventListener('click', e => {
         const btn = e.target.closest('[data-ajax-remove]');
-        if (!btn) return;
+        if (!btn || btn.disabled) return;
         const pid = btn.dataset.productId;
         if (!confirm('Retirer ce produit du panier ?')) return;
-        btn.disabled = true;
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
-        api(removeUrl, { product_id: pid }, null, () => {
+        setSpin(btn, true);
+        api(removeUrl, { product_id: pid }, btn, () => {
             const row = getRow(pid);
             if (row) row.remove();
             showToast('Produit retiré du panier.', 'success');
-            // If cart is now empty, reload the page to show empty state
-            if (document.querySelectorAll('#cart-table tbody tr').length === 0) {
-                location.reload();
-            }
+            if (document.querySelectorAll('#cart-table tbody tr').length === 0) location.reload();
         });
     });
 
@@ -295,27 +301,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const val = parseInt(input.value);
         const max = parseInt(input.dataset.max);
         const clamped = Math.max(1, Math.min(val || 1, max));
-        if (clamped === parseInt(input.value)) {
-            input.value = clamped;
-            api(updateUrl, { product_id: pid, quantity: clamped }, null, data => {
-                const row = getRow(pid);
-                if (row) row.querySelector('.cart-subtotal').textContent = data.subtotal.toFixed(2) + ' €';
-                const up = row?.querySelector('.qty-up');
-                const down = row?.querySelector('.qty-down');
-                if (up) up.disabled = (clamped >= max);
-                if (down) down.disabled = (clamped <= 1);
-            });
-        }
+        if (clamped !== parseInt(input.value)) input.value = clamped;
+        api(updateUrl, { product_id: pid, quantity: clamped }, null, data => {
+            const row = getRow(pid);
+            if (row) row.querySelector('.cart-subtotal').textContent = data.subtotal.toFixed(2) + ' €';
+            const up = row?.querySelector('.qty-up');
+            const down = row?.querySelector('.qty-down');
+            if (up) up.disabled = (clamped >= max);
+            if (down) down.disabled = (clamped <= 1);
+        });
     });
 
     // Clear cart
     document.querySelector('[data-ajax-clear]')?.addEventListener('click', function () {
+        if (this.disabled) return;
         if (!confirm('Vider le panier ?')) return;
-        this.disabled = true;
+        setSpin(this, true);
         this.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Vidage...';
-        api(clearUrl, {}, null, () => {
-            location.reload();
-        });
+        api(clearUrl, {}, this, () => { location.reload(); });
     });
 });
 </script>
