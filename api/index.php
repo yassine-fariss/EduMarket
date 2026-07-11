@@ -13,6 +13,24 @@ if (file_exists($seedDb) && !file_exists($runtimeDb)) {
     copy($seedDb, $runtimeDb);
 }
 
+// Create cart_items table in runtime database (migration not run on Vercel)
+try {
+    $pdo = new PDO("sqlite:$runtimeDb");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS cart_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        product_id INTEGER NOT NULL,
+        quantity INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT,
+        updated_at TEXT,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+        UNIQUE(user_id, product_id)
+    )");
+} catch (Exception $e) {
+    // Table creation failed, will be handled by Laravel's migration if possible
+}
+
 // Create writable storage directories in /tmp/
 $tmpStorage = '/tmp/storage';
 foreach (['framework/views', 'framework/cache', 'framework/sessions', 'logs', 'app/public', 'app/private'] as $dir) {
