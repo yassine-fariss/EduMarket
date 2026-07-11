@@ -110,17 +110,17 @@
             </section>
         @endif
     </div>
-</x-customer-layout>
 
-@push('scripts')
-<script>
-function qtyStep(step) {
-    const input = document.getElementById('qty-input');
-    let val = parseInt(input.value) || 1;
-    val += step;
-    if (val < 1) val = 1;
-    if (val > parseInt(input.max)) val = parseInt(input.max);
-    input.value = val;
-}
-</script>
-@endpush
+    @push('scripts')
+    <script>
+    function qtyStep(step) {
+        const input = document.getElementById('qty-input');
+        let val = parseInt(input.value) || 1;
+        val += step;
+        if (val < 1) val = 1;
+        if (val > parseInt(input.max)) val = parseInt(input.max);
+        input.value = val;
+    }
+    </script>
+    @endpush
+</x-customer-layout>

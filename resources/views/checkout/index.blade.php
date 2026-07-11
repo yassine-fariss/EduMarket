@@ -140,13 +140,13 @@
             </div>
         </div>
     </div>
-</x-customer-layout>
 
-@push('scripts')
-<script>
-document.getElementById('checkout-form')?.addEventListener('submit', function () {
-    document.getElementById('submit-btn').disabled = true;
-    document.getElementById('submit-btn').innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Traitement en cours...';
-});
-</script>
-@endpush
+    @push('scripts')
+    <script>
+    document.getElementById('checkout-form')?.addEventListener('submit', function () {
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Traitement en cours...';
+    });
+    </script>
+    @endpush
+</x-customer-layout>
