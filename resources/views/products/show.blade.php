@@ -53,7 +53,7 @@
                 <p class="text-muted mb-4">{{ $product->description }}</p>
 
                 @if ($product->stock > 0)
-                    <form method="POST" action="{{ route('cart.add') }}" class="cart-add-form">
+                    <form method="POST" action="{{ route('cart.add') }}" class="cart-add-form" data-ajax-cart>
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <div class="row g-3 align-items-end">
