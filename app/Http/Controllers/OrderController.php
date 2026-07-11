@@ -10,8 +10,7 @@ class OrderController extends Controller
 {
     public function index(Request $request): View
     {
-        $orders = $request->user()
-            ->orders()
+        $orders = Order::where('user_id', $request->user()->id)
             ->with('items.product')
             ->withCount('items')
             ->latest()
