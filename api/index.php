@@ -32,6 +32,7 @@ foreach (['services.php', 'packages.php'] as $file) {
 
 // Set all environment variables for Laravel (Vercel may not load .env)
 $env = [
+    'APP_NAME' => 'EduMarket',
     'APP_KEY' => 'base64:NMtlsBpaCulSGZqcW2ri0iTRmHskki4JKsuiwHYa4N0=',
     'APP_ENV' => 'production',
     'APP_DEBUG' => 'true',
