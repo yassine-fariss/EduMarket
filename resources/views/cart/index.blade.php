@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!toast || !body) return;
         body.textContent = message;
         toast.className = 'toast align-items-center text-bg-' + type + ' border-0';
-        bootstrap.Toast.getOrCreateInstance(toast).show();
+        try { bootstrap.Toast.getOrCreateInstance(toast).show(); } catch {}
     }
 
     function refreshTotals(data) {
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(() => {
-            showToast('Erreur réseau.', 'danger');
+            try { showToast('Erreur réseau.', 'danger'); } catch {}
             if (btn) { btn.disabled = false; btn.innerHTML = btn.dataset.originalHtml; }
         });
     }
