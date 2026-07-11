@@ -13,7 +13,7 @@ class PageController extends Controller
     {
         $featured = Product::with('category')
             ->where('status', 'active')
-            ->inRandomOrder()
+            ->orderBy('title')
             ->take(8)
             ->get();
 
