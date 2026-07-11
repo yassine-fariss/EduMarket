@@ -15,12 +15,9 @@
                 @endif
             </div>
             @if ($items->isNotEmpty())
-                <form method="POST" action="{{ route('cart.clear') }}" class="m-0">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-danger rounded-pill btn-sm">
-                        <i class="bi bi-trash me-1"></i>Vider le panier
-                    </button>
-                </form>
+                <button type="button" class="btn btn-outline-danger rounded-pill btn-sm" data-ajax-clear>
+                    <i class="bi bi-trash me-1"></i>Vider le panier
+                </button>
             @endif
         </div>
 
@@ -103,13 +100,13 @@
                                                 {{ number_format($item['price'] * $item['quantity'], 2) }} €
                                             </td>
                                             <td class="text-end">
-                                                <form method="POST" action="{{ route('cart.remove') }}">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger rounded-circle" aria-label="Retirer">
-                                                        <i class="bi bi-x"></i>
-                                                    </button>
-                                                </form>
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-danger rounded-circle"
+                                                        data-ajax-remove
+                                                        data-product-id="{{ $item['product_id'] }}"
+                                                        aria-label="Retirer">
+                                                    <i class="bi bi-x"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -159,64 +156,165 @@
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const cartTable = document.getElementById('cart-table');
-    if (!cartTable) return;
+document.addEventListener('DOMContentLoaded', () => {
+    const table = document.getElementById('cart-table');
+    if (!table) return;
 
-    function updateCart(button, url, body, callback) {
-        const row = button.closest('tr');
+    const csrf = document.querySelector('meta[name="csrf-token"]')?.content ?? '';
+    const updateUrl = '{{ route("cart.update") }}';
+    const removeUrl = '{{ route("cart.remove") }}';
+    const clearUrl = '{{ route("cart.clear") }}';
+
+    function el(id) { return document.getElementById(id); }
+    function showToast(message, type) {
+        const toast = el('cart-toast');
+        const body = el('cart-toast-body');
+        if (!toast || !body) return;
+        body.textContent = message;
+        toast.className = 'toast align-items-center text-bg-' + type + ' border-0';
+        bootstrap.Toast.getOrCreateInstance(toast).show();
+    }
+
+    function refreshTotals(data) {
+        const count = el('cart-count');
+        const total = el('cart-total');
+        const badge = el('cart-badge');
+        if (count) count.textContent = data.cart_count;
+        if (total) total.textContent = data.cart_total.toFixed(2) + ' €';
+        if (badge) {
+            badge.textContent = data.cart_count;
+            badge.classList.toggle('d-none', data.cart_count === 0);
+        }
+    }
+
+    function api(url, body, btn, cb) {
+        if (btn) btn.disabled = true;
         fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Accept': 'application/json' },
-            body: JSON.stringify(body)
+            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrf, 'Accept': 'application/json' },
+            body: JSON.stringify(body),
         })
         .then(r => r.json())
         .then(data => {
             if (data.success) {
-                const countEl = document.getElementById('cart-count');
-                const totalEl = document.getElementById('cart-total');
-                const navBadge = document.getElementById('cart-badge');
-                if (countEl) countEl.textContent = data.cart_count;
-                if (totalEl) totalEl.textContent = data.cart_total.toFixed(2) + ' €';
-                if (navBadge) { navBadge.textContent = data.cart_count; navBadge.classList.remove('d-none'); }
-                if (callback) callback(data);
+                refreshTotals(data);
+                if (cb) cb(data);
             } else {
-                alert(data.message);
+                showToast(data.message, 'danger');
             }
-        });
+        })
+        .catch(() => showToast('Erreur réseau.', 'danger'))
+        .finally(() => { if (btn) btn.disabled = false; });
     }
 
-    document.querySelectorAll('.qty-up').forEach(btn => {
-        btn.addEventListener('click', function () {
-            const pid = this.dataset.productId;
-            const input = document.querySelector(`.cart-qty-input[data-product-id="${pid}"]`);
-            const newVal = parseInt(input.value) + 1;
-            if (newVal > parseInt(input.dataset.max)) return;
-            updateCart(this, '{{ route("cart.update") }}', { product_id: pid, quantity: newVal }, function (data) {
-                input.value = newVal;
-                const row = input.closest('tr');
-                row.querySelector('.cart-subtotal').textContent = data.subtotal.toFixed(2) + ' €';
-                btn.disabled = (newVal >= parseInt(input.dataset.max));
-                const down = row.querySelector('.qty-down');
-                down.disabled = (newVal <= 1);
-            });
+    function getInput(pid) { return document.querySelector('.cart-qty-input[data-product-id="' + pid + '"]'); }
+    function getRow(pid) { const inp = getInput(pid); return inp ? inp.closest('tr') : null; }
+
+    // Quantity UP
+    table.addEventListener('click', e => {
+        const btn = e.target.closest('.qty-up');
+        if (!btn) return;
+        const pid = btn.dataset.productId;
+        const input = getInput(pid);
+        if (!input) return;
+        const max = parseInt(input.dataset.max);
+        const val = parseInt(input.value);
+        if (val >= max) return;
+        const newVal = val + 1;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+        api(updateUrl, { product_id: pid, quantity: newVal }, null, data => {
+            input.value = newVal;
+            const row = getRow(pid);
+            if (row) row.querySelector('.cart-subtotal').textContent = data.subtotal.toFixed(2) + ' €';
+            btn.disabled = (newVal >= max);
+            btn.innerHTML = '<i class="bi bi-plus"></i>';
+            const down = row?.querySelector('.qty-down');
+            if (down) down.disabled = (newVal <= 1);
         });
     });
 
-    document.querySelectorAll('.qty-down').forEach(btn => {
-        btn.addEventListener('click', function () {
-            const pid = this.dataset.productId;
-            const input = document.querySelector(`.cart-qty-input[data-product-id="${pid}"]`);
-            const newVal = parseInt(input.value) - 1;
-            if (newVal < 1) return;
-            updateCart(this, '{{ route("cart.update") }}', { product_id: pid, quantity: newVal }, function (data) {
-                input.value = newVal;
-                const row = input.closest('tr');
-                row.querySelector('.cart-subtotal').textContent = data.subtotal.toFixed(2) + ' €';
-                btn.disabled = (newVal <= 1);
-                const up = row.querySelector('.qty-up');
-                up.disabled = (newVal >= parseInt(input.dataset.max));
+    // Quantity DOWN — if quantity would become 0, remove after confirmation
+    table.addEventListener('click', e => {
+        const btn = e.target.closest('.qty-down');
+        if (!btn) return;
+        const pid = btn.dataset.productId;
+        const input = getInput(pid);
+        if (!input) return;
+        const val = parseInt(input.value);
+        if (val <= 1) {
+            if (!confirm('Retirer ce produit du panier ?')) return;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+            api(removeUrl, { product_id: pid }, null, () => {
+                const row = getRow(pid);
+                if (row) row.remove();
+                showToast('Produit retiré du panier.', 'success');
+                if (document.querySelectorAll('#cart-table tbody tr').length === 0) location.reload();
             });
+            return;
+        }
+        const newVal = val - 1;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+        api(updateUrl, { product_id: pid, quantity: newVal }, null, data => {
+            input.value = newVal;
+            const row = getRow(pid);
+            if (row) row.querySelector('.cart-subtotal').textContent = data.subtotal.toFixed(2) + ' €';
+            btn.disabled = (newVal <= 1);
+            btn.innerHTML = '<i class="bi bi-dash"></i>';
+            const up = row?.querySelector('.qty-up');
+            if (up) up.disabled = (newVal >= parseInt(input.dataset.max));
+        });
+    });
+
+    // Remove product
+    table.addEventListener('click', e => {
+        const btn = e.target.closest('[data-ajax-remove]');
+        if (!btn) return;
+        const pid = btn.dataset.productId;
+        if (!confirm('Retirer ce produit du panier ?')) return;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+        api(removeUrl, { product_id: pid }, null, () => {
+            const row = getRow(pid);
+            if (row) row.remove();
+            showToast('Produit retiré du panier.', 'success');
+            // If cart is now empty, reload the page to show empty state
+            if (document.querySelectorAll('#cart-table tbody tr').length === 0) {
+                location.reload();
+            }
+        });
+    });
+
+    // Direct input change
+    table.addEventListener('change', e => {
+        const input = e.target.closest('.cart-qty-input');
+        if (!input) return;
+        const pid = input.dataset.productId;
+        const val = parseInt(input.value);
+        const max = parseInt(input.dataset.max);
+        const clamped = Math.max(1, Math.min(val || 1, max));
+        if (clamped === parseInt(input.value)) {
+            input.value = clamped;
+            api(updateUrl, { product_id: pid, quantity: clamped }, null, data => {
+                const row = getRow(pid);
+                if (row) row.querySelector('.cart-subtotal').textContent = data.subtotal.toFixed(2) + ' €';
+                const up = row?.querySelector('.qty-up');
+                const down = row?.querySelector('.qty-down');
+                if (up) up.disabled = (clamped >= max);
+                if (down) down.disabled = (clamped <= 1);
+            });
+        }
+    });
+
+    // Clear cart
+    document.querySelector('[data-ajax-clear]')?.addEventListener('click', function () {
+        if (!confirm('Vider le panier ?')) return;
+        this.disabled = true;
+        this.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Vidage...';
+        api(clearUrl, {}, null, () => {
+            location.reload();
         });
     });
 });
