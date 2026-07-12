@@ -10,11 +10,11 @@
         <div class="col-lg-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
-                    <h5 class="fw-bold mb-0">{{ $isEdit ? 'Modifier la catégorie' : 'Nouvelle catégorie' }}</h5>
+                    <h5 class="fw-bold mb-0">{{ $isEdit ? 'Edit Category' : 'New Category' }}</h5>
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
-                        <x-input-label for="name" value="Nom *" />
+                        <x-input-label for="name" value="Name *" />
                         <x-text-input id="name" class="w-100" type="text" name="name"
                                       :value="old('name', $isEdit ? $category->name : '')" required />
                         <x-input-error :messages="$errors->get('name')" />
@@ -26,9 +26,9 @@
                             <x-text-input id="slug" class="w-100" type="text" name="slug"
                                           :value="old('slug', $isEdit ? $category->slug : '')" required />
                             <button type="button" class="btn btn-outline-secondary" id="generate-slug"
-                                    title="Générer depuis le nom">⟳</button>
+                                    title="Generate from name">⟳</button>
                         </div>
-                        <div class="form-text">Identifiant unique pour l'URL. Lettres, chiffres et tirets.</div>
+                        <div class="form-text">Unique URL identifier. Letters, numbers and hyphens.</div>
                         <x-input-error :messages="$errors->get('slug')" />
                     </div>
 
@@ -40,9 +40,9 @@
 
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-primary">
-                            {{ $isEdit ? 'Mettre à jour' : 'Créer la catégorie' }}
+                            {{ $isEdit ? 'Update' : 'Create Category' }}
                         </button>
-                        <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-secondary">Annuler</a>
+                        <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-secondary">Cancel</a>
                     </div>
                 </div>
             </div>

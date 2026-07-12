@@ -1,22 +1,22 @@
-<x-customer-layout title="Panier">
+<x-customer-layout title="Cart">
     <div class="container py-4">
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Accueil</a></li>
-                <li class="breadcrumb-item active">Panier</li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Home</a></li>
+                <li class="breadcrumb-item active">Cart</li>
             </ol>
         </nav>
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="fw-bold mb-0">Mon panier</h2>
+                <h2 class="fw-bold mb-0">My Cart</h2>
                 @if ($items->isNotEmpty())
-                    <p class="text-muted small mb-0">{{ $items->sum('quantity') }} article(s)</p>
+                    <p class="text-muted small mb-0">{{ $items->sum('quantity') }} item(s)</p>
                 @endif
             </div>
             @if ($items->isNotEmpty())
                 <button type="button" class="btn btn-outline-danger rounded-pill btn-sm" data-ajax-clear>
-                    <i class="bi bi-trash me-1"></i>Vider le panier
+                    <i class="bi bi-trash me-1"></i>Clear cart
                 </button>
             @endif
         </div>
@@ -24,9 +24,9 @@
         @if ($items->isEmpty())
             <div class="card-modern bg-white text-center py-5">
                 <i class="bi bi-cart-x text-muted" style="font-size: 4rem;"></i>
-                <p class="text-muted mb-3 mt-3">Votre panier est vide.</p>
+                <p class="text-muted mb-3 mt-3">Your cart is empty.</p>
                 <a href="{{ route('shop.index') }}" class="btn btn-primary rounded-pill px-4">
-                    <i class="bi bi-bag me-2"></i>Découvrir nos produits
+                    <i class="bi bi-bag me-2"></i>Browse our products
                 </a>
             </div>
         @else
@@ -37,10 +37,10 @@
                             <table class="table align-middle mb-0 cart-table" id="cart-table">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>Produit</th>
-                                        <th class="text-center">Prix</th>
-                                        <th class="text-center">Quantité</th>
-                                        <th class="text-end">Sous-total</th>
+                                        <th>Product</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Qty</th>
+                                        <th class="text-end">Subtotal</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -74,7 +74,7 @@
                                                     <button type="button"
                                                             class="btn btn-sm btn-outline-secondary rounded-circle qty-down"
                                                             data-product-id="{{ $item['product_id'] }}"
-                                                            aria-label="Diminuer"
+                                                            aria-label="Decrease"
                                                             {{ $item['quantity'] <= 1 ? 'disabled' : '' }}>
                                                         <i class="bi bi-dash"></i>
                                                     </button>
@@ -90,7 +90,7 @@
                                                     <button type="button"
                                                             class="btn btn-sm btn-outline-secondary rounded-circle qty-up"
                                                             data-product-id="{{ $item['product_id'] }}"
-                                                            aria-label="Augmenter"
+                                                            aria-label="Increase"
                                                             {{ $item['quantity'] >= $item['stock'] ? 'disabled' : '' }}>
                                                         <i class="bi bi-plus"></i>
                                                     </button>
@@ -104,7 +104,7 @@
                                                         class="btn btn-sm btn-outline-danger rounded-circle"
                                                         data-ajax-remove
                                                         data-product-id="{{ $item['product_id'] }}"
-                                                        aria-label="Retirer">
+                                                        aria-label="Remove">
                                                     <i class="bi bi-x"></i>
                                                 </button>
                                             </td>
@@ -119,16 +119,16 @@
                 <div class="col-lg-4">
                     <div class="card-modern bg-white">
                         <div class="p-3 border-bottom">
-                            <h5 class="fw-bold mb-0"><i class="bi bi-receipt me-2 text-primary"></i>Résumé</h5>
+                            <h5 class="fw-bold mb-0"><i class="bi bi-receipt me-2 text-primary"></i>Summary</h5>
                         </div>
                         <div class="p-4">
                             <div class="d-flex justify-content-between mb-2">
-                                <span class="text-muted">Articles</span>
+                                <span class="text-muted">Items</span>
                                 <span class="fw-medium" id="cart-count">{{ $items->sum('quantity') }}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-3">
-                                <span class="text-muted">Livraison</span>
-                                <span class="text-muted small">Calculée à la commande</span>
+                                <span class="text-muted">Shipping</span>
+                                <span class="text-muted small">Calculated at checkout</span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between mb-3">
@@ -139,11 +139,11 @@
                             </div>
                             @auth
                                 <a href="{{ route('checkout.index') }}" class="btn btn-primary w-100 rounded-pill">
-                                    <i class="bi bi-box-seam me-2"></i>Commander
+                                    <i class="bi bi-box-seam me-2"></i>Checkout
                                 </a>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-primary w-100 rounded-pill">
-                                    <i class="bi bi-person me-2"></i>Connectez-vous pour commander
+                                    <i class="bi bi-person me-2"></i>Log in to checkout
                                 </a>
                             @endauth
                         </div>
@@ -204,7 +204,7 @@
                 }
             })
             .catch(() => {
-                try { showToast('Erreur réseau.', 'danger'); } catch {}
+                try { showToast('Network error.', 'danger'); } catch {}
                 if (btn) { btn.disabled = false; btn.innerHTML = btn.dataset.originalHtml; }
             });
         }
@@ -245,7 +245,7 @@
             });
         });
 
-        // Quantity DOWN — if quantity would become 0, remove after confirmation
+        // Quantity DOWN
         table.addEventListener('click', e => {
             const btn = e.target.closest('.qty-down');
             if (!btn || btn.disabled) return;
@@ -254,12 +254,12 @@
             if (!input) return;
             const val = parseInt(input.value);
             if (val <= 1) {
-                if (!confirm('Retirer ce produit du panier ?')) return;
+                if (!confirm('Remove this item from cart?')) return;
                 setSpin(btn, true);
                 api(removeUrl, { product_id: pid }, btn, () => {
                     const row = getRow(pid);
                     if (row) row.remove();
-                    showToast('Produit retiré du panier.', 'success');
+                    showToast('Item removed from cart.', 'success');
                     if (document.querySelectorAll('#cart-table tbody tr').length === 0) location.reload();
                 });
                 return;
@@ -282,12 +282,12 @@
             const btn = e.target.closest('[data-ajax-remove]');
             if (!btn || btn.disabled) return;
             const pid = btn.dataset.productId;
-            if (!confirm('Retirer ce produit du panier ?')) return;
+            if (!confirm('Remove this item from cart?')) return;
             setSpin(btn, true);
             api(removeUrl, { product_id: pid }, btn, () => {
                 const row = getRow(pid);
                 if (row) row.remove();
-                showToast('Produit retiré du panier.', 'success');
+                showToast('Item removed from cart.', 'success');
                 if (document.querySelectorAll('#cart-table tbody tr').length === 0) location.reload();
             });
         });
@@ -314,9 +314,9 @@
         // Clear cart
         document.querySelector('[data-ajax-clear]')?.addEventListener('click', function () {
             if (this.disabled) return;
-            if (!confirm('Vider le panier ?')) return;
+            if (!confirm('Clear the cart?')) return;
             setSpin(this, true);
-            this.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Vidage...';
+            this.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Clearing...';
             api(clearUrl, {}, this, () => { location.reload(); });
         });
     });

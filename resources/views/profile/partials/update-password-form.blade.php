@@ -1,8 +1,8 @@
 <section>
     <header class="mb-4">
-        <h5 class="fw-bold">{{ __('Changer le mot de passe') }}</h5>
+        <h5 class="fw-bold">{{ __('Change Password') }}</h5>
         <p class="text-muted small">
-            {{ __('Assurez-vous que votre compte utilise un mot de passe long et aléatoire pour rester sécurisé.') }}
+            {{ __('Ensure your account is using a long, random password to stay secure.') }}
         </p>
     </header>
 
@@ -11,25 +11,25 @@
         @method('put')
 
         <div class="mb-3">
-            <x-input-label for="update_password_current_password" :value="__('Mot de passe actuel')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="w-100" autocomplete="current-password" placeholder="Votre mot de passe actuel" />
+            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
+            <x-text-input id="update_password_current_password" name="current_password" type="password" class="w-100" autocomplete="current-password" placeholder="Your current password" />
             <x-input-error :messages="$errors->updatePassword->get('current_password')" />
         </div>
 
         <div class="mb-3">
-            <x-input-label for="update_password_password" :value="__('Nouveau mot de passe')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="w-100" autocomplete="new-password" placeholder="Minimum 8 caractères" />
+            <x-input-label for="update_password_password" :value="__('New Password')" />
+            <x-text-input id="update_password_password" name="password" type="password" class="w-100" autocomplete="new-password" placeholder="At least 8 characters" />
             <x-input-error :messages="$errors->updatePassword->get('password')" />
         </div>
 
         <div class="mb-3">
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirmer le mot de passe')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="w-100" autocomplete="new-password" placeholder="Répétez le nouveau mot de passe" />
+            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
+            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="w-100" autocomplete="new-password" placeholder="Repeat your new password" />
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" />
         </div>
 
         <div class="d-flex align-items-center gap-3">
-            <x-primary-button>{{ __('Enregistrer') }}</x-primary-button>
+            <x-primary-button>{{ __('Save') }}</x-primary-button>
         </div>
     </form>
 </section>

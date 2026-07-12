@@ -46,7 +46,7 @@ class OrderController extends Controller
         $order->update(['status' => $validated['status']]);
 
         return redirect()->route('admin.orders.show', $order)
-            ->with('success', 'Statut de la commande mis à jour.');
+            ->with('success', 'Order status updated.');
     }
 
     public function print(Order $order): View

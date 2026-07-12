@@ -49,6 +49,6 @@ class RegisteredUserController extends Controller
 
         $cart->mergeSessionToDatabase();
 
-        return redirect(route('dashboard', absolute: false))->with('success', 'Bienvenue sur EduMarket ! Votre inscription a été réussie.');
+        return redirect(route('dashboard', absolute: false))->with('success', 'Welcome to EduMarket! Your registration was successful.');
     }
 }

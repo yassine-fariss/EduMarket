@@ -81,7 +81,7 @@ class CartService
         if ($newQty > $product->stock) {
             return [
                 'success' => false,
-                'message' => "Stock insuffisant. {$product->stock} unité(s) disponible(s).",
+                'message' => "Insufficient stock. {$product->stock} unit(s) available.",
             ];
         }
 
@@ -96,7 +96,7 @@ class CartService
 
         return [
             'success' => true,
-            'message' => "{$product->title} ajouté au panier.",
+            'message' => "{$product->title} added to cart.",
             'count' => $this->count(),
             'total' => $this->total(),
         ];
@@ -108,7 +108,7 @@ class CartService
         $existing = $items->firstWhere('product_id', $productId);
 
         if (!$existing) {
-            return ['success' => false, 'message' => 'Produit introuvable dans le panier.'];
+            return ['success' => false, 'message' => 'Product not found in cart.'];
         }
 
         $product = Product::find($productId);
@@ -116,7 +116,7 @@ class CartService
         if ($quantity > ($product?->stock ?? 0)) {
             return [
                 'success' => false,
-                'message' => "Stock insuffisant. " . ($product?->stock ?? 0) . " unité(s) disponible(s).",
+                'message' => "Insufficient stock. " . ($product?->stock ?? 0) . " unit(s) available.",
             ];
         }
 
@@ -135,7 +135,7 @@ class CartService
 
         return [
             'success' => true,
-            'message' => 'Quantité mise à jour.',
+            'message' => 'Quantity updated.',
             'count' => $this->count(),
             'total' => $this->total(),
             'subtotal' => $this->subtotal($productId),
@@ -157,7 +157,7 @@ class CartService
 
         return [
             'success' => true,
-            'message' => 'Produit retiré du panier.',
+            'message' => 'Product removed from cart.',
             'count' => $this->count(),
             'total' => $this->total(),
         ];
@@ -173,7 +173,7 @@ class CartService
 
         return [
             'success' => true,
-            'message' => 'Panier vidé.',
+            'message' => 'Cart cleared.',
             'count' => 0,
             'total' => 0,
         ];

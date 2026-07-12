@@ -1,15 +1,15 @@
-<x-customer-layout title="Catégories">
+<x-customer-layout title="Categories">
     <div class="container py-4">
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Accueil</a></li>
-                <li class="breadcrumb-item active">Catégories</li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Home</a></li>
+                <li class="breadcrumb-item active">Categories</li>
             </ol>
         </nav>
 
         <div class="text-center mb-5">
-            <h2 class="fw-bold section-title section-title-center">Nos catégories</h2>
-            <p class="text-muted">Explorez notre large gamme de produits par catégorie</p>
+            <h2 class="fw-bold section-title section-title-center">Our Categories</h2>
+            <p class="text-muted">Explore our wide range of products by category</p>
         </div>
 
         <div class="row g-4">
@@ -24,7 +24,7 @@
                             <i class="{{ $catIcons[$i % count($catIcons)] }}"></i>
                         </div>
                         <h5 class="fw-bold text-dark mb-1">{{ $category->name }}</h5>
-                        <p class="small text-muted mb-2">{{ $category->products_count }} produit(s)</p>
+                        <p class="small text-muted mb-2">{{ $category->products_count }} product(s)</p>
                         @if ($category->description)
                             <p class="small text-muted mb-0">{{ Str::limit($category->description, 80) }}</p>
                         @endif

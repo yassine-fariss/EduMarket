@@ -13,173 +13,173 @@ use Illuminate\Support\Str;
 class ProductFactory extends Factory
 {
     private static array $productTemplates = [
-        'Livres' => [
-            ['title' => 'Manuel de Mathématiques 6ème', 'desc' => 'Manuel complet couvrant le programme de mathématiques de la 6ème. Nombres entiers, fractions, géométrie de base et statistiques. Exercices progressifs avec corrigés détaillés.', 'price' => 180, 'stock' => 50, 'image_key' => 'math-book'],
-            ['title' => 'Manuel de Français 5ème', 'desc' => 'Grammaire, conjugaison, orthographe et rédaction. Extraits littéraires classiques et modernes, questionnaires de compréhension, sujets de rédaction.', 'price' => 175, 'stock' => 45, 'image_key' => 'french-book'],
-            ['title' => 'Cahier d\'Exercices Physique-Chimie 3ème', 'desc' => 'Plus de 200 exercices corrigés sur l\'électricité, la mécanique, la chimie. Conforme au programme officiel avec schémas en couleur.', 'price' => 120, 'stock' => 60, 'image_key' => 'physics-book'],
-            ['title' => 'Guide SVT - Sciences de la Vie et de la Terre', 'desc' => 'Référence pour l\'enseignement des SVT. Biologie végétale, animale, écologie, géologie. Illustrations détaillées et fiches de synthèse.', 'price' => 190, 'stock' => 40, 'image_key' => 'svt-book'],
-            ['title' => 'Bescherelle - La Conjugaison pour Tous', 'desc' => 'Intégralité des verbes français conjugués à tous les temps. Tableaux clairs, règles d\'accord, listes des verbes irréguliers.', 'price' => 150, 'stock' => 80, 'image_key' => 'bescherelle'],
-            ['title' => 'Atlas Scolaire du Monde', 'desc' => 'Cartes physiques et politiques détaillées de tous les continents. Données démographiques et économiques actualisées. Index complet.', 'price' => 220, 'stock' => 35, 'image_key' => 'atlas'],
-            ['title' => 'Manuel d\'Histoire-Géographie 4ème', 'desc' => 'Histoire moderne, géographie humaine. Documents sources, frises chronologiques, études de cas pour le brevet.', 'price' => 165, 'stock' => 55, 'image_key' => 'history-book'],
-            ['title' => 'Allemand 1ère Année - Cahier d\'Activités', 'desc' => 'Introduction progressive à l\'allemand. Vocabulaire illustré, dialogues simples, exercices de grammaire, jeux linguistiques.', 'price' => 130, 'stock' => 45, 'image_key' => 'german-book'],
-            ['title' => 'Sésame - Maths Terminale S', 'desc' => 'Préparation complète au baccalauréat scientifique. Cours détaillés, exercices types, sujets d\'examen corrigés.', 'price' => 250, 'stock' => 30, 'image_key' => 'math-advanced'],
-            ['title' => 'Bled - Orthographe et Grammaire', 'desc' => 'Référence pour maîtriser l\'orthographe française. Règles expliquées simplement avec exemples concrets.', 'price' => 140, 'stock' => 70, 'image_key' => 'bled'],
-            ['title' => 'Dictionnaire Le Robert Poche', 'desc' => '60 000 mots, 100 000 définitions. Conjugaison, étymologie, synonymes. Format poche pratique.', 'price' => 180, 'stock' => 50, 'image_key' => 'dictionary'],
-            ['title' => 'Larousse Junior - Dictionnaire Enfant', 'desc' => '30 000 mots, définitions simples, illustrations. Pour enfants 7-11 ans. Conjugaison, grammaire.', 'price' => 195, 'stock' => 40, 'image_key' => 'child-dictionary'],
-            ['title' => 'Manuel de Philosophie Terminale', 'desc' => 'Programme officiel : sujet, culture, raison, politique, morale. Textes d\'auteurs, analyses, sujets bac.', 'price' => 200, 'stock' => 35, 'image_key' => 'philosophy-book'],
-            ['title' => 'Cahier de Vacances CM2 vers 6ème', 'desc' => 'Révision complète du programme CM2. Français, maths, anglais, découverte du monde. Jeux et exercices ludiques.', 'price' => 85, 'stock' => 100, 'image_key' => 'vacation-workbook'],
-            ['title' => 'Petit Larousse Illustré 2025', 'desc' => '65 000 mots, 28 000 noms propres. Encyclopédie de référence. Version mise à jour annuelle.', 'price' => 350, 'stock' => 25, 'image_key' => 'larousse'],
+        'Books' => [
+            ['title' => '6th Grade Mathematics Textbook', 'desc' => 'Complete textbook covering the 6th grade mathematics curriculum. Integers, fractions, basic geometry, and statistics. Progressive exercises with detailed solutions.', 'price' => 180, 'stock' => 50, 'image_key' => 'math-book'],
+            ['title' => '5th Grade French Textbook', 'desc' => 'Grammar, conjugation, spelling, and writing. Classic and modern literary excerpts, comprehension questions, essay topics.', 'price' => 175, 'stock' => 45, 'image_key' => 'french-book'],
+            ['title' => '3rd Grade Physics-Chemistry Workbook', 'desc' => 'Over 200 corrected exercises on electricity, mechanics, and chemistry. Aligned with the official curriculum with color diagrams.', 'price' => 120, 'stock' => 60, 'image_key' => 'physics-book'],
+            ['title' => 'SVT Guide - Life and Earth Sciences', 'desc' => 'Reference for teaching life and earth sciences. Plant and animal biology, ecology, geology. Detailed illustrations and summary sheets.', 'price' => 190, 'stock' => 40, 'image_key' => 'svt-book'],
+            ['title' => 'Bescherelle - Conjugation for Everyone', 'desc' => 'Complete conjugation of French verbs in all tenses. Clear tables, agreement rules, lists of irregular verbs.', 'price' => 150, 'stock' => 80, 'image_key' => 'bescherelle'],
+            ['title' => 'World School Atlas', 'desc' => 'Detailed physical and political maps of all continents. Updated demographic and economic data. Complete index.', 'price' => 220, 'stock' => 35, 'image_key' => 'atlas'],
+            ['title' => '4th Grade History-Geography Textbook', 'desc' => 'Modern history, human geography. Source documents, timelines, case studies for the brevet exam.', 'price' => 165, 'stock' => 55, 'image_key' => 'history-book'],
+            ['title' => 'German 1st Year - Activity Workbook', 'desc' => 'Progressive introduction to German. Illustrated vocabulary, simple dialogues, grammar exercises, language games.', 'price' => 130, 'stock' => 45, 'image_key' => 'german-book'],
+            ['title' => 'Sesame - Terminal S Math', 'desc' => 'Complete preparation for the science baccalaureate. Detailed lessons, practice exercises, corrected exam topics.', 'price' => 250, 'stock' => 30, 'image_key' => 'math-advanced'],
+            ['title' => 'Bled - Spelling and Grammar', 'desc' => 'Reference for mastering French spelling. Rules explained simply with concrete examples.', 'price' => 140, 'stock' => 70, 'image_key' => 'bled'],
+            ['title' => 'Le Robert Pocket Dictionary', 'desc' => '60,000 words, 100,000 definitions. Conjugation, etymology, synonyms. Convenient pocket format.', 'price' => 180, 'stock' => 50, 'image_key' => 'dictionary'],
+            ['title' => 'Larousse Junior - Children\'s Dictionary', 'desc' => '30,000 words, simple definitions, illustrations. For ages 7-11. Conjugation, grammar.', 'price' => 195, 'stock' => 40, 'image_key' => 'child-dictionary'],
+            ['title' => 'Terminal Philosophy Textbook', 'desc' => 'Official curriculum: subject, culture, reason, politics, morality. Author texts, analyses, bac exam topics.', 'price' => 200, 'stock' => 35, 'image_key' => 'philosophy-book'],
+            ['title' => 'CM2 to 6th Grade Vacation Workbook', 'desc' => 'Complete review of the CM2 curriculum. French, math, English, discovery of the world. Fun games and exercises.', 'price' => 85, 'stock' => 100, 'image_key' => 'vacation-workbook'],
+            ['title' => 'Petit Larousse Illustrated 2025', 'desc' => '65,000 words, 28,000 proper names. Reference encyclopedia. Annual updated edition.', 'price' => 350, 'stock' => 25, 'image_key' => 'larousse'],
         ],
-        'Manuels Universitaires' => [
-            ['title' => 'Introduction à l\'Économie', 'desc' => 'Principes microéconomie et macroéconomie. Marchés, politiques économiques, inflation, chômage. Exemples concrets.', 'price' => 320, 'stock' => 30, 'image_key' => 'economics-book'],
-            ['title' => 'Droit Constitutionnel - L1 Droit', 'desc' => 'Théorie de l\'État, séparation des pouvoirs, constitution, justice constitutionnelle. Jurisprudence majeure.', 'price' => 280, 'stock' => 40, 'image_key' => 'law-book'],
-            ['title' => 'Algorithmique et Programmation - Python', 'desc' => 'Structures de données, algorithmes de tri, récursivité, POO. Exercices corrigés, projets pratiques.', 'price' => 350, 'stock' => 35, 'image_key' => 'python-book'],
-            ['title' => 'Biochimie Structurale et Métabolique', 'desc' => 'Protéines, glucides, lipides, acides nucléiques. Voies métaboliques, régulations enzymatiques. Schémas détaillés.', 'price' => 420, 'stock' => 25, 'image_key' => 'biochemistry-book'],
-            ['title' => 'Statistiques pour Sciences Sociales', 'desc' => 'Statistiques descriptives, probabilités, tests d\'hypothèses, régression linéaire. Applications SPSS/R.', 'price' => 380, 'stock' => 30, 'image_key' => 'stats-book'],
-            ['title' => 'Psychologie Cognitive', 'desc' => 'Mémoire, attention, langage, raisonnement. Théories classiques et récentes. Expériences clés.', 'price' => 340, 'stock' => 35, 'image_key' => 'psychology-book'],
-            ['title' => 'Marketing Fondamentaux', 'desc' => 'Mix marketing, segmentation, comportement consommateur, marque, digital. Cas d\'entreprises réelles.', 'price' => 360, 'stock' => 30, 'image_key' => 'marketing-book'],
-            ['title' => 'Droit des Affaires', 'desc' => 'Sociétés, contrats commerciaux, concurrence, propriété intellectuelle. Code de commerce annoté.', 'price' => 320, 'stock' => 35, 'image_key' => 'business-law'],
-            ['title' => 'Comptabilité Générale', 'desc' => 'Plan comptable, écritures, bilan, compte de résultat, TVA. Exercices progressifs corrigés.', 'price' => 290, 'stock' => 40, 'image_key' => 'accounting-book'],
-            ['title' => 'Gestion des Ressources Humaines', 'desc' => 'Recrutement, formation, évaluation, rémunération, droit social. Outils RH modernes.', 'price' => 340, 'stock' => 30, 'image_key' => 'hr-book'],
+        'University Textbooks' => [
+            ['title' => 'Introduction to Economics', 'desc' => 'Microeconomic and macroeconomic principles. Markets, economic policies, inflation, unemployment. Concrete examples.', 'price' => 320, 'stock' => 30, 'image_key' => 'economics-book'],
+            ['title' => 'Constitutional Law - L1 Law', 'desc' => 'State theory, separation of powers, constitution, constitutional justice. Major case law.', 'price' => 280, 'stock' => 40, 'image_key' => 'law-book'],
+            ['title' => 'Algorithms and Programming - Python', 'desc' => 'Data structures, sorting algorithms, recursion, OOP. Corrected exercises, practical projects.', 'price' => 350, 'stock' => 35, 'image_key' => 'python-book'],
+            ['title' => 'Structural and Metabolic Biochemistry', 'desc' => 'Proteins, carbohydrates, lipids, nucleic acids. Metabolic pathways, enzyme regulation. Detailed diagrams.', 'price' => 420, 'stock' => 25, 'image_key' => 'biochemistry-book'],
+            ['title' => 'Statistics for Social Sciences', 'desc' => 'Descriptive statistics, probability, hypothesis testing, linear regression. SPSS/R applications.', 'price' => 380, 'stock' => 30, 'image_key' => 'stats-book'],
+            ['title' => 'Cognitive Psychology', 'desc' => 'Memory, attention, language, reasoning. Classic and recent theories. Key experiments.', 'price' => 340, 'stock' => 35, 'image_key' => 'psychology-book'],
+            ['title' => 'Marketing Fundamentals', 'desc' => 'Marketing mix, segmentation, consumer behavior, brand, digital. Real company case studies.', 'price' => 360, 'stock' => 30, 'image_key' => 'marketing-book'],
+            ['title' => 'Business Law', 'desc' => 'Companies, commercial contracts, competition, intellectual property. Annotated commercial code.', 'price' => 320, 'stock' => 35, 'image_key' => 'business-law'],
+            ['title' => 'General Accounting', 'desc' => 'Chart of accounts, entries, balance sheet, income statement, VAT. Progressive corrected exercises.', 'price' => 290, 'stock' => 40, 'image_key' => 'accounting-book'],
+            ['title' => 'Human Resources Management', 'desc' => 'Recruitment, training, evaluation, compensation, labor law. Modern HR tools.', 'price' => 340, 'stock' => 30, 'image_key' => 'hr-book'],
         ],
-        'Fournitures Scolaires' => [
-            ['title' => 'Lot de 10 Stylos Bille Bleu', 'desc' => 'Stylos bille encre bleue qualité pro. Pointe 0.7mm, écriture fluide. Corps ergonomique antidérapant.', 'price' => 45, 'stock' => 200, 'image_key' => 'blue-pens'],
-            ['title' => 'Lot de 10 Stylos Bille Noir', 'desc' => 'Stylos bille encre noire. Pointe 0.7mm, séchage rapide. Idéal examens et concours.', 'price' => 45, 'stock' => 200, 'image_key' => 'black-pens'],
-            ['title' => 'Lot de 10 Stylos Bille Rouge', 'desc' => 'Stylos bille encre rouge. Pointe 0.7mm. Correction, annotation, surlignage.', 'price' => 45, 'stock' => 150, 'image_key' => 'red-pens'],
-            ['title' => 'Cahier 200 Pages Grand Format', 'desc' => 'Format 21x29.7cm, spirale. 200 pages, papier 90g/m² anti-transparence. Couverture rigide.', 'price' => 35, 'stock' => 150, 'image_key' => 'notebook-200'],
-            ['title' => 'Cahier 96 Pages Petit Format', 'desc' => 'Format 17x22cm, 96 pages. Papier 90g/m². Couverture souple colorée. Idéal primaire.', 'price' => 18, 'stock' => 300, 'image_key' => 'notebook-96'],
-            ['title' => 'Cahier Spirale 140 Pages', 'desc' => 'Format A4, 140 pages. Spirale résistante. Papier 90g/m². Marge pré-imprimée.', 'price' => 28, 'stock' => 200, 'image_key' => 'spiral-notebook'],
-            ['title' => 'Classeur 4 Anneaux A4', 'desc' => 'Classeur levier 4 anneaux 5cm. Capacité 300 feuilles. Polypropylène transparent. Dos personnalisable.', 'price' => 55, 'stock' => 80, 'image_key' => 'binder'],
-            ['title' => 'Lot de 10 Dossiers Suspendus', 'desc' => 'Dossiers suspension format A4. Renfort métallique, onglets identifiables. Coloris assortis.', 'price' => 65, 'stock' => 100, 'image_key' => 'hanging-folders'],
-            ['title' => 'Set 5 Marqueurs Fluorescents', 'desc' => 'Marqueurs fluo sans bavure. Jaune, rose, vert, orange, bleu. Pointe biseautée 1-4mm.', 'price' => 35, 'stock' => 250, 'image_key' => 'highlighters'],
-            ['title' => 'Correcteur Liquide 15ml', 'desc' => 'Correcteur blanc séchage rapide. Embout pinceau précis. Couvre encre noire et bleue.', 'price' => 18, 'stock' => 200, 'image_key' => 'correction-fluid'],
-            ['title' => 'Roller Correcteur 5mm x 8m', 'desc' => 'Bande correctrice blanche. Application propre, réécriture immédiate. Rechargeable.', 'price' => 25, 'stock' => 150, 'image_key' => 'correction-tape'],
-            ['title' => 'Agenda Scolaire 2025-2026', 'desc' => 'Journalier et hebdomadaire. Sept 2025 - Juin 2026. Emploi du temps, notes, répertoire.', 'price' => 55, 'stock' => 200, 'image_key' => 'agenda'],
-            ['title' => 'Pack 100 Feuilles Quadrillées', 'desc' => 'Format A4 21x29.7cm. Quadrillage 5x5mm. Papier 80g/m². Perforées 4 trous.', 'price' => 25, 'stock' => 300, 'image_key' => 'grid-paper'],
-            ['title' => 'Pack 100 Feuilles Unies', 'desc' => 'Format A4. Papier 80g/m² blanc. Perforées 4 trous. Marge gauche. Ramette 100 feuilles.', 'price' => 22, 'stock' => 300, 'image_key' => 'lined-paper'],
-            ['title' => 'Trousse Scolaire 2 Compartiments', 'desc' => 'Toile polyester 25x12cm. 2 zips, poches filet intérieure. Capacité 40 stylos. Coloris variés.', 'price' => 85, 'stock' => 120, 'image_key' => 'pencil-case'],
-            ['title' => 'Lot 12 Crayons à Papier HB', 'desc' => 'Crayons graphite HB. Mine résistante 2.2mm. Bois cèdre certifié. Gomme intégrée.', 'price' => 30, 'stock' => 250, 'image_key' => 'pencils-hb'],
-            ['title' => 'Lot 12 Crayons de Couleur', 'desc' => 'Mines tendres 3.3mm. Couleurs vives, mélangeables. Étui carton renforcé. Norme CE.', 'price' => 55, 'stock' => 150, 'image_key' => 'color-pencils'],
-            ['title' => 'Boîte 24 Feutres Fins', 'desc' => 'Feutres pointe fine 0.4mm. Encre lavable. 24 couleurs. Capuchon ventilé sécurité.', 'price' => 65, 'stock' => 120, 'image_key' => 'fine-markers'],
-            ['title' => 'Gomme Blanche Lot de 5', 'desc' => 'Gommes qualité supérieure. Effacement net sans trace. Format 40x20x12mm. Sans PVC.', 'price' => 20, 'stock' => 200, 'image_key' => 'erasers'],
-            ['title' => 'Taille-Crayon Métallique Double', 'desc' => 'Double trou standard et gros. Lame acier inoxydable. Réservoir transparent. Vis de fixation.', 'price' => 15, 'stock' => 200, 'image_key' => 'sharpener'],
-            ['title' => 'Règle Plate 30cm Transparente', 'desc' => 'Règle PMMA incassable. Graduations mm/cm précises. Bords biseautés. Face antidérapante.', 'price' => 12, 'stock' => 300, 'image_key' => 'ruler'],
-            ['title' => 'Équerre 26cm + Rapporteur 180°', 'desc' => 'Set géométrie : équerre 26cm, rapporteur 180°. PMMA transparent. Graduations laser.', 'price' => 22, 'stock' => 200, 'image_key' => 'set-square'],
-            ['title' => 'Compas de Précision Métallique', 'desc' => 'Compas acier inox. Réglage micrométrique. Crayon et pointe sèche. Étui rigide.', 'price' => 85, 'stock' => 80, 'image_key' => 'compass'],
-            ['title' => 'Ciseaux Scolaires 13cm', 'desc' => 'Lames inox bout rond. Poignées ergonomiques souples. Ambidextre. Lame micro-dentelée.', 'price' => 18, 'stock' => 250, 'image_key' => 'scissors'],
-            ['title' => 'Colle Bâton 21g Lot de 3', 'desc' => 'Bâtons colle PVP. Séchage 30s. Propre, non toxique, lavable. Tube rétractable.', 'price' => 28, 'stock' => 200, 'image_key' => 'glue-sticks'],
-            ['title' => 'Colle Liquide 50ml', 'desc' => 'Colle blanche vinyle. Embout pinceau. Fort pouvoir collant. Bois, papier, carton. Sans solvant.', 'price' => 15, 'stock' => 150, 'image_key' => 'liquid-glue'],
-            ['title' => 'Ramette A4 500 Feuilles 80g', 'desc' => 'Papier blanc 80g/m². Blancheur CIE 161. Multifonction imprimante/copieur. Certifié PEFC.', 'price' => 55, 'stock' => 100, 'image_key' => 'a4-paper'],
-            ['title' => 'Sac à Dos Scolaire 30L', 'desc' => 'Polyester 600D imperméable. Dos rembourré, bretelles ergonomiques. 2 grands compartiments, poche avant.', 'price' => 280, 'stock' => 50, 'image_key' => 'backpack'],
+        'School Supplies' => [
+            ['title' => 'Pack of 10 Blue Ballpoint Pens', 'desc' => 'Professional quality blue ink ballpoint pens. 0.7mm tip, smooth writing. Non-slip ergonomic body.', 'price' => 45, 'stock' => 200, 'image_key' => 'blue-pens'],
+            ['title' => 'Pack of 10 Black Ballpoint Pens', 'desc' => 'Black ink ballpoint pens. 0.7mm tip, quick drying. Ideal for exams and competitions.', 'price' => 45, 'stock' => 200, 'image_key' => 'black-pens'],
+            ['title' => 'Pack of 10 Red Ballpoint Pens', 'desc' => 'Red ink ballpoint pens. 0.7mm tip. Correction, annotation, highlighting.', 'price' => 45, 'stock' => 150, 'image_key' => 'red-pens'],
+            ['title' => '200-Page Large Notebook', 'desc' => '21x29.7cm format, spiral bound. 200 pages, 90g/m² anti-bleed paper. Hardcover.', 'price' => 35, 'stock' => 150, 'image_key' => 'notebook-200'],
+            ['title' => '96-Page Small Notebook', 'desc' => '17x22cm format, 96 pages. 90g/m² paper. Colorful soft cover. Ideal for primary school.', 'price' => 18, 'stock' => 300, 'image_key' => 'notebook-96'],
+            ['title' => '140-Page Spiral Notebook', 'desc' => 'A4 format, 140 pages. Durable spiral binding. 90g/m² paper. Pre-printed margin.', 'price' => 28, 'stock' => 200, 'image_key' => 'spiral-notebook'],
+            ['title' => 'A4 4-Ring Binder', 'desc' => 'Lever-arch file with 4 rings, 5cm spine. 300-sheet capacity. Transparent polypropylene. Customizable spine.', 'price' => 55, 'stock' => 80, 'image_key' => 'binder'],
+            ['title' => 'Pack of 10 Hanging Folders', 'desc' => 'A4 suspension filing folders. Metal reinforcement, identifiable tabs. Assorted colors.', 'price' => 65, 'stock' => 100, 'image_key' => 'hanging-folders'],
+            ['title' => 'Set of 5 Fluorescent Highlighters', 'desc' => 'Bleed-free fluorescent highlighters. Yellow, pink, green, orange, blue. Beveled tip 1-4mm.', 'price' => 35, 'stock' => 250, 'image_key' => 'highlighters'],
+            ['title' => 'Correction Fluid 15ml', 'desc' => 'Quick-drying white correction fluid. Precision brush applicator. Covers black and blue ink.', 'price' => 18, 'stock' => 200, 'image_key' => 'correction-fluid'],
+            ['title' => 'Correction Tape Roller 5mm x 8m', 'desc' => 'White correction tape. Clean application, immediate rewriting. Refillable.', 'price' => 25, 'stock' => 150, 'image_key' => 'correction-tape'],
+            ['title' => 'School Diary 2025-2026', 'desc' => 'Daily and weekly pages. Sept 2025 - June 2026. Timetable, notes, directory.', 'price' => 55, 'stock' => 200, 'image_key' => 'agenda'],
+            ['title' => 'Pack of 100 Grid Sheets', 'desc' => 'A4 21x29.7cm format. 5x5mm grid. 80g/m² paper. 4-hole punched.', 'price' => 25, 'stock' => 300, 'image_key' => 'grid-paper'],
+            ['title' => 'Pack of 100 Plain Sheets', 'desc' => 'A4 format. White 80g/m² paper. 4-hole punched. Left margin. 100-sheet pack.', 'price' => 22, 'stock' => 300, 'image_key' => 'lined-paper'],
+            ['title' => '2-Compartment Pencil Case', 'desc' => 'Polyester fabric 25x12cm. 2 zippers, inner mesh pockets. 40-pen capacity. Various colors.', 'price' => 85, 'stock' => 120, 'image_key' => 'pencil-case'],
+            ['title' => 'Pack of 12 HB Graphite Pencils', 'desc' => 'HB graphite pencils. Durable 2.2mm lead. Certified cedar wood. Built-in eraser.', 'price' => 30, 'stock' => 250, 'image_key' => 'pencils-hb'],
+            ['title' => 'Pack of 12 Colored Pencils', 'desc' => 'Soft 3.3mm leads. Bright, blendable colors. Reinforced cardboard case. CE standard.', 'price' => 55, 'stock' => 150, 'image_key' => 'color-pencils'],
+            ['title' => 'Box of 24 Fine Markers', 'desc' => 'Fine tip 0.4mm markers. Washable ink. 24 colors. Ventilated safety cap.', 'price' => 65, 'stock' => 120, 'image_key' => 'fine-markers'],
+            ['title' => 'White Eraser Pack of 5', 'desc' => 'High-quality erasers. Clean erasing without marks. Size 40x20x12mm. PVC-free.', 'price' => 20, 'stock' => 200, 'image_key' => 'erasers'],
+            ['title' => 'Dual Metal Sharpener', 'desc' => 'Dual holes for standard and large pencils. Stainless steel blade. Transparent reservoir. Fixing screw.', 'price' => 15, 'stock' => 200, 'image_key' => 'sharpener'],
+            ['title' => '30cm Transparent Flat Ruler', 'desc' => 'Unbreakable PMMA ruler. Precise mm/cm graduations. Beveled edges. Non-slip surface.', 'price' => 12, 'stock' => 300, 'image_key' => 'ruler'],
+            ['title' => '26cm Set Square + 180° Protractor', 'desc' => 'Geometry set: 26cm set square, 180° protractor. Transparent PMMA. Laser graduations.', 'price' => 22, 'stock' => 200, 'image_key' => 'set-square'],
+            ['title' => 'Metal Precision Compass', 'desc' => 'Stainless steel compass. Micrometric adjustment. Pencil and dry point. Rigid case.', 'price' => 85, 'stock' => 80, 'image_key' => 'compass'],
+            ['title' => '13cm School Scissors', 'desc' => 'Round-tip stainless steel blades. Soft ergonomic handles. Ambidextrous. Micro-serrated blade.', 'price' => 18, 'stock' => 250, 'image_key' => 'scissors'],
+            ['title' => 'Glue Stick 21g Pack of 3', 'desc' => 'PVP glue sticks. 30s drying time. Clean, non-toxic, washable. Retractable tube.', 'price' => 28, 'stock' => 200, 'image_key' => 'glue-sticks'],
+            ['title' => 'Liquid Glue 50ml', 'desc' => 'White vinyl glue. Brush applicator. Strong bonding. Wood, paper, cardboard. Solvent-free.', 'price' => 15, 'stock' => 150, 'image_key' => 'liquid-glue'],
+            ['title' => 'A4 Ream 500 Sheets 80g', 'desc' => 'White 80g/m² paper. CIE 161 whiteness. Multifunction printer/copier. PEFC certified.', 'price' => 55, 'stock' => 100, 'image_key' => 'a4-paper'],
+            ['title' => '30L School Backpack', 'desc' => 'Waterproof 600D polyester. Padded back, ergonomic straps. 2 main compartments, front pocket.', 'price' => 280, 'stock' => 50, 'image_key' => 'backpack'],
         ],
-        'Calculatrices' => [
-            ['title' => 'Calculatrice Scientifique Casio FX-92+', 'desc' => '276 fonctions, écran 4 lignes, 15 niveaux parenthèses. Mode examen officiel. Alimentation solaire + pile.', 'price' => 220, 'stock' => 60, 'image_key' => 'casio-fx92'],
-            ['title' => 'Calculatrice Graphique Casio Graph 90+E', 'desc' => 'Écran couleur 3.5", 61KB RAM, 4.5MB Flash. Python, CAS, tableaux, graphiques 3D. Mode examen.', 'price' => 1450, 'stock' => 20, 'image_key' => 'casio-graph90'],
-            ['title' => 'Calculatrice Scientifique Texas TI-30X Pro', 'desc' => 'Écran 4 lignes, 417 fonctions. MathPrint, tableaux, conversions unités. Pile CR2032 fournie.', 'price' => 280, 'stock' => 40, 'image_key' => 'ti30xpro'],
-            ['title' => 'Calculatrice Graphique NumWorks N0100', 'desc' => 'Écran 2.8" couleur, Python, applications intégrées. Interface intuitive. Mode examen LED.', 'price' => 1350, 'stock' => 25, 'image_key' => 'numworks'],
-            ['title' => 'Calculatrice de Bureau 12 Chiffres', 'desc' => 'Écran LCD inclinable 12 digits. Imprimante 2 couleurs. Mémoire, %, racine, TTC. Alim secteur/piles.', 'price' => 380, 'stock' => 30, 'image_key' => 'desk-calculator'],
-            ['title' => 'Calculatrice Financière HP 10bII+', 'desc' => '120 fonctions financières. VAN, TIR, amortissement, obligations. Clavier RPN/algébrique.', 'price' => 950, 'stock' => 15, 'image_key' => 'hp10bii'],
-            ['title' => 'Calculatrice de Poche 8 Chiffres', 'desc' => 'Format carte crédit. 4 opérations, %, racine, mémoire. Solaire double alimentation. Etui rigide.', 'price' => 45, 'stock' => 100, 'image_key' => 'pocket-calculator'],
+        'Calculators' => [
+            ['title' => 'Casio FX-92+ Scientific Calculator', 'desc' => '276 functions, 4-line display, 15 parenthesis levels. Official exam mode. Solar + battery power.', 'price' => 220, 'stock' => 60, 'image_key' => 'casio-fx92'],
+            ['title' => 'Casio Graph 90+E Graphing Calculator', 'desc' => '3.5" color screen, 61KB RAM, 4.5MB Flash. Python, CAS, tables, 3D graphs. Exam mode.', 'price' => 1450, 'stock' => 20, 'image_key' => 'casio-graph90'],
+            ['title' => 'Texas TI-30X Pro Scientific Calculator', 'desc' => '4-line display, 417 functions. MathPrint, tables, unit conversions. CR2032 battery included.', 'price' => 280, 'stock' => 40, 'image_key' => 'ti30xpro'],
+            ['title' => 'NumWorks N0100 Graphing Calculator', 'desc' => '2.8" color screen, Python, built-in applications. Intuitive interface. LED exam mode.', 'price' => 1350, 'stock' => 25, 'image_key' => 'numworks'],
+            ['title' => '12-Digit Desktop Calculator', 'desc' => 'Tiltable 12-digit LCD display. 2-color printer. Memory, %, square root, tax incl. Mains/battery.', 'price' => 380, 'stock' => 30, 'image_key' => 'desk-calculator'],
+            ['title' => 'HP 10bII+ Financial Calculator', 'desc' => '120 financial functions. NPV, IRR, amortization, bonds. RPN/algebraic keyboard.', 'price' => 950, 'stock' => 15, 'image_key' => 'hp10bii'],
+            ['title' => '8-Digit Pocket Calculator', 'desc' => 'Credit card size. 4 operations, %, square root, memory. Dual solar power. Rigid case.', 'price' => 45, 'stock' => 100, 'image_key' => 'pocket-calculator'],
         ],
-        'Outils de Dessin' => [
-            ['title' => 'Kit 12 Crayons de Couleur Artiste', 'desc' => 'Mines 3.8mm tendres, pigments purs. 12 couleurs intenses, mélangeables. Boîte métal.', 'price' => 120, 'stock' => 80, 'image_key' => 'artist-pencils'],
-            ['title' => 'Kit 24 Crayons Aquarelle', 'desc' => 'Mines solubles dans l\'eau. 24 nuances. Pointe 3.3mm. Travail sec ou humide. Boîte métal.', 'price' => 180, 'stock' => 50, 'image_key' => 'watercolor-pencils'],
-            ['title' => 'Bloc Dessin A3 30 Feuilles', 'desc' => 'Papier 180g/m² grain fin. 30 feuilles. Idéal crayon, fusain, pastel. Couverture rigide.', 'price' => 85, 'stock' => 80, 'image_key' => 'drawing-pad-a3'],
-            ['title' => 'Bloc Aquarelle A4 20 Feuilles', 'desc' => 'Papier 300g/m² grain fin. Encollé 4 bords. 100% coton. Ne gondole pas.', 'price' => 95, 'stock' => 60, 'image_key' => 'watercolor-pad'],
-            ['title' => 'Set 6 Feutres Artistiques Double Pointe', 'desc' => 'Pointe fine 0.4mm + moyenne 1mm. Encre à base d\'eau. 6 couleurs. Capuchon étanche.', 'price' => 85, 'stock' => 80, 'image_key' => 'artist-markers'],
-            ['title' => 'Marqueurs Posca Lot de 8', 'desc' => 'Peinture acrylique opaque. Pointe 1.8-2.5mm. 8 couleurs. Multi-surfaces. Non toxique.', 'price' => 160, 'stock' => 60, 'image_key' => 'posca-markers'],
-            ['title' => 'Pastels Secs Artistique 24 Couleurs', 'desc' => 'Pastels tendres, pigments purs. Couleurs intenses, fondant. Étui bois 24 teintes.', 'price' => 140, 'stock' => 50, 'image_key' => 'soft-pastels'],
-            ['title' => 'Pastels à l\'Huile 24 Couleurs', 'desc' => 'Pastels gras, couvrants. Résistants à l\'eau. 24 teintes vives. Papier, toile, bois.', 'price' => 110, 'stock' => 60, 'image_key' => 'oil-pastels'],
-            ['title' => 'Gomme Mie de Pain Artistique', 'desc' => 'Gomme molle malléable. Absorbe graphite/charbon sans abîmer papier. Format 5x5cm.', 'price' => 35, 'stock' => 100, 'image_key' => 'kneaded-eraser'],
-            ['title' => 'Carnet Croquis Poche 10x15cm', 'desc' => 'Papier 140g/m² grain fin. 80 pages. Spirale. Couverture kraft. Glisse dans la poche.', 'price' => 45, 'stock' => 100, 'image_key' => 'sketchbook-pocket'],
-            ['title' => 'Compas de Précision Grand Modèle', 'desc' => 'Compas acier, bras 18cm. Réglage central précis. Cercles jusqu\'à 35cm. Étui cuir.', 'price' => 120, 'stock' => 40, 'image_key' => 'large-compass'],
-            ['title' => 'Set Règle 30cm + Équerre 26cm + Rapporteur', 'desc' => 'PMMA transparent. Règle 30cm, équerre 26cm 45/60°, rapporteur 180°. Pochette.', 'price' => 35, 'stock' => 150, 'image_key' => 'geometry-set'],
-            ['title' => 'Toile Peinture 40x50cm Lot de 3', 'desc' => 'Coton 380g/m². Châssis bois pin 2cm. Encollage universel. Prêtes à peindre.', 'price' => 180, 'stock' => 40, 'image_key' => 'canvas-pack'],
-            ['title' => 'Kit Peinture Acrylique 12 Tubes', 'desc' => '12 tubes 20ml. Couleurs primaires + nuances. Pigments fins. Non toxique. Tubes refermables.', 'price' => 140, 'stock' => 60, 'image_key' => 'acrylic-set'],
-            ['title' => 'Kit Gouache 12 Couleurs + Pinceaux', 'desc' => '12 godets 12ml + 3 pinceaux synthétiques. Couleurs vives, lavables. Palette intégrée.', 'price' => 85, 'stock' => 80, 'image_key' => 'gouache-set'],
+        'Drawing Tools' => [
+            ['title' => 'Kit of 12 Artist Colored Pencils', 'desc' => 'Soft 3.8mm leads, pure pigments. 12 intense, blendable colors. Metal tin.', 'price' => 120, 'stock' => 80, 'image_key' => 'artist-pencils'],
+            ['title' => 'Kit of 24 Watercolor Pencils', 'desc' => 'Water-soluble leads. 24 shades. 3.3mm tip. Dry or wet application. Metal tin.', 'price' => 180, 'stock' => 50, 'image_key' => 'watercolor-pencils'],
+            ['title' => 'A3 Drawing Pad 30 Sheets', 'desc' => '180g/m² fine-grain paper. 30 sheets. Ideal for pencil, charcoal, pastel. Hardcover.', 'price' => 85, 'stock' => 80, 'image_key' => 'drawing-pad-a3'],
+            ['title' => 'A4 Watercolor Pad 20 Sheets', 'desc' => '300g/m² fine-grain paper. 4-edge glued. 100% cotton. Does not warp.', 'price' => 95, 'stock' => 60, 'image_key' => 'watercolor-pad'],
+            ['title' => 'Set of 6 Double-Tip Artist Markers', 'desc' => 'Fine tip 0.4mm + medium tip 1mm. Water-based ink. 6 colors. Airtight cap.', 'price' => 85, 'stock' => 80, 'image_key' => 'artist-markers'],
+            ['title' => 'Posca Markers Pack of 8', 'desc' => 'Opaque acrylic paint. Tip 1.8-2.5mm. 8 colors. Multi-surface. Non-toxic.', 'price' => 160, 'stock' => 60, 'image_key' => 'posca-markers'],
+            ['title' => 'Artist Soft Pastels 24 Colors', 'desc' => 'Soft pastels, pure pigments. Intense, blendable colors. Wooden case of 24 shades.', 'price' => 140, 'stock' => 50, 'image_key' => 'soft-pastels'],
+            ['title' => 'Oil Pastels 24 Colors', 'desc' => 'Greasy, opaque pastels. Water-resistant. 24 bright shades. Paper, canvas, wood.', 'price' => 110, 'stock' => 60, 'image_key' => 'oil-pastels'],
+            ['title' => 'Kneaded Artist Eraser', 'desc' => 'Soft malleable eraser. Absorbs graphite/charcoal without damaging paper. 5x5cm size.', 'price' => 35, 'stock' => 100, 'image_key' => 'kneaded-eraser'],
+            ['title' => 'Pocket Sketchbook 10x15cm', 'desc' => '140g/m² fine-grain paper. 80 pages. Spiral bound. Kraft cover. Fits in pocket.', 'price' => 45, 'stock' => 100, 'image_key' => 'sketchbook-pocket'],
+            ['title' => 'Large Precision Compass', 'desc' => 'Steel compass, 18cm arms. Precise central adjustment. Circles up to 35cm. Leather case.', 'price' => 120, 'stock' => 40, 'image_key' => 'large-compass'],
+            ['title' => 'Set Ruler 30cm + Set Square 26cm + Protractor', 'desc' => 'Transparent PMMA. 30cm ruler, 26cm 45/60° set square, 180° protractor. Pouch.', 'price' => 35, 'stock' => 150, 'image_key' => 'geometry-set'],
+            ['title' => 'Canvas 40x50cm Pack of 3', 'desc' => '380g/m² cotton. 2cm pine wood frame. Universal primer. Ready to paint.', 'price' => 180, 'stock' => 40, 'image_key' => 'canvas-pack'],
+            ['title' => 'Acrylic Paint Kit 12 Tubes', 'desc' => '12 tubes of 20ml. Primary colors + shades. Fine pigments. Non-toxic. Resealable tubes.', 'price' => 140, 'stock' => 60, 'image_key' => 'acrylic-set'],
+            ['title' => 'Gouache Kit 12 Colors + Brushes', 'desc' => '12 pans of 12ml + 3 synthetic brushes. Bright, washable colors. Built-in palette.', 'price' => 85, 'stock' => 80, 'image_key' => 'gouache-set'],
         ],
-        'Kits Pédagogiques' => [
-            ['title' => 'Kit Chimie - 50 Expériences', 'desc' => 'Labo complet: tubes, bécher, pipettes, lunettes, produits chimiques sûrs. 50 expériences. Livret 48p.', 'price' => 350, 'stock' => 25, 'image_key' => 'chemistry-kit'],
-            ['title' => 'Kit Robotique Solaire 12-en-1', 'desc' => '12 robots solaires à construire. Panneau solaire, moteur, engrenages. notice illustrée. Dès 10 ans.', 'price' => 280, 'stock' => 30, 'image_key' => 'solar-robot'],
-            ['title' => 'Kit Robotique Programmable mBot', 'desc' => 'Robot Arduino programmable Scratch/Python. Capteurs: ultrasons, ligne, lumière. Bluetooth. Dès 8 ans.', 'price' => 850, 'stock' => 15, 'image_key' => 'mbot'],
-            ['title' => 'Kit Micro:bit V2 Go', 'desc' => 'Microcontrôleur BBC. LED 5x5, boutons, accéléromètre, boussole, Bluetooth, radio. Batterie incluse.', 'price' => 320, 'stock' => 30, 'image_key' => 'microbit'],
-            ['title' => 'Kit Arduino Uno R3 Starter', 'desc' => 'Arduino Uno R3, breadboard, LEDs, résistances, capteurs, moteurs, fils. 15 projets tutoriels.', 'price' => 420, 'stock' => 25, 'image_key' => 'arduino-starter'],
-            ['title' => 'Kit Corps Humain Anatomique', 'desc' => 'Modèle 45cm, 30 pièces amovibles. Squelette, organes, muscles, vaisseaux. Socle rotatif. Guide anatomique.', 'price' => 280, 'stock' => 30, 'image_key' => 'anatomy-model'],
-            ['title' => 'Squelette Humain 85cm sur Socle', 'desc' => 'Squelette anatomique complet. Articulations mobiles. Crâne ouvrant. Socle métal roulettes. Notice.', 'price' => 850, 'stock' => 10, 'image_key' => 'skeleton-model'],
-            ['title' => 'Globe Terrestre Lumineux 30cm', 'desc' => 'Globe physique/politique. Éclairage LED interne. Pays, capitales, méridiens. Socle métal.', 'price' => 350, 'stock' => 25, 'image_key' => 'globe'],
-            ['title' => 'Microscope Optique 40x-1000x', 'desc' => '3 objectifs 4x/10x/40x. Oculaire 10x/25x. Éclairage LED double. Mise au point macro/micro. Lames incluses.', 'price' => 550, 'stock' => 20, 'image_key' => 'microscope'],
-            ['title' => 'Télescope Réfracteur 70mm/700mm', 'desc' => 'Ouverture 70mm, focale 700mm. Monture équatoriale, trépied alu. Oculaires 10mm/20mm. Filtre lune.', 'price' => 850, 'stock' => 12, 'image_key' => 'telescope'],
-            ['title' => 'Balance Précision 0.01g / 200g', 'desc' => 'Précision 0.01g, capacité 200g. Écoulement, tare, comptage. Écran LCD rétroéclairage. Calibrage externe.', 'price' => 420, 'stock' => 20, 'image_key' => 'precision-scale'],
-            ['title' => 'Kit Énergie Renouvelable', 'desc' => 'Éolienne, panneau solaire, pile à combustible H2, voiture électrique. 20 expériences. Mesureurs inclus.', 'price' => 480, 'stock' => 20, 'image_key' => 'renewable-kit'],
+        'Educational Kits' => [
+            ['title' => 'Chemistry Kit - 50 Experiments', 'desc' => 'Complete lab: tubes, beaker, pipettes, goggles, safe chemicals. 50 experiments. 48-page booklet.', 'price' => 350, 'stock' => 25, 'image_key' => 'chemistry-kit'],
+            ['title' => '12-in-1 Solar Robotics Kit', 'desc' => '12 solar-powered robots to build. Solar panel, motor, gears. Illustrated manual. Ages 10+.', 'price' => 280, 'stock' => 30, 'image_key' => 'solar-robot'],
+            ['title' => 'mBot Programmable Robotics Kit', 'desc' => 'Arduino programmable robot with Scratch/Python. Sensors: ultrasonic, line, light. Bluetooth. Ages 8+.', 'price' => 850, 'stock' => 15, 'image_key' => 'mbot'],
+            ['title' => 'Micro:bit V2 Go Kit', 'desc' => 'BBC microcontroller. 5x5 LED matrix, buttons, accelerometer, compass, Bluetooth, radio. Battery included.', 'price' => 320, 'stock' => 30, 'image_key' => 'microbit'],
+            ['title' => 'Arduino Uno R3 Starter Kit', 'desc' => 'Arduino Uno R3, breadboard, LEDs, resistors, sensors, motors, wires. 15 tutorial projects.', 'price' => 420, 'stock' => 25, 'image_key' => 'arduino-starter'],
+            ['title' => 'Human Anatomy Model Kit', 'desc' => '45cm model, 30 removable parts. Skeleton, organs, muscles, vessels. Rotating base. Anatomy guide.', 'price' => 280, 'stock' => 30, 'image_key' => 'anatomy-model'],
+            ['title' => '85cm Human Skeleton on Stand', 'desc' => 'Complete anatomical skeleton. Movable joints. Opening skull. Metal stand with wheels. Manual.', 'price' => 850, 'stock' => 10, 'image_key' => 'skeleton-model'],
+            ['title' => '30cm Illuminated Globe', 'desc' => 'Physical/political globe. Internal LED lighting. Countries, capitals, meridians. Metal base.', 'price' => 350, 'stock' => 25, 'image_key' => 'globe'],
+            ['title' => 'Optical Microscope 40x-1000x', 'desc' => '3 objectives 4x/10x/40x. Eyepiece 10x/25x. Dual LED lighting. Macro/micro focus. Slides included.', 'price' => 550, 'stock' => 20, 'image_key' => 'microscope'],
+            ['title' => '70mm/700mm Refractor Telescope', 'desc' => '70mm aperture, 700mm focal length. Equatorial mount, aluminum tripod. 10mm/20mm eyepieces. Moon filter.', 'price' => 850, 'stock' => 12, 'image_key' => 'telescope'],
+            ['title' => 'Precision Scale 0.01g / 200g', 'desc' => '0.01g precision, 200g capacity. Flow, tare, counting. Backlit LCD display. External calibration.', 'price' => 420, 'stock' => 20, 'image_key' => 'precision-scale'],
+            ['title' => 'Renewable Energy Kit', 'desc' => 'Wind turbine, solar panel, H2 fuel cell, electric car. 20 experiments. Meters included.', 'price' => 480, 'stock' => 20, 'image_key' => 'renewable-kit'],
         ],
-        'Papeterie' => [
-            ['title' => 'Ramette A4 500 Feuilles 80g', 'desc' => 'Papier blanc 80g/m². Blancheur 161 CIE. Multifonction. Ream emballé 500 feuilles. PEFC.', 'price' => 55, 'stock' => 100, 'image_key' => 'a4-paper'],
-            ['title' => 'Ramette A3 500 Feuilles 80g', 'desc' => 'Format A3 297x420mm. 500 feuilles 80g/m². Blancheur 161. Imprimante laser/jet encre.', 'price' => 110, 'stock' => 50, 'image_key' => 'a3-paper'],
-            ['title' => 'Bloc-Notes Autocollants 75x75mm', 'desc' => '12 blocs x 100 feuilles. Couleurs néon. Adhésif repositionnable. 100% recyclé.', 'price' => 45, 'stock' => 150, 'image_key' => 'sticky-notes'],
-            ['title' => 'Carnet Notes Relié 192 Pages', 'desc' => 'Format A5. 192 pages lignées 90g/m² ivoire. Couverture cuir synthétique. Signet, élastique, poche.', 'price' => 85, 'stock' => 80, 'image_key' => 'hardcover-notebook'],
-            ['title' => 'Cahier Réunion A4 80 Pages', 'desc' => 'Couverture polypro. 80 pages micro-perforées. 2 trous. Papier 90g. Marge, en-tête date/objet.', 'price' => 35, 'stock' => 100, 'image_key' => 'meeting-notebook'],
-            ['title' => 'Enveloppes Kraft A4 Lot de 50', 'desc' => 'Kraft brun 120g. Autocollantes. Fenêtre 45x90mm. Rabat droit. Qualité postale.', 'price' => 65, 'stock' => 80, 'image_key' => 'kraft-envelopes'],
-            ['title' => 'Enveloppes Blanches DL Lot 100', 'desc' => 'Blanc 90g. Fenêtre gauche. Autocollantes. Format DL 110x220mm. Qualité supérieure.', 'price' => 55, 'stock' => 100, 'image_key' => 'white-envelopes'],
-            ['title' => 'Classeur 2 Anneaux A4 30mm', 'desc' => '2 anneaux ronds 30mm. Polypro opaque. Couverture 1.5mm. Compression 250 feuilles. 2 poches int.', 'price' => 38, 'stock' => 120, 'image_key' => '2-ring-binder'],
-            ['title' => 'Chemises Cartonnées A4 Lot 50', 'desc' => 'Carton 250g. Rabat 30mm. 3 rabats. Coins arrondis. Coloris assortis. Dos 30mm.', 'price' => 85, 'stock' => 60, 'image_key' => 'cardboard-folders'],
-            ['title' => 'Intercalaires A4 12 Onglets', 'desc' => 'Polypropylène translucide. 12 onglets numérotés 1-12. Renforcés. Perforation universelle.', 'price' => 25, 'stock' => 150, 'image_key' => 'dividers'],
-            ['title' => 'Pochettes Perforées A4 Lot 100', 'desc' => 'Polypropylène 80µ transparent. Perforation 11 trous. Ouverture haut. Épaisseur 60µ.', 'price' => 45, 'stock' => 100, 'image_key' => 'sheet-protectors'],
+        'Stationery' => [
+            ['title' => 'A4 Ream 500 Sheets 80g', 'desc' => 'White 80g/m² paper. CIE 161 whiteness. Multifunction. Ream wrapped 500 sheets. PEFC certified.', 'price' => 55, 'stock' => 100, 'image_key' => 'a4-paper'],
+            ['title' => 'A3 Ream 500 Sheets 80g', 'desc' => 'A3 format 297x420mm. 500 sheets 80g/m². Whiteness 161. Laser/inkjet printer.', 'price' => 110, 'stock' => 50, 'image_key' => 'a3-paper'],
+            ['title' => 'Sticky Notes 75x75mm', 'desc' => '12 pads x 100 sheets. Neon colors. Repositionable adhesive. 100% recycled.', 'price' => 45, 'stock' => 150, 'image_key' => 'sticky-notes'],
+            ['title' => '192-Page Hardcover Notebook', 'desc' => 'A5 format. 192 lined pages 90g/m² ivory. Synthetic leather cover. Bookmark, elastic, pocket.', 'price' => 85, 'stock' => 80, 'image_key' => 'hardcover-notebook'],
+            ['title' => 'A4 Meeting Notebook 80 Pages', 'desc' => 'Polypro cover. 80 micro-perforated pages. 2 holes. 90g paper. Margin, date/subject header.', 'price' => 35, 'stock' => 100, 'image_key' => 'meeting-notebook'],
+            ['title' => 'Kraft A4 Envelopes Pack of 50', 'desc' => 'Brown kraft 120g. Self-adhesive. 45x90mm window. Straight flap. Postal quality.', 'price' => 65, 'stock' => 80, 'image_key' => 'kraft-envelopes'],
+            ['title' => 'White DL Envelopes Pack of 100', 'desc' => 'White 90g. Left window. Self-adhesive. DL format 110x220mm. Premium quality.', 'price' => 55, 'stock' => 100, 'image_key' => 'white-envelopes'],
+            ['title' => 'A4 2-Ring Binder 30mm', 'desc' => '2 round rings 30mm. Opaque polypro. 1.5mm cover. 250-sheet capacity. 2 inner pockets.', 'price' => 38, 'stock' => 120, 'image_key' => '2-ring-binder'],
+            ['title' => 'Cardboard A4 Folders Pack of 50', 'desc' => '250g cardboard. 30mm flap. 3 flaps. Rounded corners. Assorted colors. 30mm spine.', 'price' => 85, 'stock' => 60, 'image_key' => 'cardboard-folders'],
+            ['title' => 'A4 Dividers 12 Tabs', 'desc' => 'Translucent polypropylene. 12 numbered tabs 1-12. Reinforced. Universal punching.', 'price' => 25, 'stock' => 150, 'image_key' => 'dividers'],
+            ['title' => 'A4 Sheet Protectors Pack of 100', 'desc' => 'Transparent 80µ polypropylene. 11-hole punching. Top opening. 60µ thickness.', 'price' => 45, 'stock' => 100, 'image_key' => 'sheet-protectors'],
         ],
-        'Matériel de Classe' => [
-            ['title' => 'Tableau Velleda 120x90cm', 'desc' => 'Blanc magnétique vitrifié. Cadre alu anodisé. Kit fixation mural. 1 feutre + effaceur.', 'price' => 450, 'stock' => 20, 'image_key' => 'whiteboard'],
-            ['title' => 'Tableau Velleda Mobile 150x100cm', 'desc' => 'Sur pied 4 roulettes freinées. Double face magnétique. Hauteur réglable 170-190cm.', 'price' => 1200, 'stock' => 8, 'image_key' => 'mobile-whiteboard'],
-            ['title' => 'Ardoises Velleda 30x21cm Lot 30', 'desc' => 'Blanches effaçables. Coins arrondis. Surface lisse. 30 ardoises + 30 feutres + 30 chiffons.', 'price' => 420, 'stock' => 20, 'image_key' => 'slates-pack'],
-            ['title' => 'Feutres Tableau Lot 12 Couleurs', 'desc' => 'Pointe ogive 3mm. Encre effaçable sèche. 12 couleurs. Corps transparent. Capuchon ventilé.', 'price' => 120, 'stock' => 80, 'image_key' => 'board-markers'],
-            ['title' => 'Effaceur Tableau Magnétique', 'desc' => 'Effaceur feutre sec. Manche ergonomique. Feutre amovible lavable. Aimant intégré.', 'price' => 45, 'stock' => 100, 'image_key' => 'board-eraser'],
-            ['title' => 'Horloge Murale Pédagogique 30cm', 'desc' => 'Cadran 12h/24h. Aiguilles heures/minutes couleurs. Silencieuse. Pile AA fournie.', 'price' => 120, 'stock' => 60, 'image_key' => 'teaching-clock'],
-            ['title' => 'Tableau Affichage Liège 90x60cm', 'desc' => 'Liège naturel 10mm. Cadre alu argenté. Auto-cicatrisant. Kit fixation inclus.', 'price' => 280, 'stock' => 30, 'image_key' => 'cork-board'],
-            ['title' => 'Pupitre Professeur Réglable', 'desc' => 'Hauteur 52-76cm. Plateau inclinable 0-45°. Structure acier époxy. Range-livres intégré.', 'price' => 650, 'stock' => 15, 'image_key' => 'teacher-desk'],
-            ['title' => 'Compteur Présence Magnétique 30', 'desc' => 'Panneau 45x30cm. 30 aimants photos/noms. 3 zones: présent/absent/retard. Feutre effaçable.', 'price' => 180, 'stock' => 30, 'image_key' => 'attendance-board'],
-            ['title' => 'Mallette Enseignant 40x30cm', 'desc' => 'Polyester 600D. Compartiments: PC 15\", dossiers, trousse, bouteille. Bandoulière rembourrée.', 'price' => 320, 'stock' => 30, 'image_key' => 'teacher-bag'],
+        'Classroom Equipment' => [
+            ['title' => 'Whiteboard 120x90cm', 'desc' => 'Vitrified magnetic whiteboard. Anodized aluminum frame. Wall mounting kit. 1 marker + eraser.', 'price' => 450, 'stock' => 20, 'image_key' => 'whiteboard'],
+            ['title' => 'Mobile Whiteboard 150x100cm', 'desc' => 'On stand with 4 lockable casters. Double-sided magnetic. Adjustable height 170-190cm.', 'price' => 1200, 'stock' => 8, 'image_key' => 'mobile-whiteboard'],
+            ['title' => 'Whiteboard Slates 30x21cm Pack of 30', 'desc' => 'Erasable white slates. Rounded corners. Smooth surface. 30 slates + 30 markers + 30 cloths.', 'price' => 420, 'stock' => 20, 'image_key' => 'slates-pack'],
+            ['title' => 'Board Markers Pack of 12 Colors', 'desc' => 'Bullet tip 3mm. Dry-erase ink. 12 colors. Transparent barrel. Ventilated cap.', 'price' => 120, 'stock' => 80, 'image_key' => 'board-markers'],
+            ['title' => 'Magnetic Board Eraser', 'desc' => 'Dry-erase eraser. Ergonomic handle. Removable washable felt. Built-in magnet.', 'price' => 45, 'stock' => 100, 'image_key' => 'board-eraser'],
+            ['title' => 'Educational Wall Clock 30cm', 'desc' => '12h/24h dial. Colored hour/minute hands. Silent. AA battery included.', 'price' => 120, 'stock' => 60, 'image_key' => 'teaching-clock'],
+            ['title' => 'Cork Bulletin Board 90x60cm', 'desc' => 'Natural cork 10mm. Silver aluminum frame. Self-healing. Mounting kit included.', 'price' => 280, 'stock' => 30, 'image_key' => 'cork-board'],
+            ['title' => 'Adjustable Teacher Lectern', 'desc' => 'Height 52-76cm. Tiltable surface 0-45°. Epoxy steel structure. Built-in bookrest.', 'price' => 650, 'stock' => 15, 'image_key' => 'teacher-desk'],
+            ['title' => 'Magnetic Attendance Tracker 30', 'desc' => 'Panel 45x30cm. 30 photo/name magnets. 3 zones: present/absent/late. Erasable marker.', 'price' => 180, 'stock' => 30, 'image_key' => 'attendance-board'],
+            ['title' => 'Teacher Briefcase 40x30cm', 'desc' => '600D polyester. Compartments: 15" laptop, folders, pencil case, bottle. Padded shoulder strap.', 'price' => 320, 'stock' => 30, 'image_key' => 'teacher-bag'],
         ],
-        'Sciences et Expériences' => [
-            ['title' => 'Microscope Optique 40x-1000x', 'desc' => '3 objectifs achromatiques 4x/10x/40x. Oculaire grand champ 10x/25x. LED réglable. 5 lames préparées.', 'price' => 550, 'stock' => 20, 'image_key' => 'microscope'],
-            ['title' => 'Télescope 70mm/700mm', 'desc' => 'Réfracteur 70mm/700mm. Monture équatoriale EQ. Trépied alu. Oculaires 10/20mm. Filtre lune. Sac transport.', 'price' => 850, 'stock' => 12, 'image_key' => 'telescope'],
-            ['title' => 'Kit Chimie Volcans Cristaux', 'desc' => 'Éruptions volcaniques, culture cristaux. 15 expériences. Tubes, entonnoir, lunettes, gants. 8+ ans.', 'price' => 180, 'stock' => 40, 'image_key' => 'volcano-kit'],
-            ['title' => 'Kit Énergie Solaire', 'desc' => 'Voiture solaire + moulin à vent. Panneau 2V/100mAh. Moteur 1.5V. Assemblage sans outil. 8+ ans.', 'price' => 180, 'stock' => 50, 'image_key' => 'solar-kit'],
-            ['title' => 'Loupe Binoculaire 20x', 'desc' => 'Grossissement 20x. Œilletons caoutchouc. Mise au point centrale. Étui rigide. Poids 320g.', 'price' => 220, 'stock' => 40, 'image_key' => 'binoculars'],
-            ['title' => 'Thermomètre Laboratoire -10/+110°C', 'desc' => 'Verre, colonne alcool rouge. Précision ±1°C. Longueur 30cm. Anneau suspension.', 'price' => 45, 'stock' => 100, 'image_key' => 'lab-thermometer'],
-            ['title' => 'Set 10 Lames Microscope Préparées', 'desc' => 'Tissus végétaux/animaux, protozoaires, bactéries. Verre 26x76mm. Boîte bois 10 compartiments.', 'price' => 120, 'stock' => 50, 'image_key' => 'microscope-slides'],
-            ['title' => 'Kit ADN Extraction Fraise', 'desc' => 'Extraction ADN visible. Tubes, filtre, éthanol, savon, sel. Protocole illustré. 12+ ans.', 'price' => 150, 'stock' => 40, 'image_key' => 'dna-kit'],
-            ['title' => 'Station Météo Sans Fil', 'desc' => 'Température int/ext, hygrométrie, pression, prévisions, phases lune. Sonde ext 100m. Alarme.', 'price' => 320, 'stock' => 30, 'image_key' => 'weather-station'],
+        'Science & Experiments' => [
+            ['title' => 'Optical Microscope 40x-1000x', 'desc' => '3 achromatic objectives 4x/10x/40x. Wide-field eyepiece 10x/25x. Adjustable LED. 5 prepared slides.', 'price' => 550, 'stock' => 20, 'image_key' => 'microscope'],
+            ['title' => 'Telescope 70mm/700mm', 'desc' => '70mm/700mm refractor. EQ equatorial mount. Aluminum tripod. 10/20mm eyepieces. Moon filter. Carry bag.', 'price' => 850, 'stock' => 12, 'image_key' => 'telescope'],
+            ['title' => 'Volcano & Crystal Chemistry Kit', 'desc' => 'Volcanic eruptions, crystal growing. 15 experiments. Tubes, funnel, goggles, gloves. Ages 8+.', 'price' => 180, 'stock' => 40, 'image_key' => 'volcano-kit'],
+            ['title' => 'Solar Energy Kit', 'desc' => 'Solar car + windmill. 2V/100mAh panel. 1.5V motor. Tool-free assembly. Ages 8+.', 'price' => 180, 'stock' => 50, 'image_key' => 'solar-kit'],
+            ['title' => '20x Binocular Loupe', 'desc' => '20x magnification. Rubber eyecups. Central focus. Rigid case. Weight 320g.', 'price' => 220, 'stock' => 40, 'image_key' => 'binoculars'],
+            ['title' => 'Lab Thermometer -10/+110°C', 'desc' => 'Glass, red alcohol column. ±1°C accuracy. Length 30cm. Suspension ring.', 'price' => 45, 'stock' => 100, 'image_key' => 'lab-thermometer'],
+            ['title' => 'Set of 10 Prepared Microscope Slides', 'desc' => 'Plant/animal tissues, protozoa, bacteria. Glass 26x76mm. Wooden box with 10 compartments.', 'price' => 120, 'stock' => 50, 'image_key' => 'microscope-slides'],
+            ['title' => 'Strawberry DNA Extraction Kit', 'desc' => 'Visible DNA extraction. Tubes, filter, ethanol, soap, salt. Illustrated protocol. Ages 12+.', 'price' => 150, 'stock' => 40, 'image_key' => 'dna-kit'],
+            ['title' => 'Wireless Weather Station', 'desc' => 'Indoor/outdoor temperature, humidity, pressure, forecasts, moon phases. 100m outdoor sensor. Alarm.', 'price' => 320, 'stock' => 30, 'image_key' => 'weather-station'],
         ],
-        'Langues Étrangères' => [
-            ['title' => 'Assimil Anglais Débutant Livre+CD', 'desc' => '100 leçons progressives. 30 min/jour. Audio natifs. Grammaire, vocabulaire, dialogues. Niveau A1-A2.', 'price' => 280, 'stock' => 40, 'image_key' => 'assimil-english'],
-            ['title' => 'Assimil Espagnol Livre+CD', 'desc' => 'Même méthode Assimil pour l\'espagnol. 100 leçons. Audio natifs. Niveau A1-B1.', 'price' => 280, 'stock' => 35, 'image_key' => 'assimil-spanish'],
-            ['title' => 'Assimil Allemand Livre+CD', 'desc' => 'Méthode intuitive. 100 leçons. Audio MP3. Grammaire progressive. Niveau A1-A2.', 'price' => 280, 'stock' => 30, 'image_key' => 'assimil-german'],
-            ['title' => 'Dictionnaire Larousse Anglais-Français', 'desc' => '250 000 mots/expressions. Phrases exemples. Phonétique. Annexes grammaire/conjugaison.', 'price' => 220, 'stock' => 50, 'image_key' => 'eng-french-dict'],
-            ['title' => 'Dictionnaire Larousse Espagnol-Français', 'desc' => '180 000 mots. Amérique latine/Espagne. Conjugaison, proverbes. Format moyen.', 'price' => 200, 'stock' => 40, 'image_key' => 'spanish-french-dict'],
-            ['title' => 'Bescherelle Espagnol Conjugaison', 'desc' => '12 000 verbes. Tous temps/modes. Tables modèles. Verbes irréguliers. Index.', 'price' => 150, 'stock' => 50, 'image_key' => 'bescherelle-spanish'],
-            ['title' => 'Vocabulaire Anglais 3000 Mots', 'desc' => '3000 mots par thèmes. Cartes mémo recto-verso. Niveau A1-B2. Application audio.', 'price' => 120, 'stock' => 80, 'image_key' => 'vocab-cards'],
-            ['title' => 'Grammaire Anglaise Progressive', 'desc' => 'Niveau intermédiaire B1-B2. 120 leçons. Règles, exceptions, exercices corrigés. Auto-évaluation.', 'price' => 180, 'stock' => 50, 'image_key' => 'english-grammar'],
+        'Foreign Languages' => [
+            ['title' => 'Assimil English Beginner Book+CD', 'desc' => '100 progressive lessons. 30 min/day. Native audio. Grammar, vocabulary, dialogues. Level A1-A2.', 'price' => 280, 'stock' => 40, 'image_key' => 'assimil-english'],
+            ['title' => 'Assimil Spanish Book+CD', 'desc' => 'Same Assimil method for Spanish. 100 lessons. Native audio. Level A1-B1.', 'price' => 280, 'stock' => 35, 'image_key' => 'assimil-spanish'],
+            ['title' => 'Assimil German Book+CD', 'desc' => 'Intuitive method. 100 lessons. MP3 audio. Progressive grammar. Level A1-A2.', 'price' => 280, 'stock' => 30, 'image_key' => 'assimil-german'],
+            ['title' => 'Larousse English-French Dictionary', 'desc' => '250,000 words/expressions. Example sentences. Phonetics. Grammar/conjugation appendices.', 'price' => 220, 'stock' => 50, 'image_key' => 'eng-french-dict'],
+            ['title' => 'Larousse Spanish-French Dictionary', 'desc' => '180,000 words. Latin America/Spain. Conjugation, proverbs. Medium format.', 'price' => 200, 'stock' => 40, 'image_key' => 'spanish-french-dict'],
+            ['title' => 'Bescherelle Spanish Conjugation', 'desc' => '12,000 verbs. All tenses/moods. Model tables. Irregular verbs. Index.', 'price' => 150, 'stock' => 50, 'image_key' => 'bescherelle-spanish'],
+            ['title' => 'English Vocabulary 3000 Words', 'desc' => '3000 words by theme. Double-sided flash cards. Level A1-B2. Audio app.', 'price' => 120, 'stock' => 80, 'image_key' => 'vocab-cards'],
+            ['title' => 'Progressive English Grammar', 'desc' => 'Intermediate level B1-B2. 120 lessons. Rules, exceptions, corrected exercises. Self-assessment.', 'price' => 180, 'stock' => 50, 'image_key' => 'english-grammar'],
         ],
-        'Informatique et Programmation' => [
-            ['title' => 'Ordinateur Portable Étudiant 14"', 'desc' => 'Intel Core i5, 8Go RAM, 256Go SSD. Écran 14" Full HD. Windows 11. Autonomie 8h. 1.4kg.', 'price' => 4500, 'stock' => 20, 'image_key' => 'student-laptop'],
-            ['title' => 'Clavier Mécanique RGB', 'desc' => 'Switchs mécaniques Red. Rétroéclairage RGB 16M couleurs. Layout FR AZERTY. Câble tressé détachable.', 'price' => 450, 'stock' => 50, 'image_key' => 'mechanical-keyboard'],
-            ['title' => 'Souris Gaming Sans Fil', 'desc' => 'Capteur 16000 DPI. 6 boutons programmables. Autonomie 70h. Récepteur USB 2.4GHz. Poids 85g.', 'price' => 350, 'stock' => 60, 'image_key' => 'gaming-mouse'],
-            ['title' => 'Casque Audio USB avec Micro', 'desc' => 'Son stéréo 7.1 virtuel. Micro flexible anti-bruit. Coussinets mousse mémoire. Compatible PC/PS4/PS5.', 'price' => 380, 'stock' => 50, 'image_key' => 'gaming-headset'],
-            ['title' => 'Webcam Full HD 1080p', 'desc' => 'Capteur 2MP, autofocus. Micro stéréo intégré. Couvercle vie privée. USB Plug&Play. Clip universel.', 'price' => 280, 'stock' => 60, 'image_key' => 'webcam'],
-            ['title' => 'Clé USB 128Go USB 3.2', 'desc' => 'Vitesse lecture 400Mo/s, écriture 200Mo/s. Capuchon rétractable. Garantie 5 ans. USB-A.', 'price' => 120, 'stock' => 100, 'image_key' => 'usb-drive'],
-            ['title' => 'Disque Dur Externe 1To SSD', 'desc' => 'NVMe PCIe 3.0. Vitesse 1050Mo/s. USB-C 3.2 Gen2. Choc résistant IP54. Câble USB-C/USB-A.', 'price' => 850, 'stock' => 30, 'image_key' => 'ssd-external'],
-            ['title' => 'Hub USB-C 7-en-1', 'desc' => 'HDMI 4K@60Hz, 3x USB-A 3.0, SD/microSD, USB-C PD 100W. Aluminium. Compatible Mac/PC.', 'price' => 350, 'stock' => 50, 'image_key' => 'usb-hub'],
-            ['title' => 'Support PC Portable Aluminium', 'desc' => 'Réglable 6 angles. Aluminium anodisé. Pads antidérapants. Ventilation passive. Compatible 11-17".', 'price' => 180, 'stock' => 60, 'image_key' => 'laptop-stand'],
-            ['title' => 'Câble HDMI 2.1 3m', 'desc' => '4K@120Hz, 8K@60Hz. 48Gbps. eARC, VRR, ALLM. Connecteurs plaqués or. Tresse nylon.', 'price' => 120, 'stock' => 100, 'image_key' => 'hdmi-cable'],
-            ['title' => 'Routeur WiFi 6 AX3000', 'desc' => 'Double bande 2.4/5GHz. 3000Mbps. 4 antennes. OFDMA, MU-MIMO. Port WAN 2.5G. Application mobile.', 'price' => 650, 'stock' => 30, 'image_key' => 'wifi6-router'],
+        'Computing & Programming' => [
+            ['title' => '14" Student Laptop', 'desc' => 'Intel Core i5, 8GB RAM, 256GB SSD. 14" Full HD screen. Windows 11. 8h battery life. 1.4kg.', 'price' => 4500, 'stock' => 20, 'image_key' => 'student-laptop'],
+            ['title' => 'RGB Mechanical Keyboard', 'desc' => 'Red mechanical switches. 16M color RGB backlighting. FR AZERTY layout. Detachable braided cable.', 'price' => 450, 'stock' => 50, 'image_key' => 'mechanical-keyboard'],
+            ['title' => 'Wireless Gaming Mouse', 'desc' => '16000 DPI sensor. 6 programmable buttons. 70h battery life. USB 2.4GHz receiver. Weight 85g.', 'price' => 350, 'stock' => 60, 'image_key' => 'gaming-mouse'],
+            ['title' => 'USB Headset with Microphone', 'desc' => 'Virtual 7.1 surround sound. Flexible noise-canceling mic. Memory foam ear cushions. Compatible PC/PS4/PS5.', 'price' => 380, 'stock' => 50, 'image_key' => 'gaming-headset'],
+            ['title' => 'Full HD 1080p Webcam', 'desc' => '2MP sensor, autofocus. Built-in stereo microphone. Privacy cover. USB Plug&Play. Universal clip.', 'price' => 280, 'stock' => 60, 'image_key' => 'webcam'],
+            ['title' => '128GB USB 3.2 Flash Drive', 'desc' => 'Read speed 400MB/s, write 200MB/s. Retractable cap. 5-year warranty. USB-A.', 'price' => 120, 'stock' => 100, 'image_key' => 'usb-drive'],
+            ['title' => '1TB External SSD', 'desc' => 'NVMe PCIe 3.0. Speed 1050MB/s. USB-C 3.2 Gen2. Shock resistant IP54. USB-C/USB-A cable.', 'price' => 850, 'stock' => 30, 'image_key' => 'ssd-external'],
+            ['title' => '7-in-1 USB-C Hub', 'desc' => 'HDMI 4K@60Hz, 3x USB-A 3.0, SD/microSD, USB-C PD 100W. Aluminum. Compatible Mac/PC.', 'price' => 350, 'stock' => 50, 'image_key' => 'usb-hub'],
+            ['title' => 'Aluminum Laptop Stand', 'desc' => 'Adjustable 6 angles. Anodized aluminum. Non-slip pads. Passive ventilation. Compatible 11-17".', 'price' => 180, 'stock' => 60, 'image_key' => 'laptop-stand'],
+            ['title' => 'HDMI 2.1 Cable 3m', 'desc' => '4K@120Hz, 8K@60Hz. 48Gbps. eARC, VRR, ALLM. Gold-plated connectors. Nylon braided.', 'price' => 120, 'stock' => 100, 'image_key' => 'hdmi-cable'],
+            ['title' => 'WiFi 6 Router AX3000', 'desc' => 'Dual band 2.4/5GHz. 3000Mbps. 4 antennas. OFDMA, MU-MIMO. 2.5G WAN port. Mobile app.', 'price' => 650, 'stock' => 30, 'image_key' => 'wifi6-router'],
         ],
-        'Arts Créatifs' => [
-            ['title' => 'Kit Peinture Acrylique 12x20ml', 'desc' => '12 tubes 20ml. Pigments fins. Couleurs primaires + terre, blanc, noir. Tubes refermables.', 'price' => 140, 'stock' => 60, 'image_key' => 'acrylic-paint'],
-            ['title' => 'Peinture Gouache 12 Godets', 'desc' => '12 godets 12ml + pinceau. Couleurs vives, couvrantes. Lavable. Palette intégrée. 3+ ans.', 'price' => 75, 'stock' => 100, 'image_key' => 'gouache'],
-            ['title' => 'Kit Pâte à Modeler 10 Couleurs', 'desc' => '10 pots 100g. 10 couleurs vives. Ne sèche pas, ne tache pas. Norme CE. 3+ ans.', 'price' => 85, 'stock' => 80, 'image_key' => 'modeling-clay'],
-            ['title' => 'Coffret 50 Feutres Coloriage', 'desc' => '50 feutres pointe moy. Encre lavable. Pointes anti-enfoncement. Étui rigide. 3+ ans.', 'price' => 95, 'stock' => 80, 'image_key' => 'markers-50'],
-            ['title' => 'Bloc Aquarelle 300g 20F A4', 'desc' => 'Papier 300g grain fin. 20 feuilles blanc naturel. Encollé 4 bords. Idéal aquarelle.', 'price' => 95, 'stock' => 60, 'image_key' => 'watercolor-block'],
-            ['title' => 'Toile Coton 30x40cm Lot 5', 'desc' => 'Coton 380g/m². Châssis pin 1.8cm. Encollage universel. Prêtes à peindre. Lot 5.', 'price' => 180, 'stock' => 40, 'image_key' => 'canvas-pack'],
-            ['title' => 'Kit Origami 200 Feuilles', 'desc' => '200 feuilles 15x15cm. 20 motifs japonais. Papier 70g. Livret 20 modèles. 8+ ans.', 'price' => 65, 'stock' => 80, 'image_key' => 'origami-pack'],
-            ['title' => 'Kit Mosaïque 1000 Pièces', 'desc' => '1000 tesselles 10mm. 12 couleurs. 4 plaques support. Colle, pince, gabarits. 8+ ans.', 'price' => 120, 'stock' => 40, 'image_key' => 'mosaic-kit'],
+        'Creative Arts' => [
+            ['title' => 'Acrylic Paint Kit 12x20ml', 'desc' => '12 tubes of 20ml. Fine pigments. Primary colors + earth, white, black. Resealable tubes.', 'price' => 140, 'stock' => 60, 'image_key' => 'acrylic-paint'],
+            ['title' => 'Gouache Paint 12 Pans', 'desc' => '12 pans of 12ml + brush. Bright, opaque colors. Washable. Built-in palette. Ages 3+.', 'price' => 75, 'stock' => 100, 'image_key' => 'gouache'],
+            ['title' => 'Modeling Clay Kit 10 Colors', 'desc' => '10 pots of 100g. 10 bright colors. Does not dry out, does not stain. CE standard. Ages 3+.', 'price' => 85, 'stock' => 80, 'image_key' => 'modeling-clay'],
+            ['title' => 'Box of 50 Coloring Markers', 'desc' => '50 medium tip markers. Washable ink. Non-push-in tips. Rigid case. Ages 3+.', 'price' => 95, 'stock' => 80, 'image_key' => 'markers-50'],
+            ['title' => 'Watercolor Block 300g 20S A4', 'desc' => '300g fine-grain paper. 20 sheets natural white. 4-edge glued. Ideal for watercolor.', 'price' => 95, 'stock' => 60, 'image_key' => 'watercolor-block'],
+            ['title' => 'Cotton Canvas 30x40cm Pack of 5', 'desc' => '380g/m² cotton. 1.8cm pine frame. Universal primer. Ready to paint. Pack of 5.', 'price' => 180, 'stock' => 40, 'image_key' => 'canvas-pack'],
+            ['title' => 'Origami Kit 200 Sheets', 'desc' => '200 sheets 15x15cm. 20 Japanese patterns. 70g paper. Booklet with 20 models. Ages 8+.', 'price' => 65, 'stock' => 80, 'image_key' => 'origami-pack'],
+            ['title' => 'Mosaic Kit 1000 Pieces', 'desc' => '1000 tessellated pieces 10mm. 12 colors. 4 support boards. Glue, tweezers, templates. Ages 8+.', 'price' => 120, 'stock' => 40, 'image_key' => 'mosaic-kit'],
         ],
     ];
 
@@ -190,23 +190,23 @@ class ProductFactory extends Factory
 
     private static function img(string $text, string $category = ''): string
     {
-        if ($category === 'Livres') {
+        if ($category === 'Books') {
             $livresImages = [
-                'Manuel de Mathématiques'   => 'images/products/books/math-book.jpg',
-                'Manuel de Français'        => 'images/products/books/manuel-francais.jpg',
-                'Physique-Chimie'           => 'images/products/books/physics-book.jpg',
-                'Guide SVT'                 => 'images/products/books/guide-svt.jpg',
-                'Bescherelle'               => 'images/products/books/bescherelle.jpg',
-                'Atlas Scolaire'            => 'images/products/books/atlas.jpg',
-                'Histoire-Géographie'       => 'images/products/books/histoire-geo.jpg',
-                'Allemand 1ère Année'       => 'images/products/books/allemand-cahier.jpg',
-                'Sésame'                    => 'images/products/books/math-book.jpg',
-                'Bled'                      => 'images/products/books/bled.jpg',
-                'Dictionnaire Le Robert'    => 'images/products/books/robert-poche.jpg',
-                'Larousse Junior'           => 'images/products/books/larousse-junior.jpg',
-                'Manuel de Philosophie'     => 'images/products/books/philosophie.jpg',
-                'Cahier de Vacances'        => 'images/products/books/cahier-vacances.jpg',
-                'Petit Larousse'            => 'images/products/books/petit-larousse.jpg',
+                'Mathematics Textbook'          => 'images/products/books/math-book.jpg',
+                'French Textbook'               => 'images/products/books/manuel-francais.jpg',
+                'Physics-Chemistry'             => 'images/products/books/physics-book.jpg',
+                'SVT Guide'                     => 'images/products/books/guide-svt.jpg',
+                'Bescherelle'                   => 'images/products/books/bescherelle.jpg',
+                'World School Atlas'            => 'images/products/books/atlas.jpg',
+                'History-Geography'             => 'images/products/books/histoire-geo.jpg',
+                'German 1st Year'               => 'images/products/books/allemand-cahier.jpg',
+                'Sesame'                        => 'images/products/books/math-book.jpg',
+                'Bled'                          => 'images/products/books/bled.jpg',
+                'Le Robert Pocket'              => 'images/products/books/robert-poche.jpg',
+                'Larousse Junior'               => 'images/products/books/larousse-junior.jpg',
+                'Philosophy Textbook'           => 'images/products/books/philosophie.jpg',
+                'Vacation Workbook'             => 'images/products/books/cahier-vacances.jpg',
+                'Petit Larousse'                => 'images/products/books/petit-larousse.jpg',
             ];
             foreach ($livresImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -215,37 +215,37 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Fournitures Scolaires') {
+        if ($category === 'School Supplies') {
             $stationeryImages = [
-                'Stylos Bille Bleu'         => 'images/products/stationery/blue-pens.jpg',
-                'Stylos Bille Noir'         => 'images/products/stationery/black-pens.jpg',
-                'Stylos Bille Rouge'        => 'images/products/stationery/red-pens.jpg',
-                'Cahier 200 Pages'          => 'images/products/stationery/notebook-large.jpg',
-                'Cahier 96 Pages'           => 'images/products/stationery/notebook-96.jpg',
-                'Cahier Spirale'            => 'images/products/stationery/spiral-notebook.jpg',
-                'Classeur 4 Anneaux'        => 'images/products/stationery/binder.jpg',
-                'Dossiers Suspendus'        => 'images/products/stationery/hanging-folders.jpg',
-                'Marqueurs Fluorescents'    => 'images/products/stationery/highlighters.jpg',
-                'Correcteur Liquide'        => 'images/products/stationery/correction-fluid.jpg',
-                'Roller Correcteur'         => 'images/products/stationery/correction-tape.jpg',
-                'Agenda Scolaire'           => 'images/products/stationery/agenda.jpg',
-                'Feuilles Quadrillées'      => 'images/products/stationery/grid-paper.jpg',
-                'Feuilles Unies'            => 'images/products/stationery/lined-paper.jpg',
-                'Trousse Scolaire'          => 'images/products/stationery/pencil-case.jpg',
-                'Crayons à Papier HB'       => 'images/products/stationery/pencils-hb.jpg',
-                'Crayons de Couleur'        => 'images/products/stationery/color-pencils.jpg',
-                'Feutres Fins'              => 'images/products/stationery/fine-markers.jpg',
-                'Gomme Blanche'             => 'images/products/stationery/erasers.jpg',
-                'Taille-Crayon'             => 'images/products/stationery/sharpener.jpg',
-                'Règle Plate'               => 'images/products/stationery/ruler.jpg',
-                'Équerre 26cm'              => 'images/products/stationery/set-square.jpg',
-                'Compas de Précision'       => 'images/products/stationery/compass.jpg',
-                'Ciseaux Scolaires'         => 'images/products/stationery/scissors.jpg',
-                'Colle Bâton'               => 'images/products/stationery/glue-sticks.jpg',
-                'Colle Liquide'             => 'images/products/stationery/liquid-glue.jpg',
-                'Ramette A4'                => 'images/products/stationery/a4-paper.jpg',
-                'Sac à Dos Scolaire'        => 'images/products/stationery/backpack.jpg',
-                'Boîte 24 Feutres'          => 'images/products/stationery/fine-markers.jpg',
+                'Blue Ballpoint Pen'        => 'images/products/stationery/blue-pens.jpg',
+                'Black Ballpoint Pen'       => 'images/products/stationery/black-pens.jpg',
+                'Red Ballpoint Pen'         => 'images/products/stationery/red-pens.jpg',
+                '200-Page Large Notebook'   => 'images/products/stationery/notebook-large.jpg',
+                '96-Page Small Notebook'    => 'images/products/stationery/notebook-96.jpg',
+                'Spiral Notebook'           => 'images/products/stationery/spiral-notebook.jpg',
+                '4-Ring Binder'             => 'images/products/stationery/binder.jpg',
+                'Hanging Folders'           => 'images/products/stationery/hanging-folders.jpg',
+                'Fluorescent Highlighter'   => 'images/products/stationery/highlighters.jpg',
+                'Correction Fluid'          => 'images/products/stationery/correction-fluid.jpg',
+                'Correction Tape'           => 'images/products/stationery/correction-tape.jpg',
+                'School Diary'              => 'images/products/stationery/agenda.jpg',
+                'Grid Sheets'               => 'images/products/stationery/grid-paper.jpg',
+                'Plain Sheets'              => 'images/products/stationery/lined-paper.jpg',
+                'Pencil Case'               => 'images/products/stationery/pencil-case.jpg',
+                'HB Graphite Pencil'        => 'images/products/stationery/pencils-hb.jpg',
+                'Colored Pencil'            => 'images/products/stationery/color-pencils.jpg',
+                'Fine Markers'              => 'images/products/stationery/fine-markers.jpg',
+                'White Eraser'              => 'images/products/stationery/erasers.jpg',
+                'Sharpener'                 => 'images/products/stationery/sharpener.jpg',
+                'Flat Ruler'                => 'images/products/stationery/ruler.jpg',
+                'Set Square'                => 'images/products/stationery/set-square.jpg',
+                'Precision Compass'         => 'images/products/stationery/compass.jpg',
+                'School Scissors'           => 'images/products/stationery/scissors.jpg',
+                'Glue Stick'                => 'images/products/stationery/glue-sticks.jpg',
+                'Liquid Glue'               => 'images/products/stationery/liquid-glue.jpg',
+                'A4 Ream'                   => 'images/products/stationery/a4-paper.jpg',
+                'School Backpack'           => 'images/products/stationery/backpack.jpg',
+                'Box of 24'                 => 'images/products/stationery/fine-markers.jpg',
             ];
             foreach ($stationeryImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -254,19 +254,19 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Papeterie') {
+        if ($category === 'Stationery') {
             $officeImages = [
-                'Ramette A4'              => 'images/products/office/ramette-a4.jpg',
-                'Ramette A3'              => 'images/products/office/ramette-a3.jpg',
-                'Bloc-Notes Autocollants' => 'images/products/office/bloc-notes.jpg',
-                'Carnet Notes'            => 'images/products/office/carnet-notes.jpg',
-                'Cahier Réunion'          => 'images/products/office/cahier-reunion.jpg',
-                'Enveloppes Kraft'        => 'images/products/office/enveloppes-kraft.jpg',
-                'Enveloppes Blanches'     => 'images/products/office/enveloppes-blanches.jpg',
-                'Classeur 2 Anneaux'      => 'images/products/office/classeur-anneaux.jpg',
-                'Chemises Cartonnées'     => 'images/products/office/chemises-cartonnes.jpg',
-                'Intercalaires'           => 'images/products/office/intercalaires.jpg',
-                'Pochettes Perforées'     => 'images/products/office/pochettes-perforees.jpg',
+                'A4 Ream'                 => 'images/products/office/ramette-a4.jpg',
+                'A3 Ream'                 => 'images/products/office/ramette-a3.jpg',
+                'Sticky Notes'            => 'images/products/office/bloc-notes.jpg',
+                'Hardcover Notebook'      => 'images/products/office/carnet-notes.jpg',
+                'Meeting Notebook'        => 'images/products/office/cahier-reunion.jpg',
+                'Kraft Envelopes'         => 'images/products/office/enveloppes-kraft.jpg',
+                'White Envelopes'         => 'images/products/office/enveloppes-blanches.jpg',
+                '2-Ring Binder'           => 'images/products/office/classeur-anneaux.jpg',
+                'Cardboard Folders'       => 'images/products/office/chemises-cartonnes.jpg',
+                'Dividers'                => 'images/products/office/intercalaires.jpg',
+                'Sheet Protectors'        => 'images/products/office/pochettes-perforees.jpg',
             ];
             foreach ($officeImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -275,18 +275,18 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Manuels Universitaires') {
+        if ($category === 'University Textbooks') {
             $uniImages = [
-                'Comptabilité Générale'          => 'images/products/universitaire/comptabilite-generale.jpg',
-                'Droit des Affaires'             => 'images/products/universitaire/droit-des-affaires.jpg',
-                'Algorithmique et Programmation' => 'images/products/universitaire/algorithmique-python.jpg',
-                'Introduction à l\'Économie'     => 'images/products/universitaire/introduction-economie.jpg',
-                'Droit Constitutionnel'          => 'images/products/universitaire/droit-constitutionnel.jpg',
-                'Psychologie Cognitive'          => 'images/products/universitaire/psychologie-cognitive.jpg',
-                'Marketing Fondamentaux'         => 'images/products/universitaire/marketing-fondamentaux.jpg',
-                'Statistiques pour Sciences'     => 'images/products/universitaire/statistiques-sociales.jpg',
-                'Biochimie Structurale'          => 'images/products/universitaire/biochimie-structurale.jpg',
-                'Gestion des Ressources'         => 'images/products/universitaire/gestion-rh.jpg',
+                'General Accounting'             => 'images/products/universitaire/comptabilite-generale.jpg',
+                'Business Law'                   => 'images/products/universitaire/droit-des-affaires.jpg',
+                'Algorithms and Programming'     => 'images/products/universitaire/algorithmique-python.jpg',
+                'Introduction to Economics'      => 'images/products/universitaire/introduction-economie.jpg',
+                'Constitutional Law'             => 'images/products/universitaire/droit-constitutionnel.jpg',
+                'Cognitive Psychology'           => 'images/products/universitaire/psychologie-cognitive.jpg',
+                'Marketing Fundamentals'         => 'images/products/universitaire/marketing-fondamentaux.jpg',
+                'Statistics for Social'          => 'images/products/universitaire/statistiques-sociales.jpg',
+                'Structural and Metabolic'       => 'images/products/universitaire/biochimie-structurale.jpg',
+                'Human Resources'                => 'images/products/universitaire/gestion-rh.jpg',
             ];
             foreach ($uniImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -295,16 +295,16 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Arts Créatifs') {
+        if ($category === 'Creative Arts') {
             $artImages = [
-                'Peinture Acrylique'    => 'images/products/arts-creatifs/peinture-acrylique.jpg',
-                'Gouache'               => 'images/products/arts-creatifs/gouache-godets.jpg',
-                'Pâte à Modeler'        => 'images/products/arts-creatifs/pate-modeler.jpg',
-                'Coffret 50 Feutres'    => 'images/products/arts-creatifs/coffret-feutres.jpg',
-                'Bloc Aquarelle'        => 'images/products/arts-creatifs/bloc-aquarelle.jpg',
-                'Toile Coton'           => 'images/products/arts-creatifs/toile-coton.jpg',
-                'Kit Origami'           => 'images/products/arts-creatifs/kit-origami.jpg',
-                'Kit Mosaïque'          => 'images/products/arts-creatifs/kit-mosaique.jpg',
+                'Acrylic Paint Kit'     => 'images/products/arts-creatifs/peinture-acrylique.jpg',
+                'Gouache Paint'         => 'images/products/arts-creatifs/gouache-godets.jpg',
+                'Modeling Clay'         => 'images/products/arts-creatifs/pate-modeler.jpg',
+                'Coloring Markers'      => 'images/products/arts-creatifs/coffret-feutres.jpg',
+                'Watercolor Block'      => 'images/products/arts-creatifs/bloc-aquarelle.jpg',
+                'Cotton Canvas'         => 'images/products/arts-creatifs/toile-coton.jpg',
+                'Origami Kit'           => 'images/products/arts-creatifs/kit-origami.jpg',
+                'Mosaic Kit'            => 'images/products/arts-creatifs/kit-mosaique.jpg',
             ];
             foreach ($artImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -313,15 +313,15 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Calculatrices') {
+        if ($category === 'Calculators') {
             $calcImages = [
                 'Casio FX-92'       => 'images/products/calculatrices/casio-fx-92.jpg',
                 'Casio Graph 90'    => 'images/products/calculatrices/casio-graph-90e.jpg',
                 'Texas TI-30X'      => 'images/products/calculatrices/ti-30x-pro.jpg',
                 'NumWorks N0100'    => 'images/products/calculatrices/numworks-n0100.jpg',
-                'Bureau 12 Chiffres'=> 'images/products/calculatrices/calculatrice-bureau.jpg',
+                'Desktop Calculator'=> 'images/products/calculatrices/calculatrice-bureau.jpg',
                 'HP 10bII'          => 'images/products/calculatrices/hp-10bii-plus.jpg',
-                'Poche 8 Chiffres'  => 'images/products/calculatrices/calculatrice-poche.jpg',
+                'Pocket Calculator' => 'images/products/calculatrices/calculatrice-poche.jpg',
             ];
             foreach ($calcImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -330,20 +330,20 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Kits Pédagogiques') {
+        if ($category === 'Educational Kits') {
             $kitImages = [
-                'Kit Chimie - 50'               => 'images/products/kits-pedagogiques/kit-chimie-50.jpg',
-                'Kit Robotique Solaire'         => 'images/products/kits-pedagogiques/kit-robotique-solaire.jpg',
-                'Kit Robotique Programmable'    => 'images/products/kits-pedagogiques/mbot-robot.jpg',
-                'Kit Micro:bit'                 => 'images/products/kits-pedagogiques/microbit-v2-go.jpg',
-                'Kit Arduino'                   => 'images/products/kits-pedagogiques/arduino-starter.jpg',
-                'Kit Corps Humain'              => 'images/products/kits-pedagogiques/corps-humain.jpg',
-                'Squelette Humain'              => 'images/products/kits-pedagogiques/squelette-humain.jpg',
-                'Globe Terrestre'               => 'images/products/kits-pedagogiques/globe-terrestre.jpg',
-                'Microscope Optique'            => 'images/products/kits-pedagogiques/microscope-40x-1000x.jpg',
-                'Télescope Réfracteur'          => 'images/products/kits-pedagogiques/telescope-70mm.jpg',
-                'Balance Précision'             => 'images/products/kits-pedagogiques/balance-precision.jpg',
-                'Kit Énergie Renouvelable'      => 'images/products/kits-pedagogiques/kit-energie-renouvelable.jpg',
+                'Chemistry Kit'                 => 'images/products/kits-pedagogiques/kit-chimie-50.jpg',
+                'Solar Robotics'                => 'images/products/kits-pedagogiques/kit-robotique-solaire.jpg',
+                'Programmable Robotics'         => 'images/products/kits-pedagogiques/mbot-robot.jpg',
+                'Micro:bit'                     => 'images/products/kits-pedagogiques/microbit-v2-go.jpg',
+                'Arduino'                       => 'images/products/kits-pedagogiques/arduino-starter.jpg',
+                'Human Anatomy'                 => 'images/products/kits-pedagogiques/corps-humain.jpg',
+                'Human Skeleton'                => 'images/products/kits-pedagogiques/squelette-humain.jpg',
+                'Globe'                         => 'images/products/kits-pedagogiques/globe-terrestre.jpg',
+                'Optical Microscope'            => 'images/products/kits-pedagogiques/microscope-40x-1000x.jpg',
+                'Refractor Telescope'           => 'images/products/kits-pedagogiques/telescope-70mm.jpg',
+                'Precision Scale'               => 'images/products/kits-pedagogiques/balance-precision.jpg',
+                'Renewable Energy'              => 'images/products/kits-pedagogiques/kit-energie-renouvelable.jpg',
             ];
             foreach ($kitImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -352,16 +352,16 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Langues Étrangères') {
+        if ($category === 'Foreign Languages') {
             $langImages = [
-                'Assimil Anglais Débutant'          => 'images/products/langues/assimil-anglais-debutant.jpg',
-                'Assimil Espagnol'                  => 'images/products/langues/assimil-espagnol.jpg',
-                'Assimil Allemand'                  => 'images/products/langues/assimil-allemand.jpg',
-                'Dictionnaire Larousse Anglais'     => 'images/products/langues/larousse-anglais.jpg',
-                'Dictionnaire Larousse Espagnol'    => 'images/products/langues/larousse-espagnol.jpg',
-                'Bescherelle Espagnol'              => 'images/products/langues/bescherelle-espagnol.jpg',
-                'Vocabulaire Anglais'               => 'images/products/langues/vocabulaire-anglais.jpg',
-                'Grammaire Anglaise'                => 'images/products/langues/grammaire-anglaise.jpg',
+                'Assimil English'                   => 'images/products/langues/assimil-anglais-debutant.jpg',
+                'Assimil Spanish'                   => 'images/products/langues/assimil-espagnol.jpg',
+                'Assimil German'                    => 'images/products/langues/assimil-allemand.jpg',
+                'Larousse English-French'           => 'images/products/langues/larousse-anglais.jpg',
+                'Larousse Spanish-French'           => 'images/products/langues/larousse-espagnol.jpg',
+                'Bescherelle Spanish'               => 'images/products/langues/bescherelle-espagnol.jpg',
+                'English Vocabulary'                => 'images/products/langues/vocabulaire-anglais.jpg',
+                'Progressive English Grammar'       => 'images/products/langues/grammaire-anglaise.jpg',
             ];
             foreach ($langImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -370,18 +370,18 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Matériel de Classe') {
+        if ($category === 'Classroom Equipment') {
             $classImages = [
-                'Tableau Velleda 120x90cm'      => 'images/products/materiel-classe/tableau-velleda-120x90.jpg',
-                'Tableau Velleda Mobile'        => 'images/products/materiel-classe/tableau-velleda-mobile.jpg',
-                'Ardoises Velleda'              => 'images/products/materiel-classe/ardoises-velleda.jpg',
-                'Feutres Tableau'               => 'images/products/materiel-classe/feutres-tableau.jpg',
-                'Effaceur Tableau'              => 'images/products/materiel-classe/effaceur-tableau.jpg',
-                'Horloge Murale'                => 'images/products/materiel-classe/horloge-pedagogique.jpg',
-                'Tableau Affichage Liège'       => 'images/products/materiel-classe/tableau-affichage-liege.jpg',
-                'Pupitre Professeur'            => 'images/products/materiel-classe/pupitre-professeur.jpg',
-                'Compteur Présence'             => 'images/products/materiel-classe/compteur-presence.jpg',
-                'Mallette Enseignant'           => 'images/products/materiel-classe/mallette-enseignant.jpg',
+                'Whiteboard 120x90cm'          => 'images/products/materiel-classe/tableau-velleda-120x90.jpg',
+                'Mobile Whiteboard'             => 'images/products/materiel-classe/tableau-velleda-mobile.jpg',
+                'Whiteboard Slates'             => 'images/products/materiel-classe/ardoises-velleda.jpg',
+                'Board Markers'                 => 'images/products/materiel-classe/feutres-tableau.jpg',
+                'Board Eraser'                  => 'images/products/materiel-classe/effaceur-tableau.jpg',
+                'Educational Wall Clock'        => 'images/products/materiel-classe/horloge-pedagogique.jpg',
+                'Cork Bulletin Board'           => 'images/products/materiel-classe/tableau-affichage-liege.jpg',
+                'Adjustable Teacher Lectern'    => 'images/products/materiel-classe/pupitre-professeur.jpg',
+                'Magnetic Attendance'           => 'images/products/materiel-classe/compteur-presence.jpg',
+                'Teacher Briefcase'             => 'images/products/materiel-classe/mallette-enseignant.jpg',
             ];
             foreach ($classImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -390,17 +390,17 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Sciences et Expériences') {
+        if ($category === 'Science & Experiments') {
             $sciImages = [
-                'Microscope Optique'            => 'images/products/sciences/microscope-optique.jpg',
-                'Télescope 70mm/700mm'          => 'images/products/sciences/telescope-70mm-700mm.jpg',
-                'Kit Chimie Volcans'            => 'images/products/sciences/chimie-volcans.jpg',
-                'Kit Énergie Solaire'           => 'images/products/sciences/kit-energie-solaire.jpg',
-                'Loupe Binoculaire'             => 'images/products/sciences/loupe-binoculaire.jpg',
-                'Thermomètre Laboratoire'       => 'images/products/sciences/thermometre-laboratoire.jpg',
-                'Lames Microscope'              => 'images/products/sciences/lames-microscope.jpg',
-                'Kit ADN'                       => 'images/products/sciences/kit-adn-extraction.jpg',
-                'Station Météo'                 => 'images/products/sciences/station-meteo.jpg',
+                'Optical Microscope'            => 'images/products/sciences/microscope-optique.jpg',
+                'Telescope 70mm/700mm'          => 'images/products/sciences/telescope-70mm-700mm.jpg',
+                'Volcano & Crystal'             => 'images/products/sciences/chimie-volcans.jpg',
+                'Solar Energy'                  => 'images/products/sciences/kit-energie-solaire.jpg',
+                'Binocular Loupe'               => 'images/products/sciences/loupe-binoculaire.jpg',
+                'Lab Thermometer'               => 'images/products/sciences/thermometre-laboratoire.jpg',
+                'Microscope Slides'             => 'images/products/sciences/lames-microscope.jpg',
+                'DNA Extraction'                => 'images/products/sciences/kit-adn-extraction.jpg',
+                'Wireless Weather Station'      => 'images/products/sciences/station-meteo.jpg',
             ];
             foreach ($sciImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -409,19 +409,19 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Informatique et Programmation') {
+        if ($category === 'Computing & Programming') {
             $infoImages = [
-                'Ordinateur Portable'   => 'images/products/informatique/pc-portable-etudiant.jpg',
-                'Clavier Mécanique'     => 'images/products/informatique/clavier-mecanique.jpg',
-                'Souris Gaming'         => 'images/products/informatique/souris-gaming.jpg',
-                'Casque Audio'          => 'images/products/informatique/casque-audio-usb.jpg',
-                'Webcam Full HD'        => 'images/products/informatique/webcam-full-hd.jpg',
-                'Clé USB'               => 'images/products/informatique/cle-usb-128go.jpg',
-                'Disque Dur Externe'    => 'images/products/informatique/ssd-externe-1to.jpg',
-                'Hub USB-C'             => 'images/products/informatique/hub-usb-c.jpg',
-                'Support PC Portable'   => 'images/products/informatique/support-pc-aluminium.jpg',
-                'Câble HDMI'            => 'images/products/informatique/cable-hdmi.jpg',
-                'Routeur WiFi'          => 'images/products/informatique/routeur-wifi-6.jpg',
+                'Student Laptop'         => 'images/products/informatique/pc-portable-etudiant.jpg',
+                'Mechanical Keyboard'    => 'images/products/informatique/clavier-mecanique.jpg',
+                'Gaming Mouse'           => 'images/products/informatique/souris-gaming.jpg',
+                'USB Headset'            => 'images/products/informatique/casque-audio-usb.jpg',
+                'Full HD Webcam'         => 'images/products/informatique/webcam-full-hd.jpg',
+                'USB Flash Drive'        => 'images/products/informatique/cle-usb-128go.jpg',
+                'External SSD'           => 'images/products/informatique/ssd-externe-1to.jpg',
+                'USB-C Hub'              => 'images/products/informatique/hub-usb-c.jpg',
+                'Laptop Stand'           => 'images/products/informatique/support-pc-aluminium.jpg',
+                'HDMI Cable'             => 'images/products/informatique/cable-hdmi.jpg',
+                'WiFi Router'            => 'images/products/informatique/routeur-wifi-6.jpg',
             ];
             foreach ($infoImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -430,23 +430,23 @@ class ProductFactory extends Factory
             }
         }
 
-        if ($category === 'Outils de Dessin') {
+        if ($category === 'Drawing Tools') {
             $drawImages = [
-                'Crayons de Couleur Artiste'    => 'images/products/outils-dessin/crayons-artiste.jpg',
-                'Crayons Aquarelle'             => 'images/products/outils-dessin/crayons-aquarelle.jpg',
-                'Bloc Dessin A3'                => 'images/products/outils-dessin/bloc-dessin-a3-180g.jpg',
-                'Bloc Aquarelle A4'             => 'images/products/outils-dessin/bloc-aquarelle-20f.jpg',
-                'Feutres Artistiques'           => 'images/products/outils-dessin/feutres-artistiques.jpg',
-                'Marqueurs Posca'               => 'images/products/outils-dessin/posca-marqueurs.jpg',
-                'Pastels Secs'                  => 'images/products/outils-dessin/pastels-secs.jpg',
-                'Pastels à l\'Huile'            => 'images/products/outils-dessin/pastels-huile.jpg',
-                'Gomme Mie de Pain'             => 'images/products/outils-dessin/gomme-mie-pain.jpg',
-                'Carnet Croquis'                => 'images/products/outils-dessin/carnet-croquis.jpg',
-                'Compas de Précision Grand'     => 'images/products/outils-dessin/compas-grand-modele.jpg',
-                'Règle 30cm'                    => 'images/products/outils-dessin/set-geometrie.jpg',
-                'Toile Peinture 40x50cm'        => 'images/products/outils-dessin/toile-peinture-40x50.jpg',
-                'Kit Peinture Acrylique'        => 'images/products/outils-dessin/peinture-acrylique.jpg',
-                'Kit Gouache'                   => 'images/products/outils-dessin/kit-gouache.jpg',
+                'Artist Colored Pencil'  => 'images/products/outils-dessin/crayons-artiste.jpg',
+                'Watercolor Pencil'      => 'images/products/outils-dessin/crayons-aquarelle.jpg',
+                'A3 Drawing Pad'         => 'images/products/outils-dessin/bloc-dessin-a3-180g.jpg',
+                'A4 Watercolor Pad'      => 'images/products/outils-dessin/bloc-aquarelle-20f.jpg',
+                'Artist Markers'         => 'images/products/outils-dessin/feutres-artistiques.jpg',
+                'Posca Markers'          => 'images/products/outils-dessin/posca-marqueurs.jpg',
+                'Soft Pastels'           => 'images/products/outils-dessin/pastels-secs.jpg',
+                'Oil Pastels'            => 'images/products/outils-dessin/pastels-huile.jpg',
+                'Kneaded Eraser'         => 'images/products/outils-dessin/gomme-mie-pain.jpg',
+                'Pocket Sketchbook'      => 'images/products/outils-dessin/carnet-croquis.jpg',
+                'Large Precision Compass'=> 'images/products/outils-dessin/compas-grand-modele.jpg',
+                'Set Ruler 30cm'         => 'images/products/outils-dessin/set-geometrie.jpg',
+                'Canvas 40x50cm'         => 'images/products/outils-dessin/toile-peinture-40x50.jpg',
+                'Acrylic Paint Kit'      => 'images/products/outils-dessin/peinture-acrylique.jpg',
+                'Gouache Kit'            => 'images/products/outils-dessin/kit-gouache.jpg',
             ];
             foreach ($drawImages as $key => $path) {
                 if (str_contains($text, $key)) {
@@ -456,18 +456,18 @@ class ProductFactory extends Factory
         }
 
         $colors = [
-            'Livres'                    => '2563EB',
-            'Manuels Universitaires'    => '1D4ED8',
-            'Fournitures Scolaires'     => '16A34A',
-            'Calculatrices'             => '9333EA',
-            'Outils de Dessin'          => 'D97706',
-            'Kits Pédagogiques'         => 'DC2626',
-            'Papeterie'                 => '0891B2',
-            'Matériel de Classe'        => 'EA580C',
-            'Sciences et Expériences'   => '0D9488',
-            'Langues Étrangères'        => 'A21CAF',
-            'Informatique et Programmation' => '4F46E5',
-            'Arts Créatifs'             => 'DB2777',
+            'Books'                     => '2563EB',
+            'University Textbooks'      => '1D4ED8',
+            'School Supplies'           => '16A34A',
+            'Calculators'               => '9333EA',
+            'Drawing Tools'             => 'D97706',
+            'Educational Kits'          => 'DC2626',
+            'Stationery'                => '0891B2',
+            'Classroom Equipment'       => 'EA580C',
+            'Science & Experiments'     => '0D9488',
+            'Foreign Languages'         => 'A21CAF',
+            'Computing & Programming'   => '4F46E5',
+            'Creative Arts'             => 'DB2777',
         ];
         $color = $colors[$category] ?? '6B7280';
         $encoded = urlencode($text);
@@ -478,17 +478,17 @@ class ProductFactory extends Factory
     {
         // This should never be called if seeder works correctly, but fallback just in case
         $fallbackTitles = [
-            'Cahier A4 100 Pages', 'Stylo Bille Bleu', 'Crayon HB', 'Gomme Blanche',
-            'Règle 30cm', 'Ciseaux Scolaires', 'Colle Stick', 'Trousse Scolaire',
-            'Calculatrice Scientifique', 'Cahier 100 Pages', 'Lot 10 Stylos',
-            'Classeur A4', 'Ramette A4', 'Trousse 2 Compartiments',
+            'A4 100-Page Notebook', 'Blue Ballpoint Pen', 'HB Pencil', 'White Eraser',
+            '30cm Ruler', 'School Scissors', 'Glue Stick', 'Pencil Case',
+            'Scientific Calculator', '100-Page Notebook', 'Pack of 10 Pens',
+            'A4 Binder', 'A4 Ream', '2-Compartment Pencil Case',
         ];
         $title = fake()->randomElement($fallbackTitles);
         
         return [
             'title' => $title,
             'slug' => fn (array $attrs) => Str::slug($attrs['title']),
-            'description' => 'Produit éducatif de qualité pour étudiants et enseignants.',
+            'description' => 'Quality educational product for students and teachers.',
             'price' => fake()->randomFloat(2, 10, 500),
             'stock' => fake()->numberBetween(10, 100),
             'image' => fn (array $attrs) => "https://placehold.co/400x300/6B7280/white?text=" . urlencode($attrs['title']) . "&font=raleway",

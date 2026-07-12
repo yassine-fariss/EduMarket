@@ -22,7 +22,7 @@ class CheckoutController extends Controller
         $items = $this->cart->get();
 
         if ($items->isEmpty()) {
-            return redirect()->route('cart.index')->with('warning', 'Votre panier est vide.');
+            return redirect()->route('cart.index')->with('warning', 'Your cart is empty.');
         }
 
         return view('checkout.index', compact('items'));
@@ -33,7 +33,7 @@ class CheckoutController extends Controller
         $items = $this->cart->get();
 
         if ($items->isEmpty()) {
-            return redirect()->route('cart.index')->with('error', 'Votre panier est vide.');
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
 
         $validated = $request->validate([
@@ -50,7 +50,7 @@ class CheckoutController extends Controller
 
         if ($request->session()->has($duplicateKey)) {
             return redirect()->route('cart.index')
-                ->with('error', 'Cette commande a déjà été soumise.');
+                ->with('error', 'This order has already been submitted.');
         }
 
         DB::beginTransaction();
@@ -76,7 +76,7 @@ class CheckoutController extends Controller
                 if ($product->stock < $item['quantity']) {
                     DB::rollBack();
                     return redirect()->route('cart.index')
-                        ->with('error', "Stock insuffisant pour {$product->title}. ({$product->stock} disponible(s))");
+                        ->with('error', "Insufficient stock for {$product->title}. ({$product->stock} available)");
                 }
 
                 $product->decrement('stock', $item['quantity']);
@@ -96,11 +96,11 @@ class CheckoutController extends Controller
             $this->cart->clear();
 
             return redirect()->route('checkout.confirmation', $order)
-                ->with('success', 'Votre commande a été confirmée !');
+                ->with('success', 'Your order has been confirmed!');
         } catch (\Throwable $e) {
             DB::rollBack();
             return redirect()->route('checkout.index')
-                ->with('error', 'Une erreur est survenue lors de la commande. Veuillez réessayer.');
+                ->with('error', 'An error occurred while placing the order. Please try again.');
         }
     }
 

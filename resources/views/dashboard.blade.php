@@ -1,12 +1,12 @@
-<x-app-layout title="Tableau de bord">
+<x-app-layout title="Dashboard">
     <div class="row align-items-center mb-4">
         <div class="col">
-            <h4 class="fw-bold mb-0">Tableau de bord</h4>
-            <p class="text-muted small mb-0">Bienvenue, {{ $user->name }}</p>
+            <h4 class="fw-bold mb-0">Dashboard</h4>
+            <p class="text-muted small mb-0">Welcome, {{ $user->name }}</p>
         </div>
         <div class="col-auto">
             <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary rounded-pill btn-sm">
-                <i class="bi bi-gear me-1"></i>Mon profil
+                <i class="bi bi-gear me-1"></i>My Profile
             </a>
         </div>
     </div>
@@ -19,7 +19,7 @@
         <div>
             <h5 class="fw-bold mb-0">{{ $user->name }}</h5>
             <p class="text-muted small mb-0">
-                <i class="bi bi-calendar3 me-1"></i> Membre depuis {{ $user->created_at->translatedFormat('d F Y') }}
+                <i class="bi bi-calendar3 me-1"></i> Member since {{ $user->created_at->format('F d, Y') }}
             </p>
         </div>
     </div>
@@ -35,7 +35,7 @@
                         <p class="fs-4 fw-bold text-primary mb-0">{{ $stats['total'] }}</p>
                     </div>
                 </div>
-                <p class="small text-muted mb-0">Total commandes</p>
+                <p class="small text-muted mb-0">Total Orders</p>
             </div>
         </div>
         <div class="col-6 col-md">
@@ -46,7 +46,7 @@
                     </div>
                     <p class="fs-4 fw-bold text-accent mb-0">{{ $stats['pending'] }}</p>
                 </div>
-                <p class="small text-muted mb-0">En attente</p>
+                <p class="small text-muted mb-0">Pending</p>
             </div>
         </div>
         <div class="col-6 col-md">
@@ -57,7 +57,7 @@
                     </div>
                     <p class="fs-4 fw-bold text-info mb-0">{{ $stats['processing'] }}</p>
                 </div>
-                <p class="small text-muted mb-0">En cours</p>
+                <p class="small text-muted mb-0">Processing</p>
             </div>
         </div>
         <div class="col-6 col-md">
@@ -68,7 +68,7 @@
                     </div>
                     <p class="fs-4 fw-bold text-success mb-0">{{ $stats['completed'] }}</p>
                 </div>
-                <p class="small text-muted mb-0">Terminées</p>
+                <p class="small text-muted mb-0">Completed</p>
             </div>
         </div>
         <div class="col-6 col-md">
@@ -79,34 +79,34 @@
                     </div>
                     <p class="fs-4 fw-bold text-danger mb-0">{{ $stats['cancelled'] }}</p>
                 </div>
-                <p class="small text-muted mb-0">Annulées</p>
+                <p class="small text-muted mb-0">Cancelled</p>
             </div>
         </div>
     </div>
 
     <div class="card-modern bg-white">
         <div class="p-3 d-flex align-items-center justify-content-between border-bottom">
-            <h5 class="fw-bold mb-0"><i class="bi bi-clock-history me-2 text-primary"></i>Commandes récentes</h5>
+            <h5 class="fw-bold mb-0"><i class="bi bi-clock-history me-2 text-primary"></i>Recent Orders</h5>
             @if ($stats['total'] > 0)
-                <a href="{{ route('orders.index') }}" class="btn btn-sm btn-outline-primary rounded-pill">Voir tout</a>
+                <a href="{{ route('orders.index') }}" class="btn btn-sm btn-outline-primary rounded-pill">View All</a>
             @endif
         </div>
         @if ($recentOrders->isEmpty())
             <div class="text-center py-5">
                 <i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
-                <p class="text-muted mt-2 mb-3">Vous n'avez pas encore passé de commande.</p>
-                <a href="{{ route('shop.index') }}" class="btn btn-primary rounded-pill">Découvrir la boutique</a>
+                <p class="text-muted mt-2 mb-3">You haven't placed any orders yet.</p>
+                <a href="{{ route('shop.index') }}" class="btn btn-primary rounded-pill">Browse the shop</a>
             </div>
         @else
             <div class="table-responsive">
                 <table class="table table-hover mb-0 align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>Commande</th>
+                            <th>Order</th>
                             <th>Date</th>
-                            <th>Articles</th>
+                            <th>Items</th>
                             <th>Total</th>
-                            <th>Statut</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -127,10 +127,10 @@
                                             default => 'secondary',
                                         };
                                         $label = match ($order->status) {
-                                            'pending' => 'En attente',
-                                            'processing' => 'En cours',
-                                            'completed' => 'Terminée',
-                                            'cancelled' => 'Annulée',
+                                            'pending' => 'Pending',
+                                            'processing' => 'Processing',
+                                            'completed' => 'Completed',
+                                            'cancelled' => 'Cancelled',
                                             default => $order->status,
                                         };
                                     @endphp
@@ -138,7 +138,7 @@
                                 </td>
                                 <td class="text-end">
                                     <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-outline-primary rounded-pill">
-                                        Détails <i class="bi bi-arrow-right ms-1"></i>
+                                        Details <i class="bi bi-arrow-right ms-1"></i>
                                     </a>
                                 </td>
                             </tr>

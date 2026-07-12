@@ -28,7 +28,7 @@
 
 @if ($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{{ __('Veuillez corriger les erreurs suivantes :') }}</strong>
+        <strong>{{ __('Please correct the following errors:') }}</strong>
         <ul class="mb-0 mt-1">
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>

@@ -1,8 +1,8 @@
 <x-layouts.admin>
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h4 class="fw-bold mb-0">Produits</h4>
+        <h4 class="fw-bold mb-0">Products</h4>
         <a href="{{ route('admin.products.create') }}" class="btn btn-primary">
-            + Nouveau produit
+            + New Product
         </a>
     </div>
 
@@ -12,15 +12,15 @@
             <form method="GET" action="{{ route('admin.products.index') }}">
                 <div class="row g-2 align-items-end">
                     <div class="col-md-4">
-                        <label class="form-label small fw-medium">Rechercher</label>
+                        <label class="form-label small fw-medium">Search</label>
                         <input type="text" name="search" class="form-control"
-                               placeholder="Titre, description..."
+                               placeholder="Title, description..."
                                value="{{ request('search') }}">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label small fw-medium">Catégorie</label>
+                        <label class="form-label small fw-medium">Category</label>
                         <select name="category" class="form-select">
-                            <option value="">Toutes</option>
+                            <option value="">All</option>
                             @foreach ($categories as $cat)
                                 <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
                                     {{ $cat->name }}
@@ -29,16 +29,16 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <label class="form-label small fw-medium">Statut</label>
+                        <label class="form-label small fw-medium">Status</label>
                         <select name="status" class="form-select">
-                            <option value="">Tous</option>
-                            <option value="active" {{ request('status') === 'active' ? 'selected' : '' }}>Actif</option>
-                            <option value="draft" {{ request('status') === 'draft' ? 'selected' : '' }}>Brouillon</option>
+                            <option value="">All</option>
+                            <option value="active" {{ request('status') === 'active' ? 'selected' : '' }}>Active</option>
+                            <option value="draft" {{ request('status') === 'draft' ? 'selected' : '' }}>Draft</option>
                         </select>
                     </div>
                     <div class="col-md-3 d-flex gap-2">
-                        <button type="submit" class="btn btn-primary flex-grow-1">Filtrer</button>
-                        <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary">Réinitialiser</a>
+                        <button type="submit" class="btn btn-primary flex-grow-1">Filter</button>
+                        <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary">Reset</a>
                     </div>
                 </div>
             </form>
@@ -49,7 +49,7 @@
     <div class="card shadow-sm">
         @if ($products->isEmpty())
             <div class="card-body text-center py-5">
-                <p class="text-muted mb-0">Aucun produit trouvé.</p>
+                <p class="text-muted mb-0">No products found.</p>
             </div>
         @else
             <div class="table-responsive">
@@ -57,11 +57,11 @@
                     <thead class="table-light">
                         <tr>
                             <th style="width: 60px;">Image</th>
-                            <th>Titre</th>
-                            <th>Catégorie</th>
-                            <th class="text-end">Prix</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th class="text-end">Price</th>
                             <th class="text-center">Stock</th>
-                            <th>Statut</th>
+                            <th>Status</th>
                             <th class="text-end">Actions</th>
                         </tr>
                     </thead>
@@ -95,19 +95,19 @@
                                 </td>
                                 <td>
                                     @if ($product->status === 'active')
-                                        <span class="badge bg-success">Actif</span>
+                                        <span class="badge bg-success">Active</span>
                                     @else
-                                        <span class="badge bg-secondary">Brouillon</span>
+                                        <span class="badge bg-secondary">Draft</span>
                                     @endif
                                 </td>
                                 <td class="text-end">
                                     <a href="{{ route('admin.products.edit', $product) }}"
-                                       class="btn btn-sm btn-outline-primary">Modifier</a>
+                                       class="btn btn-sm btn-outline-primary">Edit</a>
                                     <form method="POST" action="{{ route('admin.products.destroy', $product) }}"
-                                          class="d-inline" onsubmit="return confirm('Supprimer ce produit ?')">
+                                          class="d-inline" onsubmit="return confirm('Delete this product?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -119,7 +119,7 @@
             <div class="card-footer bg-white">
                 <div class="d-flex justify-content-between align-items-center">
                     <small class="text-muted">
-                        {{ $products->firstItem() }}-{{ $products->lastItem() }} sur {{ $products->total() }} produit(s)
+                        {{ $products->firstItem() }}-{{ $products->lastItem() }} of {{ $products->total() }} product(s)
                     </small>
                     {{ $products->links() }}
                 </div>

@@ -41,7 +41,7 @@ document.addEventListener('submit', async (e) => {
             showCartToast(data.message, 'danger');
         }
     } catch {
-        showCartToast('Erreur réseau. Veuillez réessayer.', 'danger');
+        showCartToast('Network error. Please try again.', 'danger');
     } finally {
         button.disabled = false;
         button.innerHTML = originalHtml;

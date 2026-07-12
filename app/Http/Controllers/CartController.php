@@ -32,7 +32,7 @@ class CartController extends Controller
         $product = Product::findOrFail($data['product_id']);
 
         if ($product->status !== 'active') {
-            return $this->respond($request, false, 'Ce produit n\'est pas disponible.');
+            return $this->respond($request, false, 'This product is not available.');
         }
 
         $result = $this->cart->add($product, (int) $data['quantity']);

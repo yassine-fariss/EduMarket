@@ -1,11 +1,11 @@
 <x-layouts.admin>
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h4 class="fw-bold mb-0">Commande #{{ $order->order_number ?? $order->id }}</h4>
+        <h4 class="fw-bold mb-0">Order #{{ $order->order_number ?? $order->id }}</h4>
         <div class="d-flex gap-2">
             <a href="{{ route('admin.orders.print', $order) }}" target="_blank" class="btn btn-outline-primary">
-                Imprimer la facture
+                Print Invoice
             </a>
-            <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-secondary">Retour</a>
+            <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-secondary">Back</a>
         </div>
     </div>
 
@@ -14,7 +14,7 @@
         <div class="col-lg-4 order-lg-2">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-white">
-                    <h5 class="fw-bold mb-0">Statut</h5>
+                    <h5 class="fw-bold mb-0">Status</h5>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.orders.updateStatus', $order) }}">
@@ -22,45 +22,45 @@
                         @method('PUT')
                         <div class="mb-3">
                             <select name="status" class="form-select form-select-lg mb-2">
-                                <option value="pending" {{ $order->status === 'pending' ? 'selected' : '' }}>En attente</option>
-                                <option value="processing" {{ $order->status === 'processing' ? 'selected' : '' }}>En cours</option>
-                                <option value="completed" {{ $order->status === 'completed' ? 'selected' : '' }}>Terminée</option>
-                                <option value="cancelled" {{ $order->status === 'cancelled' ? 'selected' : '' }}>Annulée</option>
+                                <option value="pending" {{ $order->status === 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="processing" {{ $order->status === 'processing' ? 'selected' : '' }}>Processing</option>
+                                <option value="completed" {{ $order->status === 'completed' ? 'selected' : '' }}>Completed</option>
+                                <option value="cancelled" {{ $order->status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                             </select>
                             <x-input-error :messages="$errors->get('status')" />
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
+                        <button type="submit" class="btn btn-primary w-100">Update</button>
                     </form>
                 </div>
             </div>
 
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-white">
-                    <h5 class="fw-bold mb-0">Détails</h5>
+                    <h5 class="fw-bold mb-0">Details</h5>
                 </div>
                 <div class="card-body small">
                     <dl class="row mb-0">
-                        <dt class="col-5 text-muted">N° commande</dt>
+                        <dt class="col-5 text-muted">Order #</dt>
                         <dd class="col-7">#{{ $order->order_number ?? $order->id }}</dd>
 
                         <dt class="col-5 text-muted">Date</dt>
                         <dd class="col-7">{{ $order->created_at->format('d/m/Y H:i') }}</dd>
 
-                        <dt class="col-5 text-muted">Paiement</dt>
+                        <dt class="col-5 text-muted">Payment</dt>
                         <dd class="col-7">
                             @php
                                 $pmLabel = match ($order->payment_method) {
-                                    'cash_on_delivery' => 'À la livraison',
-                                    'credit_card' => 'Carte bancaire',
+                                    'cash_on_delivery' => 'Cash on Delivery',
+                                    'credit_card' => 'Credit Card',
                                     'paypal' => 'PayPal',
-                                    'bank_transfer' => 'Virement',
+                                    'bank_transfer' => 'Bank Transfer',
                                     default => $order->payment_method,
                                 };
                             @endphp
                             {{ $pmLabel }}
                         </dd>
 
-                        <dt class="col-5 text-muted">Sous-total</dt>
+                        <dt class="col-5 text-muted">Subtotal</dt>
                         <dd class="col-7">{{ number_format($order->total, 2) }} €</dd>
                     </dl>
                 </div>
@@ -68,23 +68,23 @@
 
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
-                    <h5 class="fw-bold mb-0">Client</h5>
+                    <h5 class="fw-bold mb-0">Customer</h5>
                 </div>
                 <div class="card-body small">
                     <dl class="row mb-0">
-                        <dt class="col-5 text-muted">Nom</dt>
+                        <dt class="col-5 text-muted">Name</dt>
                         <dd class="col-7">{{ $order->full_name ?? $order->user?->name ?? '-' }}</dd>
 
                         <dt class="col-5 text-muted">Email</dt>
                         <dd class="col-7">{{ $order->user?->email ?? '-' }}</dd>
 
-                        <dt class="col-5 text-muted">Téléphone</dt>
+                        <dt class="col-5 text-muted">Phone</dt>
                         <dd class="col-7">{{ $order->phone ?? '-' }}</dd>
 
-                        <dt class="col-5 text-muted">Adresse</dt>
+                        <dt class="col-5 text-muted">Address</dt>
                         <dd class="col-7">{{ $order->shipping_address }}</dd>
 
-                        <dt class="col-5 text-muted">Ville</dt>
+                        <dt class="col-5 text-muted">City</dt>
                         <dd class="col-7">{{ $order->city ?? '-' }}</dd>
                     </dl>
 
@@ -101,16 +101,16 @@
         <div class="col-lg-8 order-lg-1">
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
-                    <h5 class="fw-bold mb-0">Produits commandés</h5>
+                    <h5 class="fw-bold mb-0">Ordered Products</h5>
                 </div>
                 <div class="table-responsive">
                     <table class="table mb-0 align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>Produit</th>
-                                <th class="text-center">Quantité</th>
-                                <th class="text-end">Prix unitaire</th>
-                                <th class="text-end">Sous-total</th>
+                                <th>Product</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-end">Unit Price</th>
+                                <th class="text-end">Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,7 +131,7 @@
                                                  style="width: 40px; height: 40px; object-fit: cover;">
                                         @endif
                                             <div>
-                                                <span class="fw-medium">{{ $item->product?->title ?? 'Produit supprimé' }}</span>
+                                                <span class="fw-medium">{{ $item->product?->title ?? 'Deleted product' }}</span>
                                                 <small class="d-block text-muted">SKU: #{{ $item->product_id }}</small>
                                             </div>
                                         </div>

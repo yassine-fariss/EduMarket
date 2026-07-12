@@ -1,8 +1,8 @@
 <section>
     <header class="mb-4">
-        <h5 class="fw-bold">{{ __('Informations du profil') }}</h5>
+        <h5 class="fw-bold">{{ __('Profile Information') }}</h5>
         <p class="text-muted small">
-            {{ __("Mettez à jour les informations de votre profil.") }}
+            {{ __("Update your account's profile information.") }}
         </p>
     </header>
 
@@ -11,7 +11,7 @@
         @method('patch')
 
         <div class="mb-3">
-            <x-input-label for="name" :value="__('Nom')" />
+            <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="w-100" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" />
         </div>
@@ -23,11 +23,11 @@
         </div>
 
         <div class="d-flex align-items-center gap-3">
-            <x-primary-button>{{ __('Enregistrer') }}</x-primary-button>
+            <x-primary-button>{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <span class="small text-success" x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)">
-                    {{ __('Enregistré.') }}
+                    {{ __('Saved.') }}
                 </span>
             @endif
         </div>

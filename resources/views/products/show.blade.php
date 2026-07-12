@@ -2,8 +2,8 @@
     <div class="container py-4">
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Accueil</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('shop.index') }}">Boutique</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('shop.index') }}">Shop</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('shop.index', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></li>
                 <li class="breadcrumb-item active">{{ \Illuminate\Support\Str::limit($product->title, 40) }}</li>
             </ol>
@@ -35,16 +35,16 @@
 
                 <div class="d-flex align-items-center gap-2 mb-3">
                     @if ($product->stock > 0)
-                        <span class="badge bg-success rounded-pill px-3 py-2"><i class="bi bi-check-circle me-1"></i> En stock</span>
-                        <small class="text-muted">{{ $product->stock }} unité(s) disponible(s)</small>
+                        <span class="badge bg-success rounded-pill px-3 py-2"><i class="bi bi-check-circle me-1"></i> In Stock</span>
+                        <small class="text-muted">{{ $product->stock }} unit(s) available</small>
                     @else
-                        <span class="badge bg-danger rounded-pill px-3 py-2"><i class="bi bi-x-circle me-1"></i> Rupture de stock</span>
+                        <span class="badge bg-danger rounded-pill px-3 py-2"><i class="bi bi-x-circle me-1"></i> Out of Stock</span>
                     @endif
                 </div>
 
                 <div class="mb-4">
                     <span class="display-5 fw-bold" style="color: var(--primary);">{{ number_format($product->price, 2) }} €</span>
-                    <small class="text-muted ms-2">TTC</small>
+                    <small class="text-muted ms-2">incl. tax</small>
                 </div>
 
                 <hr>
@@ -58,7 +58,7 @@
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <div class="row g-3 align-items-end">
                             <div class="col-auto">
-                                <label class="form-label fw-medium small mb-1">Quantité</label>
+                                <label class="form-label fw-medium small mb-1">Quantity</label>
                                 <div class="input-group" style="width: 130px;">
                                     <button type="button" class="btn btn-outline-secondary qty-down" onclick="qtyStep(-1)">
                                         <i class="bi bi-dash"></i>
@@ -73,20 +73,20 @@
                             </div>
                             <div class="col">
                                 <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill">
-                                    <i class="bi bi-cart-plus me-2"></i>Ajouter au panier
+                                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
                                 </button>
                             </div>
                         </div>
                     </form>
 
                     <div class="d-flex gap-3 mt-4 pt-3 small text-muted border-top">
-                        <span><i class="bi bi-truck me-1"></i> Livraison sous 2-5 jours</span>
-                        <span><i class="bi bi-arrow-repeat me-1"></i> Retour sous 14 jours</span>
-                        <span><i class="bi bi-lock me-1"></i> Paiement sécurisé</span>
+                        <span><i class="bi bi-truck me-1"></i> Delivery 2-5 days</span>
+                        <span><i class="bi bi-arrow-repeat me-1"></i> 14-day returns</span>
+                        <span><i class="bi bi-lock me-1"></i> Secure payment</span>
                     </div>
                 @else
                     <button class="btn btn-secondary btn-lg w-100 rounded-pill" disabled>
-                        <i class="bi bi-x-circle me-2"></i>Rupture de stock
+                        <i class="bi bi-x-circle me-2"></i>Out of Stock
                     </button>
                 @endif
             </div>
@@ -95,9 +95,9 @@
         @if ($related->isNotEmpty())
             <section class="mt-5 pt-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h3 class="fw-bold mb-0 section-title">Produits similaires</h3>
+                    <h3 class="fw-bold mb-0 section-title">Similar Products</h3>
                     <a href="{{ route('shop.index', ['category' => $product->category->slug]) }}" class="btn btn-outline-primary rounded-pill btn-sm">
-                        Voir tout <i class="bi bi-arrow-right ms-1"></i>
+                        View all <i class="bi bi-arrow-right ms-1"></i>
                     </a>
                 </div>
                 <div class="row g-4">

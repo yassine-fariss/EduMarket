@@ -1,11 +1,11 @@
-<x-app-layout title="Commande #{{ $order->order_number ?? $order->id }}">
+<x-app-layout title="Order #{{ $order->order_number ?? $order->id }}">
     <div class="d-flex align-items-center justify-content-between mb-4">
         <div>
-            <h4 class="fw-bold mb-0">Commande #{{ $order->order_number ?? $order->id }}</h4>
-            <p class="text-muted small mb-0">Détail de votre commande</p>
+            <h4 class="fw-bold mb-0">Order #{{ $order->order_number ?? $order->id }}</h4>
+            <p class="text-muted small mb-0">Order details</p>
         </div>
         <a href="{{ route('orders.index') }}" class="btn btn-outline-primary rounded-pill btn-sm">
-            <i class="bi bi-arrow-left me-1"></i>Retour
+            <i class="bi bi-arrow-left me-1"></i>Back
         </a>
     </div>
 
@@ -13,16 +13,16 @@
         <div class="col-lg-8">
             <div class="card-modern bg-white">
                 <div class="p-3 border-bottom">
-                    <h5 class="fw-bold mb-0"><i class="bi bi-box-seam me-2 text-primary"></i>Articles</h5>
+                    <h5 class="fw-bold mb-0"><i class="bi bi-box-seam me-2 text-primary"></i>Items</h5>
                 </div>
                 <div class="table-responsive">
                     <table class="table mb-0 align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>Produit</th>
-                                <th class="text-center">Quantité</th>
-                                <th class="text-end">Prix unitaire</th>
-                                <th class="text-end">Sous-total</th>
+                                <th>Product</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-end">Unit Price</th>
+                                <th class="text-end">Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,11 +53,11 @@
         <div class="col-lg-4">
             <div class="card-modern bg-white mb-4">
                 <div class="p-3 border-bottom">
-                    <h5 class="fw-bold mb-0"><i class="bi bi-info-circle me-2 text-primary"></i>Détails</h5>
+                    <h5 class="fw-bold mb-0"><i class="bi bi-info-circle me-2 text-primary"></i>Details</h5>
                 </div>
                 <div class="p-4">
                     <dl class="row mb-0 small">
-                        <dt class="col-sm-5 text-muted">Statut</dt>
+                        <dt class="col-sm-5 text-muted">Status</dt>
                         <dd class="col-sm-7">
                             @php
                                 $badge = match ($order->status) {
@@ -68,10 +68,10 @@
                                     default => 'secondary',
                                 };
                                 $label = match ($order->status) {
-                                    'pending' => 'En attente',
-                                    'processing' => 'En cours',
-                                    'completed' => 'Terminée',
-                                    'cancelled' => 'Annulée',
+                                    'pending' => 'Pending',
+                                    'processing' => 'Processing',
+                                    'completed' => 'Completed',
+                                    'cancelled' => 'Cancelled',
                                     default => $order->status,
                                 };
                             @endphp
@@ -79,24 +79,24 @@
                         </dd>
                         <dt class="col-sm-5 text-muted">Date</dt>
                         <dd class="col-sm-7">{{ $order->created_at->format('d/m/Y H:i') }}</dd>
-                        <dt class="col-sm-5 text-muted">Paiement</dt>
+                        <dt class="col-sm-5 text-muted">Payment</dt>
                         <dd class="col-sm-7">
                             @php
                                 $pmLabel = match ($order->payment_method) {
-                                    'cash_on_delivery' => 'Paiement à la livraison',
-                                    'credit_card' => 'Carte bancaire',
+                                    'cash_on_delivery' => 'Cash on Delivery',
+                                    'credit_card' => 'Credit Card',
                                     'paypal' => 'PayPal',
-                                    'bank_transfer' => 'Virement bancaire',
+                                    'bank_transfer' => 'Bank Transfer',
                                     default => $order->payment_method,
                                 };
                             @endphp
                             {{ $pmLabel }}
                         </dd>
-                        <dt class="col-sm-5 text-muted">Client</dt>
+                        <dt class="col-sm-5 text-muted">Customer</dt>
                         <dd class="col-sm-7">{{ $order->full_name ?? $order->user->name }}</dd>
-                        <dt class="col-sm-5 text-muted">Téléphone</dt>
+                        <dt class="col-sm-5 text-muted">Phone</dt>
                         <dd class="col-sm-7">{{ $order->phone }}</dd>
-                        <dt class="col-sm-5 text-muted">Ville</dt>
+                        <dt class="col-sm-5 text-muted">City</dt>
                         <dd class="col-sm-7">{{ $order->city }}</dd>
                     </dl>
                     @if ($order->notes)
@@ -110,7 +110,7 @@
 
             <div class="card-modern bg-white">
                 <div class="p-3 border-bottom">
-                    <h5 class="fw-bold mb-0"><i class="bi bi-geo-alt me-2 text-primary"></i>Adresse de livraison</h5>
+                    <h5 class="fw-bold mb-0"><i class="bi bi-geo-alt me-2 text-primary"></i>Shipping Address</h5>
                 </div>
                 <div class="p-4">
                     <p class="small mb-0">

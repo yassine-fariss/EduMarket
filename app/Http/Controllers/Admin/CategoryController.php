@@ -35,7 +35,7 @@ class CategoryController extends Controller
         Category::create($validated);
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Catégorie créée avec succès.');
+            ->with('success', 'Category created successfully.');
     }
 
     public function edit(Category $category): View
@@ -54,19 +54,19 @@ class CategoryController extends Controller
         $category->update($validated);
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Catégorie mise à jour avec succès.');
+            ->with('success', 'Category updated successfully.');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         if ($category->products()->count() > 0) {
             return redirect()->route('admin.categories.index')
-                ->with('error', 'Impossible de supprimer cette catégorie car elle contient ' . $category->products()->count() . ' produit(s).');
+                ->with('error', 'Cannot delete this category because it contains ' . $category->products()->count() . ' product(s).');
         }
 
         $category->delete();
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Catégorie supprimée avec succès.');
+            ->with('success', 'Category deleted successfully.');
     }
 }

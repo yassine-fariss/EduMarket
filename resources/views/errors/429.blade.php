@@ -9,9 +9,9 @@
 <body class="bg-light d-flex align-items-center min-vh-100">
     <div class="container text-center">
         <h1 class="display-1 fw-bold text-secondary">429</h1>
-        <h4 class="mb-3">{{ __('Trop de requêtes') }}</h4>
-        <p class="text-muted mb-4">{{ __('Vous avez effectué trop de requêtes. Veuillez réessayer plus tard.') }}</p>
-        <a href="{{ url('/') }}" class="btn btn-primary">{{ __('Retour à l\'accueil') }}</a>
+        <h4 class="mb-3">{{ __('Too Many Requests') }}</h4>
+        <p class="text-muted mb-4">{{ __('You have made too many requests. Please try again later.') }}</p>
+        <a href="{{ url('/') }}" class="btn btn-primary">{{ __('Back to Home') }}</a>
     </div>
 </body>
 </html>

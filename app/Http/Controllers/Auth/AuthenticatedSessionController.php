@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         return redirect()->route('dashboard')
-            ->with('success', 'Bon retour sur EduMarket !');
+            ->with('success', 'Welcome back to EduMarket!');
     }
 
     /**
@@ -47,6 +47,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('success', 'Vous avez été déconnecté avec succès.');
+        return redirect('/')->with('success', 'You have been logged out successfully.');
     }
 }

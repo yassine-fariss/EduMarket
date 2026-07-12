@@ -1,19 +1,19 @@
-<x-app-layout title="Mes commandes">
+<x-app-layout title="My Orders">
     <div class="d-flex align-items-center justify-content-between mb-4">
         <div>
-            <h4 class="fw-bold mb-0">Mes commandes</h4>
-            <p class="text-muted small mb-0">Historique de vos achats</p>
+            <h4 class="fw-bold mb-0">My Orders</h4>
+            <p class="text-muted small mb-0">Your purchase history</p>
         </div>
         <a href="{{ route('dashboard') }}" class="btn btn-outline-primary rounded-pill btn-sm">
-            <i class="bi bi-arrow-left me-1"></i>Tableau de bord
+            <i class="bi bi-arrow-left me-1"></i>Dashboard
         </a>
     </div>
 
     @if ($orders->isEmpty())
         <div class="card-modern bg-white text-center py-5">
             <i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
-            <p class="text-muted mb-3 mt-3">Vous n'avez pas encore passé de commande.</p>
-            <a href="{{ route('shop.index') }}" class="btn btn-primary rounded-pill">Découvrir la boutique</a>
+            <p class="text-muted mb-3 mt-3">You haven't placed any orders yet.</p>
+            <a href="{{ route('shop.index') }}" class="btn btn-primary rounded-pill">Browse the shop</a>
         </div>
     @else
         <div class="card-modern bg-white">
@@ -21,11 +21,11 @@
                 <table class="table table-hover mb-0 align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>Commande</th>
+                            <th>Order</th>
                             <th>Date</th>
-                            <th>Articles</th>
+                            <th>Items</th>
                             <th>Total</th>
-                            <th>Statut</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -46,10 +46,10 @@
                                             default => 'secondary',
                                         };
                                         $label = match ($order->status) {
-                                            'pending' => 'En attente',
-                                            'processing' => 'En cours',
-                                            'completed' => 'Terminée',
-                                            'cancelled' => 'Annulée',
+                                            'pending' => 'Pending',
+                                            'processing' => 'Processing',
+                                            'completed' => 'Completed',
+                                            'cancelled' => 'Cancelled',
                                             default => $order->status,
                                         };
                                     @endphp
@@ -57,7 +57,7 @@
                                 </td>
                                 <td class="text-end">
                                     <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-outline-primary rounded-pill">
-                                        Détails <i class="bi bi-arrow-right ms-1"></i>
+                                        Details <i class="bi bi-arrow-right ms-1"></i>
                                     </a>
                                 </td>
                             </tr>

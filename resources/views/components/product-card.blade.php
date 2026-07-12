@@ -20,9 +20,9 @@
                 {{ $product->category->name }}
             </a>
             @if ($product->stock > 0)
-                <span class="stock-badge bg-success bg-opacity-10 text-success">En stock</span>
+                <span class="stock-badge bg-success bg-opacity-10 text-success">In Stock</span>
             @else
-                <span class="stock-badge bg-danger bg-opacity-10 text-danger">Rupture</span>
+                <span class="stock-badge bg-danger bg-opacity-10 text-danger">Out of Stock</span>
             @endif
         </div>
 
@@ -36,7 +36,7 @@
             <div class="product-price">{{ number_format($product->price, 2) }} €</div>
             <div class="card-actions">
                 <a href="{{ route('shop.show', $product->slug) }}" class="btn btn-outline-primary btn-sm">
-                    <i class="bi bi-eye me-1"></i> Détails
+                    <i class="bi bi-eye me-1"></i> Details
                 </a>
                 @if ($product->stock > 0)
                     <form method="POST" action="{{ route('cart.add') }}" class="d-flex flex-grow-1" data-ajax-cart>
@@ -44,12 +44,12 @@
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <input type="hidden" name="quantity" value="1">
                         <button type="submit" class="btn btn-primary btn-sm w-100">
-                            <i class="bi bi-cart-plus me-1"></i> Ajouter
+                            <i class="bi bi-cart-plus me-1"></i> Add
                         </button>
                     </form>
                 @else
                     <button class="btn btn-secondary btn-sm w-100" disabled>
-                        <i class="bi bi-x-circle me-1"></i> Indisponible
+                        <i class="bi bi-x-circle me-1"></i> Unavailable
                     </button>
                 @endif
             </div>

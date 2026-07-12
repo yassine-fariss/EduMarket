@@ -27,11 +27,11 @@ document.getElementById('generate-slug')?.addEventListener('click', function () 
         <div class="col-lg-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
-                    <h5 class="fw-bold mb-0">Informations</h5>
+                    <h5 class="fw-bold mb-0">Information</h5>
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
-                        <x-input-label for="title" value="Titre *" />
+                        <x-input-label for="title" value="Title *" />
                         <x-text-input id="title" class="w-100" type="text" name="title"
                                       :value="old('title', $isEdit ? $product->title : '')" required />
                         <x-input-error :messages="$errors->get('title')" />
@@ -43,9 +43,9 @@ document.getElementById('generate-slug')?.addEventListener('click', function () 
                             <x-text-input id="slug" class="w-100" type="text" name="slug"
                                           :value="old('slug', $isEdit ? $product->slug : '')" required />
                             <button type="button" class="btn btn-outline-secondary" id="generate-slug"
-                                    title="Générer depuis le titre">⟳</button>
+                                    title="Generate from title">⟳</button>
                         </div>
-                        <div class="form-text">Identifiant unique pour l'URL. Lettres, chiffres et tirets.</div>
+                        <div class="form-text">Unique URL identifier. Letters, numbers and hyphens.</div>
                         <x-input-error :messages="$errors->get('slug')" />
                     </div>
 
@@ -57,7 +57,7 @@ document.getElementById('generate-slug')?.addEventListener('click', function () 
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-4">
-                            <x-input-label for="price" value="Prix (€) *" />
+                            <x-input-label for="price" value="Price (€) *" />
                             <x-text-input id="price" class="w-100" type="number" step="0.01" min="0"
                                           name="price"
                                           :value="old('price', $isEdit ? $product->price : '')" required />
@@ -73,10 +73,10 @@ document.getElementById('generate-slug')?.addEventListener('click', function () 
                         </div>
 
                         <div class="col-md-4">
-                            <x-input-label for="status" value="Statut *" />
+                            <x-input-label for="status" value="Status *" />
                             <select id="status" name="status" class="form-select">
-                                <option value="active" {{ old('status', $isEdit ? $product->status : 'active') === 'active' ? 'selected' : '' }}>Actif</option>
-                                <option value="draft" {{ old('status', $isEdit ? $product->status : '') === 'draft' ? 'selected' : '' }}>Brouillon</option>
+                                <option value="active" {{ old('status', $isEdit ? $product->status : 'active') === 'active' ? 'selected' : '' }}>Active</option>
+                                <option value="draft" {{ old('status', $isEdit ? $product->status : '') === 'draft' ? 'selected' : '' }}>Draft</option>
                             </select>
                             <x-input-error :messages="$errors->get('status')" />
                         </div>
@@ -88,11 +88,11 @@ document.getElementById('generate-slug')?.addEventListener('click', function () 
         <div class="col-lg-4">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-white">
-                    <h5 class="fw-bold mb-0">Catégorie *</h5>
+                    <h5 class="fw-bold mb-0">Category *</h5>
                 </div>
                 <div class="card-body">
                     <select name="category_id" class="form-select" required>
-                        <option value="">Sélectionner...</option>
+                        <option value="">Select...</option>
                         @foreach ($categories as $cat)
                             <option value="{{ $cat->id }}" {{ old('category_id', $isEdit ? $product->category_id : '') == $cat->id ? 'selected' : '' }}>
                                 {{ $cat->name }}
@@ -115,15 +115,15 @@ document.getElementById('generate-slug')?.addEventListener('click', function () 
                                  alt="{{ $product->title }}"
                                  class="img-fluid rounded mb-2"
                                  style="max-height: 180px; object-fit: cover;">
-                            <p class="small text-muted mb-0">Image actuelle</p>
+                            <p class="small text-muted mb-0">Current image</p>
                         </div>
                     @endif
 
                     <div class="mb-3">
-                        <x-input-label for="image" value="{{ $isEdit && $product->image ? 'Nouvelle image' : 'Image' }}" />
+                        <x-input-label for="image" value="{{ $isEdit && $product->image ? 'New image' : 'Image' }}" />
                         <input type="file" id="image" name="image" class="form-control"
                                accept="image/jpeg,image/png,image/jpg,image/webp">
-                        <div class="form-text">JPEG, PNG ou WebP. Max 2 Mo.</div>
+                        <div class="form-text">JPEG, PNG or WebP. Max 2 MB.</div>
                         <x-input-error :messages="$errors->get('image')" />
                     </div>
 
@@ -131,7 +131,7 @@ document.getElementById('generate-slug')?.addEventListener('click', function () 
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="remove_image" id="remove_image" value="1">
                             <label class="form-check-label small" for="remove_image">
-                                Supprimer l'image actuelle
+                                Remove current image
                             </label>
                         </div>
                     @endif
@@ -140,9 +140,9 @@ document.getElementById('generate-slug')?.addEventListener('click', function () 
 
             <div class="mt-4 d-flex gap-2">
                 <button type="submit" class="btn btn-primary flex-grow-1">
-                    {{ $isEdit ? 'Mettre à jour' : 'Créer le produit' }}
+                    {{ $isEdit ? 'Update' : 'Create Product' }}
                 </button>
-                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary">Annuler</a>
+                <a href="{{ route('admin.products.index') }}" class="btn btn-outline-secondary">Cancel</a>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Facture #{{ $order->order_number ?? $order->id }} - {{ config('app.name') }}</title>
+    <title>Invoice #{{ $order->order_number ?? $order->id }} - {{ config('app.name') }}</title>
     <style>
         @page { margin: 20mm; }
         body { font-family: 'DejaVu Sans', sans-serif; font-size: 12px; line-height: 1.5; color: #333; }
@@ -36,19 +36,19 @@
 </head>
 <body>
     <div class="no-print">
-        <button onclick="window.print()">Imprimer</button>
+        <button onclick="window.print()">Print</button>
     </div>
 
     <div class="header">
         <h1>{{ config('app.name', 'EduMarket') }}</h1>
-        <p>Facture</p>
+        <p>Invoice</p>
     </div>
 
     <div class="info">
         <table>
             <tr>
                 <td>
-                    <h3>Facturé à</h3>
+                    <h3>Billed To</h3>
                     <p><strong>{{ $order->full_name ?? $order->user?->name }}</strong></p>
                     <p>{{ $order->shipping_address }}</p>
                     @if ($order->city)<p>{{ $order->city }}</p>@endif
@@ -56,10 +56,10 @@
                     <p>{{ $order->user?->email }}</p>
                 </td>
                 <td>
-                    <h3>Détails</h3>
-                    <p><strong>N° commande :</strong> #{{ $order->order_number ?? $order->id }}</p>
-                    <p><strong>Date :</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
-                    <p><strong>Statut :</strong>
+                    <h3>Details</h3>
+                    <p><strong>Order #:</strong> #{{ $order->order_number ?? $order->id }}</p>
+                    <p><strong>Date:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
+                    <p><strong>Status:</strong>
                         @php
                             $badge = match ($order->status) {
                                 'pending' => 'badge-warning',
@@ -69,22 +69,22 @@
                                 default => '',
                             };
                             $label = match ($order->status) {
-                                'pending' => 'En attente',
-                                'processing' => 'En cours',
-                                'completed' => 'Terminée',
-                                'cancelled' => 'Annulée',
+                                'pending' => 'Pending',
+                                'processing' => 'Processing',
+                                'completed' => 'Completed',
+                                'cancelled' => 'Cancelled',
                                 default => $order->status,
                             };
                         @endphp
                         <span class="badge {{ $badge }}">{{ $label }}</span>
                     </p>
-                    <p><strong>Paiement :</strong>
+                    <p><strong>Payment:</strong>
                         @php
                             $pmLabel = match ($order->payment_method) {
-                                'cash_on_delivery' => 'À la livraison',
-                                'credit_card' => 'Carte bancaire',
+                                'cash_on_delivery' => 'Cash on Delivery',
+                                'credit_card' => 'Credit Card',
                                 'paypal' => 'PayPal',
-                                'bank_transfer' => 'Virement',
+                                'bank_transfer' => 'Bank Transfer',
                                 default => $order->payment_method,
                             };
                         @endphp
@@ -98,16 +98,16 @@
     <table class="items">
         <thead>
             <tr>
-                <th>Produit</th>
-                <th class="center">Quantité</th>
-                <th class="right">Prix unitaire</th>
+                <th>Product</th>
+                <th class="center">Quantity</th>
+                <th class="right">Unit Price</th>
                 <th class="right">Total</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($order->items as $item)
                 <tr>
-                    <td>{{ $item->product?->title ?? 'Produit supprimé' }}</td>
+                    <td>{{ $item->product?->title ?? 'Deleted product' }}</td>
                     <td class="center">{{ $item->quantity }}</td>
                     <td class="right">{{ number_format($item->price, 2) }} €</td>
                     <td class="right">{{ number_format($item->subtotal, 2) }} €</td>
@@ -117,18 +117,18 @@
     </table>
 
     <div class="total">
-        Total : {{ number_format($order->total, 2) }} €
+        Total: {{ number_format($order->total, 2) }} €
     </div>
 
     @if ($order->notes)
         <div style="margin-top: 20px;">
-            <strong>Notes :</strong>
+            <strong>Notes:</strong>
             <p>{{ $order->notes }}</p>
         </div>
     @endif
 
     <div class="footer">
-        <p>{{ config('app.name', 'EduMarket') }} &mdash; Merci de votre confiance.</p>
+        <p>{{ config('app.name', 'EduMarket') }} &mdash; Thank you for your trust.</p>
     </div>
 </body>
 </html>
