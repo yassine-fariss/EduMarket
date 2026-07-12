@@ -28,6 +28,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $cart->mergeSessionToDatabase();
+        $cart->loadFromDatabase();
 
         $request->session()->regenerate();
 

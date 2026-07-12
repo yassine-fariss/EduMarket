@@ -17,7 +17,7 @@ class CheckoutController extends Controller
         private readonly CartService $cart
     ) {}
 
-    public function index(): View
+    public function index(): View|\Illuminate\Http\RedirectResponse
     {
         $items = $this->cart->get();
 
@@ -25,7 +25,7 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('warning', 'Votre panier est vide.');
         }
 
-        return view('checkout.index');
+        return view('checkout.index', compact('items'));
     }
 
     public function store(Request $request): RedirectResponse

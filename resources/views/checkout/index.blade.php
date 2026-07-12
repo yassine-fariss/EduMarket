@@ -10,8 +10,6 @@
 
         <h2 class="fw-bold mb-4">Finaliser la commande</h2>
 
-        @php $items = app(\App\Services\CartService::class)->get(); @endphp
-
         <div class="row g-4">
             <div class="col-lg-7">
                 <form method="POST" action="{{ route('checkout.store') }}" id="checkout-form">

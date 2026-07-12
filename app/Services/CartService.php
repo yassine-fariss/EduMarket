@@ -185,6 +185,28 @@ class CartService
             ->contains('product_id', $productId);
     }
 
+    public function loadFromDatabase(): void
+    {
+        if (!Auth::check()) {
+            return;
+        }
+
+        $sessionItems = Session::get(self::SESSION_KEY, []);
+        if (!empty($sessionItems)) {
+            return;
+        }
+
+        $dbItems = CartItem::where('user_id', Auth::id())->get();
+        if ($dbItems->isEmpty()) {
+            return;
+        }
+
+        Session::put(self::SESSION_KEY, $dbItems->map(fn (CartItem $item) => [
+            'product_id' => $item->product_id,
+            'quantity' => $item->quantity,
+        ])->values()->toArray());
+    }
+
     public function mergeSessionToDatabase(): void
     {
         if (!Auth::check()) {
@@ -197,31 +219,34 @@ class CartService
             return;
         }
 
+        $merged = collect($sessionItems)->keyBy('product_id');
+
         foreach ($sessionItems as $item) {
             $cartItem = CartItem::firstOrNew([
                 'user_id' => Auth::id(),
                 'product_id' => $item['product_id'],
             ]);
-            $cartItem->quantity += $item['quantity'];
+            $merged[$item['product_id']]['quantity'] = $cartItem->quantity + $item['quantity'];
+            $cartItem->quantity = $merged[$item['product_id']]['quantity'];
             $cartItem->save();
         }
 
-        // Do NOT clear session cart — session (cookie) is the primary store,
-        // DB is just a sync target. Clearing would lose the cart on cross-instance redirects.
+        Session::put(self::SESSION_KEY, $merged->values()->toArray());
     }
 
     private function syncSessionToDatabase(): void
     {
         $sessionItems = Session::get(self::SESSION_KEY, []);
 
-        CartItem::where('user_id', Auth::id())->delete();
-
         foreach ($sessionItems as $item) {
-            CartItem::create([
-                'user_id' => Auth::id(),
-                'product_id' => $item['product_id'],
-                'quantity' => $item['quantity'],
-            ]);
+            CartItem::updateOrCreate(
+                ['user_id' => Auth::id(), 'product_id' => $item['product_id']],
+                ['quantity' => $item['quantity']],
+            );
         }
+
+        CartItem::where('user_id', Auth::id())
+            ->whereNotIn('product_id', collect($sessionItems)->pluck('product_id'))
+            ->delete();
     }
 }

@@ -74,8 +74,8 @@ class CartController extends Controller
     {
         $extra['success'] = $success;
         $extra['message'] = $message;
-        $extra['cart_count'] = $this->cart->count();
-        $extra['cart_total'] = $this->cart->total();
+        $extra['cart_count'] = $extra['count'] ?? $this->cart->count();
+        $extra['cart_total'] = $extra['total'] ?? $this->cart->total();
 
         if ($request->wantsJson() || $request->ajax()) {
             return response()->json($extra);
