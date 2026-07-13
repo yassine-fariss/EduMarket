@@ -9,7 +9,7 @@ $root = __DIR__ . '/..';
 // Set safe production defaults (can be overridden by Vercel env vars)
 $_ENV['APP_KEY'] = 'base64:NMtlsBpaCulSGZqcW2ri0iTRmHskki4JKsuiwHYa4N0=';
 $_ENV['APP_ENV'] = 'production';
-$_ENV['APP_DEBUG'] = getenv('APP_DEBUG') ?: 'true';
+$_ENV['APP_DEBUG'] = getenv('APP_DEBUG') ?: 'false';
 $_ENV['SESSION_SECURE_COOKIE'] = 'true';
 $_ENV['CACHE_STORE'] = 'array';
 $_ENV['QUEUE_CONNECTION'] = 'sync';
