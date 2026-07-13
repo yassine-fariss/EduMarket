@@ -115,7 +115,7 @@
                             <tr>
                                 <td class="fw-medium">#{{ $order->order_number ?? $order->id }}</td>
                                 <td class="small">{{ $order->created_at->format('d/m/Y') }}</td>
-                                <td>{{ $order->items->sum('quantity') }}</td>
+                                <td>{{ $order->total_qty }}</td>
                                 <td class="fw-medium">{{ number_format($order->total, 2) }} €</td>
                                 <td>
                                     @php

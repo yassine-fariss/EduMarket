@@ -11,7 +11,6 @@ class OrderController extends Controller
     public function index(Request $request): View
     {
         $orders = Order::where('user_id', $request->user()->id)
-            ->with('items.product')
             ->withCount('items')
             ->latest()
             ->paginate(10);
@@ -25,7 +24,7 @@ class OrderController extends Controller
             abort(403);
         }
 
-        $order->load('items.product');
+        $order->load(['items.product', 'user']);
 
         return view('orders.show', compact('order'));
     }

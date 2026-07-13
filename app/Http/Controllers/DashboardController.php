@@ -28,7 +28,7 @@ class DashboardController extends Controller
         ];
 
         $recentOrders = $user->orders()
-            ->with('items')
+            ->withSum('items as total_qty', 'quantity')
             ->latest()
             ->take(5)
             ->get();
