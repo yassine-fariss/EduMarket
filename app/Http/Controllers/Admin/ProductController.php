@@ -14,22 +14,22 @@ class ProductController extends Controller
 {
     public function index(Request $request): View
     {
-        $products = Product::with('category')
+        $products = Product::with('category:id,name')
             ->search($request->search)
             ->when($request->category, fn ($q, $v) => $q->where('category_id', $v))
             ->when($request->status, fn ($q, $v) => $q->where('status', $v))
             ->orderBy('created_at', 'desc')
-            ->paginate(15)
+            ->paginate(15, ['id', 'title', 'slug', 'price', 'stock', 'image', 'status', 'category_id', 'created_at'])
             ->withQueryString();
 
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get(['id', 'name']);
 
         return view('admin.products.index', compact('products', 'categories'));
     }
 
     public function create(): View
     {
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get(['id', 'name']);
 
         return view('admin.products.create', compact('categories'));
     }
@@ -59,7 +59,7 @@ class ProductController extends Controller
 
     public function edit(Product $product): View
     {
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get(['id', 'name']);
 
         return view('admin.products.edit', compact('product', 'categories'));
     }

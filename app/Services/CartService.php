@@ -65,7 +65,7 @@ class CartService
             return 0;
         }
 
-        $product = Product::find($productId);
+        $product = Product::find($productId, ['id', 'price']);
 
         return $product ? round((float) $product->price * $item['quantity'], 2) : 0;
     }
@@ -219,33 +219,53 @@ class CartService
             return;
         }
 
-        $merged = collect($sessionItems)->keyBy('product_id');
+        $userId = Auth::id();
+        $productIds = collect($sessionItems)->pluck('product_id');
+
+        $existing = CartItem::where('user_id', $userId)
+            ->whereIn('product_id', $productIds)
+            ->get()
+            ->keyBy('product_id');
+
+        $values = [];
 
         foreach ($sessionItems as $item) {
-            $cartItem = CartItem::firstOrNew([
-                'user_id' => Auth::id(),
+            $dbQty = $existing->get($item['product_id'])?->quantity ?? 0;
+            $newQty = $dbQty + $item['quantity'];
+
+            $values[] = [
+                'user_id' => $userId,
                 'product_id' => $item['product_id'],
-            ]);
-            $merged[$item['product_id']]['quantity'] = $cartItem->quantity + $item['quantity'];
-            $cartItem->quantity = $merged[$item['product_id']]['quantity'];
-            $cartItem->save();
+                'quantity' => $newQty,
+            ];
         }
 
-        Session::put(self::SESSION_KEY, $merged->values()->toArray());
+        CartItem::upsert($values, ['user_id', 'product_id'], ['quantity']);
+
+        Session::put(self::SESSION_KEY, collect($values)->map(fn ($v) => [
+            'product_id' => $v['product_id'],
+            'quantity' => $v['quantity'],
+        ])->values()->toArray());
     }
 
     private function syncSessionToDatabase(): void
     {
         $sessionItems = Session::get(self::SESSION_KEY, []);
 
-        foreach ($sessionItems as $item) {
-            CartItem::updateOrCreate(
-                ['user_id' => Auth::id(), 'product_id' => $item['product_id']],
-                ['quantity' => $item['quantity']],
-            );
+        if (empty($sessionItems)) {
+            return;
         }
 
-        CartItem::where('user_id', Auth::id())
+        $userId = Auth::id();
+        $values = collect($sessionItems)->map(fn ($item) => [
+            'user_id' => $userId,
+            'product_id' => $item['product_id'],
+            'quantity' => $item['quantity'],
+        ])->toArray();
+
+        CartItem::upsert($values, ['user_id', 'product_id'], ['quantity']);
+
+        CartItem::where('user_id', $userId)
             ->whereNotIn('product_id', collect($sessionItems)->pluck('product_id'))
             ->delete();
     }

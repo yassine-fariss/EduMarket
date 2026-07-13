@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
     public function index(Request $request): View
     {
-        $orders = Order::with(['user', 'items'])
+        $orders = Order::with('user')
             ->when($request->search, function ($q, $search) {
                 $q->where(function ($q) use ($search) {
                     $q->where('order_number', 'like', "%{$search}%")

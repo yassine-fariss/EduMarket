@@ -59,9 +59,11 @@ class CategoryController extends Controller
 
     public function destroy(Category $category): RedirectResponse
     {
-        if ($category->products()->count() > 0) {
+        $productCount = $category->products()->count();
+
+        if ($productCount > 0) {
             return redirect()->route('admin.categories.index')
-                ->with('error', 'Cannot delete this category because it contains ' . $category->products()->count() . ' product(s).');
+                ->with('error', "Cannot delete this category because it contains {$productCount} product(s).");
         }
 
         $category->delete();

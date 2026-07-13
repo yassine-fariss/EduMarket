@@ -19,9 +19,9 @@
                                 $isExternal = filter_var($product->image, FILTER_VALIDATE_URL);
                                 $imgSrc = $isExternal ? $product->image : (str_starts_with($product->image, 'images/') ? asset($product->image) : asset('storage/' . $product->image));
                             @endphp
-                            <img src="{{ $imgSrc }}" alt="{{ $product->title }}" class="img-fluid p-4" style="max-height: 400px; object-fit: contain;">
+                            <img src="{{ $imgSrc }}" alt="{{ $product->title }}" width="500" height="400" class="img-fluid p-4" style="max-height: 400px; object-fit: contain;">
                         @else
-                            <img src="https://placehold.co/500x400/6B7280/FFFFFF?text={{ urlencode($product->title) }}" alt="{{ $product->title }}" class="img-fluid p-4">
+                            <img src="https://placehold.co/500x400/6B7280/FFFFFF?text={{ urlencode($product->title) }}" alt="{{ $product->title }}" width="500" height="400" class="img-fluid p-4">
                         @endif
                     </div>
                 </div>

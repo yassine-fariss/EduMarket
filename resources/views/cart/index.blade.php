@@ -55,7 +55,7 @@
                                                     @endphp
                                                     @if ($item['image'])
                                                         <img src="{{ $imgSrc }}" alt="{{ $item['title'] }}"
-                                                             class="rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                                                             width="50" height="50" class="rounded" style="object-fit: cover;" loading="lazy">
                                                     @else
                                                         <div class="bg-light rounded d-flex align-items-center justify-content-center text-muted"
                                                              style="width: 50px; height: 50px; font-size: 0.7rem;">N/A</div>

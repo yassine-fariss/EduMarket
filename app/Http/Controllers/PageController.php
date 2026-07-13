@@ -11,21 +11,21 @@ class PageController extends Controller
 {
     public function home(): View
     {
-        $featured = Product::with('category')
+        $featured = Product::with('category:id,name,slug')
             ->where('status', 'active')
             ->orderBy('title')
             ->take(8)
-            ->get();
+            ->get(['id', 'title', 'slug', 'price', 'stock', 'image', 'category_id']);
 
-        $newest = Product::with('category')
+        $newest = Product::with('category:id,name,slug')
             ->where('status', 'active')
             ->latest()
             ->take(8)
-            ->get();
+            ->get(['id', 'title', 'slug', 'price', 'stock', 'image', 'category_id', 'created_at']);
 
         $categories = Category::withCount('products')
             ->orderBy('name')
-            ->get();
+            ->get(['id', 'name', 'slug']);
 
         return view('home', compact('featured', 'newest', 'categories'));
     }

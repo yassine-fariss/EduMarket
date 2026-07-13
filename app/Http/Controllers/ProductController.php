@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function index(Request $request): View
     {
-        $products = Product::with('category')
+        $products = Product::with('category:id,name,slug')
             ->active()
             ->search($request->search)
             ->byCategorySlug($request->category)
@@ -21,14 +21,16 @@ class ProductController extends Controller
             )
             ->inStock($request->boolean('in_stock'))
             ->sortBy($request->sort)
-            ->paginate(min((int) $request->per_page ?: 12, 48))
+            ->paginate(min((int) $request->per_page ?: 12, 48), ['products.id', 'products.title', 'products.slug', 'products.price', 'products.stock', 'products.image', 'products.category_id', 'products.status', 'products.created_at'])
             ->withQueryString();
 
-        $categories = Category::has('products')->orderBy('name')->get();
+        $categories = Category::has('products')->orderBy('name')->get(['id', 'name', 'slug']);
 
         $activeCategory = $request->category
             ? Category::whereSlug($request->category)->value('name')
             : null;
+
+
 
         return view('shop.index', compact('products', 'categories', 'activeCategory'));
     }
@@ -39,15 +41,15 @@ class ProductController extends Controller
             abort(404);
         }
 
-        $product->load('category');
+        $product->load('category:id,name,slug');
 
-        $related = Product::with('category')
+        $related = Product::with('category:id,name,slug')
             ->active()
             ->where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
             ->inRandomOrder()
             ->take(4)
-            ->get();
+            ->get(['id', 'title', 'slug', 'price', 'stock', 'image', 'category_id']);
 
         return view('products.show', compact('product', 'related'));
     }

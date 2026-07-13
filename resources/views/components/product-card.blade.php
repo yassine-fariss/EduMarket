@@ -8,9 +8,9 @@
                 $isExternal = filter_var($product->image, FILTER_VALIDATE_URL);
                 $imgSrc = $isExternal ? $product->image : (str_starts_with($product->image, 'images/') ? asset($product->image) : asset('storage/' . $product->image));
             @endphp
-            <img src="{{ $imgSrc }}" alt="{{ $product->title }}" class="card-img-top" loading="lazy">
+            <img src="{{ $imgSrc }}" alt="{{ $product->title }}" width="400" height="300" class="card-img-top" loading="lazy">
         @else
-                <img src="https://placehold.co/400x300/6B7280/FFFFFF?text={{ urlencode($product->title) }}" alt="{{ $product->title }}" class="card-img-top" loading="lazy">
+                <img src="https://placehold.co/400x300/6B7280/FFFFFF?text={{ urlencode($product->title) }}" alt="{{ $product->title }}" width="400" height="300" class="card-img-top" loading="lazy">
             @endif
         </div>
     </a>

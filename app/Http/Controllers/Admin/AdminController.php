@@ -25,12 +25,12 @@ class AdminController extends Controller
             'revenue' => Order::where('status', 'completed')->sum('total'),
         ];
 
-        $recentOrders = Order::with(['user', 'items'])
+        $recentOrders = Order::with('user')
             ->latest()
             ->take(5)
             ->get();
 
-        $lowStockProducts = Product::with('category')
+        $lowStockProducts = Product::with('category:id,name')
             ->where('stock', '<', 5)
             ->orderBy('stock')
             ->take(10)

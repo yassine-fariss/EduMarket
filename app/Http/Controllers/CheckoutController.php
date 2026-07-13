@@ -70,13 +70,18 @@ class CheckoutController extends Controller
                 'status' => 'pending',
             ]);
 
-            foreach ($items as $item) {
-                $product = Product::findOrFail($item['product_id']);
+            $productIds = $items->pluck('product_id');
+            $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
 
-                if ($product->stock < $item['quantity']) {
+            foreach ($items as $item) {
+                $product = $products->get($item['product_id']);
+
+                if (!$product || $product->stock < $item['quantity']) {
                     DB::rollBack();
+                    $name = $product?->title ?? 'Product';
+                    $stock = $product?->stock ?? 0;
                     return redirect()->route('cart.index')
-                        ->with('error', "Insufficient stock for {$product->title}. ({$product->stock} available)");
+                        ->with('error', "Insufficient stock for {$name}. ({$stock} available)");
                 }
 
                 $product->decrement('stock', $item['quantity']);
