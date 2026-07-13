@@ -6,8 +6,9 @@ ini_set('error_log', '/tmp/php-error.log');
 
 $root = __DIR__ . '/..';
 
+// Set safe production defaults (can be overridden by Vercel env vars)
 $_ENV['APP_ENV'] = 'production';
-$_ENV['APP_DEBUG'] = 'false';
+$_ENV['APP_DEBUG'] = getenv('APP_DEBUG') ?: 'false';
 $_ENV['SESSION_SECURE_COOKIE'] = 'true';
 $_ENV['CACHE_STORE'] = 'array';
 $_ENV['QUEUE_CONNECTION'] = 'sync';
@@ -15,6 +16,21 @@ $_ENV['LOG_CHANNEL'] = 'stderr';
 $_ENV['LOG_LEVEL'] = 'error';
 $_ENV['BROADCAST_CONNECTION'] = 'log';
 $_ENV['FILESYSTEM_DISK'] = 'local';
+
+// Database: use Vercel env vars if set (Aiven MySQL), otherwise fallback to SQLite
+if (getenv('DB_HOST')) {
+    $_ENV['DB_CONNECTION'] = getenv('DB_CONNECTION') ?: 'mysql';
+} else {
+    // Fallback: persistent SQLite in /tmp/ so the app works without env vars
+    $_ENV['DB_CONNECTION'] = 'sqlite';
+    $_ENV['DB_DATABASE'] = '/tmp/edumarket.sqlite';
+    // Copy seed database if it exists and runtime DB doesn't
+    $seedDb = "$root/database/seed.sqlite";
+    $runtimeDb = '/tmp/edumarket.sqlite';
+    if (file_exists($seedDb) && !file_exists($runtimeDb)) {
+        copy($seedDb, $runtimeDb);
+    }
+}
 
 // Create writable storage directories in /tmp/
 $tmpStorage = '/tmp/storage';
