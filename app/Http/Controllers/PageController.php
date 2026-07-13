@@ -13,6 +13,7 @@ class PageController extends Controller
     {
         $featured = Product::with('category:id,name,slug')
             ->where('status', 'active')
+            ->where('category_id', 11)
             ->orderBy('title')
             ->take(8)
             ->get(['id', 'title', 'slug', 'price', 'stock', 'image', 'category_id']);
