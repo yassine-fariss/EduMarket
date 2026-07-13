@@ -227,24 +227,32 @@ class CartService
             ->get()
             ->keyBy('product_id');
 
-        $values = [];
+        $merged = [];
 
         foreach ($sessionItems as $item) {
             $dbQty = $existing->get($item['product_id'])?->quantity ?? 0;
-            $newQty = $dbQty + $item['quantity'];
+            $merged[$item['product_id']] = $dbQty + $item['quantity'];
+        }
 
+        CartItem::where('user_id', $userId)->delete();
+
+        $now = now();
+        $values = [];
+        foreach ($merged as $productId => $qty) {
             $values[] = [
                 'user_id' => $userId,
-                'product_id' => $item['product_id'],
-                'quantity' => $newQty,
+                'product_id' => $productId,
+                'quantity' => $qty,
+                'created_at' => $now,
+                'updated_at' => $now,
             ];
         }
 
-        CartItem::upsert($values, ['user_id', 'product_id'], ['quantity']);
+        CartItem::insert($values);
 
-        Session::put(self::SESSION_KEY, collect($values)->map(fn ($v) => [
-            'product_id' => $v['product_id'],
-            'quantity' => $v['quantity'],
+        Session::put(self::SESSION_KEY, collect($merged)->map(fn ($qty, $pid) => [
+            'product_id' => (int) $pid,
+            'quantity' => $qty,
         ])->values()->toArray());
     }
 
@@ -257,16 +265,18 @@ class CartService
         }
 
         $userId = Auth::id();
+
+        CartItem::where('user_id', $userId)->delete();
+
+        $now = now();
         $values = collect($sessionItems)->map(fn ($item) => [
             'user_id' => $userId,
             'product_id' => $item['product_id'],
             'quantity' => $item['quantity'],
+            'created_at' => $now,
+            'updated_at' => $now,
         ])->toArray();
 
-        CartItem::upsert($values, ['user_id', 'product_id'], ['quantity']);
-
-        CartItem::where('user_id', $userId)
-            ->whereNotIn('product_id', collect($sessionItems)->pluck('product_id'))
-            ->delete();
+        CartItem::insert($values);
     }
 }
