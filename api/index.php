@@ -18,14 +18,14 @@ $_ENV['LOG_LEVEL'] = 'error';
 $_ENV['BROADCAST_CONNECTION'] = 'log';
 $_ENV['FILESYSTEM_DISK'] = 'local';
 
-// Database: use Vercel env vars if set (Aiven MySQL), otherwise fallback to SQLite
-if (getenv('DB_HOST')) {
+// Database: use MySQL if host is reachable, otherwise fallback to SQLite
+$dbHost = getenv('DB_HOST');
+if ($dbHost && @gethostbyname($dbHost) !== $dbHost) {
     $_ENV['DB_CONNECTION'] = getenv('DB_CONNECTION') ?: 'mysql';
 } else {
-    // Fallback: persistent SQLite in /tmp/ so the app works without env vars
+    // Fallback: persistent SQLite in /tmp/
     $_ENV['DB_CONNECTION'] = 'sqlite';
     $_ENV['DB_DATABASE'] = '/tmp/edumarket.sqlite';
-    // Copy seed database if it exists and runtime DB doesn't
     $seedDb = "$root/database/seed.sqlite";
     $runtimeDb = '/tmp/edumarket.sqlite';
     if (file_exists($seedDb) && !file_exists($runtimeDb)) {
