@@ -9,7 +9,7 @@ $root = __DIR__ . '/..';
 // Set safe production defaults (can be overridden by Vercel env vars)
 $_ENV['APP_KEY'] = 'base64:NMtlsBpaCulSGZqcW2ri0iTRmHskki4JKsuiwHYa4N0=';
 $_ENV['APP_ENV'] = 'production';
-$_ENV['APP_DEBUG'] = getenv('APP_DEBUG') ?: 'false';
+$_ENV['APP_DEBUG'] = getenv('APP_DEBUG') ?: 'true';
 $_ENV['SESSION_SECURE_COOKIE'] = 'true';
 $_ENV['CACHE_STORE'] = 'array';
 $_ENV['QUEUE_CONNECTION'] = 'sync';
@@ -18,19 +18,12 @@ $_ENV['LOG_LEVEL'] = 'error';
 $_ENV['BROADCAST_CONNECTION'] = 'log';
 $_ENV['FILESYSTEM_DISK'] = 'local';
 
-// Database: use MySQL if host is reachable, otherwise fallback to SQLite
-$dbHost = getenv('DB_HOST');
-if ($dbHost && @gethostbyname($dbHost) !== $dbHost) {
-    $_ENV['DB_CONNECTION'] = getenv('DB_CONNECTION') ?: 'mysql';
-} else {
-    // Fallback: persistent SQLite in /tmp/
-    $_ENV['DB_CONNECTION'] = 'sqlite';
-    $_ENV['DB_DATABASE'] = '/tmp/edumarket.sqlite';
-    $seedDb = "$root/database/seed.sqlite";
-    $runtimeDb = '/tmp/edumarket.sqlite';
-    if (file_exists($seedDb) && !file_exists($runtimeDb)) {
-        copy($seedDb, $runtimeDb);
-    }
+$_ENV['DB_CONNECTION'] = 'sqlite';
+$_ENV['DB_DATABASE'] = '/tmp/edumarket.sqlite';
+$seedDb = "$root/database/seed.sqlite";
+$runtimeDb = '/tmp/edumarket.sqlite';
+if (file_exists($seedDb) && !file_exists($runtimeDb)) {
+    copy($seedDb, $runtimeDb);
 }
 
 // Create writable storage directories in /tmp/
