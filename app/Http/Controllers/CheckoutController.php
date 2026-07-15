@@ -19,93 +19,103 @@ class CheckoutController extends Controller
 
     public function index(): View|\Illuminate\Http\RedirectResponse
     {
-        $items = $this->cart->get();
+        try {
+            $items = $this->cart->get();
 
-        if ($items->isEmpty()) {
-            return redirect()->route('cart.index')->with('warning', 'Your cart is empty.');
+            if ($items->isEmpty()) {
+                return redirect()->route('cart.index')->with('warning', 'Your cart is empty.');
+            }
+
+            return view('checkout.index', compact('items'));
+        } catch (\Throwable $e) {
+            return redirect()->route('cart.index')
+                ->with('error', 'Checkout error: ' . $e->getMessage());
         }
-
-        return view('checkout.index', compact('items'));
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $items = $this->cart->get();
-
-        if ($items->isEmpty()) {
-            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
-        }
-
-        $validated = $request->validate([
-            'full_name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:20'],
-            'shipping_address' => ['required', 'string', 'max:500'],
-            'city' => ['required', 'string', 'max:100'],
-            'notes' => ['nullable', 'string', 'max:1000'],
-            'payment_method' => ['required', 'string', 'in:cash_on_delivery'],
-            '_token' => ['required', 'string'],
-        ]);
-
-        $duplicateKey = 'checkout_submitted_' . md5(serialize($items->toArray()));
-
-        if ($request->session()->has($duplicateKey)) {
-            return redirect()->route('cart.index')
-                ->with('error', 'This order has already been submitted.');
-        }
-
-        DB::beginTransaction();
-
         try {
-            $total = $this->cart->total();
+            $items = $this->cart->get();
 
-            $order = Order::create([
-                'user_id' => $request->user()->id,
-                'full_name' => $validated['full_name'],
-                'phone' => $validated['phone'],
-                'shipping_address' => $validated['shipping_address'],
-                'city' => $validated['city'],
-                'notes' => $validated['notes'] ?? null,
-                'payment_method' => $validated['payment_method'],
-                'total' => $total,
-                'status' => 'pending',
-            ]);
-
-            $productIds = $items->pluck('product_id');
-            $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
-
-            foreach ($items as $item) {
-                $product = $products->get($item['product_id']);
-
-                if (!$product || $product->stock < $item['quantity']) {
-                    DB::rollBack();
-                    $name = $product?->title ?? 'Product';
-                    $stock = $product?->stock ?? 0;
-                    return redirect()->route('cart.index')
-                        ->with('error', "Insufficient stock for {$name}. ({$stock} available)");
-                }
-
-                $product->decrement('stock', $item['quantity']);
-
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $product->id,
-                    'price' => $item['price'],
-                    'quantity' => $item['quantity'],
-                    'subtotal' => round($item['price'] * $item['quantity'], 2),
-                ]);
+            if ($items->isEmpty()) {
+                return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
             }
 
-            DB::commit();
+            $validated = $request->validate([
+                'full_name' => ['required', 'string', 'max:255'],
+                'phone' => ['required', 'string', 'max:20'],
+                'shipping_address' => ['required', 'string', 'max:500'],
+                'city' => ['required', 'string', 'max:100'],
+                'notes' => ['nullable', 'string', 'max:1000'],
+                'payment_method' => ['required', 'string', 'in:cash_on_delivery'],
+                '_token' => ['required', 'string'],
+            ]);
 
-            $request->session()->put($duplicateKey, true);
-            $this->cart->clear();
+            $duplicateKey = 'checkout_submitted_' . md5(serialize($items->toArray()));
 
-            return redirect()->route('checkout.confirmation', $order)
-                ->with('success', 'Your order has been confirmed!');
+            if ($request->session()->has($duplicateKey)) {
+                return redirect()->route('cart.index')
+                    ->with('error', 'This order has already been submitted.');
+            }
+
+            DB::beginTransaction();
+
+            try {
+                $total = $this->cart->total();
+
+                $order = Order::create([
+                    'user_id' => $request->user()->id,
+                    'full_name' => $validated['full_name'],
+                    'phone' => $validated['phone'],
+                    'shipping_address' => $validated['shipping_address'],
+                    'city' => $validated['city'],
+                    'notes' => $validated['notes'] ?? null,
+                    'payment_method' => $validated['payment_method'],
+                    'total' => $total,
+                    'status' => 'pending',
+                ]);
+
+                $productIds = $items->pluck('product_id');
+                $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+
+                foreach ($items as $item) {
+                    $product = $products->get($item['product_id']);
+
+                    if (!$product || $product->stock < $item['quantity']) {
+                        DB::rollBack();
+                        $name = $product?->title ?? 'Product';
+                        $stock = $product?->stock ?? 0;
+                        return redirect()->route('cart.index')
+                            ->with('error', "Insufficient stock for {$name}. ({$stock} available)");
+                    }
+
+                    $product->decrement('stock', $item['quantity']);
+
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'product_id' => $product->id,
+                        'price' => $item['price'],
+                        'quantity' => $item['quantity'],
+                        'subtotal' => round($item['price'] * $item['quantity'], 2),
+                    ]);
+                }
+
+                DB::commit();
+
+                $request->session()->put($duplicateKey, true);
+                $this->cart->clear();
+
+                return redirect()->route('checkout.confirmation', $order)
+                    ->with('success', 'Your order has been confirmed!');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return redirect()->route('checkout.index')
+                    ->with('error', 'Order error: ' . $e->getMessage());
+            }
         } catch (\Throwable $e) {
-            DB::rollBack();
-            return redirect()->route('checkout.index')
-                ->with('error', 'An error occurred while placing the order. Please try again.');
+            return redirect()->route('cart.index')
+                ->with('error', 'Checkout error: ' . $e->getMessage());
         }
     }
 
