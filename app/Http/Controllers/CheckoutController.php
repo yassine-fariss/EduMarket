@@ -33,7 +33,7 @@ class CheckoutController extends Controller
         }
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): View|RedirectResponse
     {
         try {
             $items = $this->cart->get();
@@ -106,8 +106,10 @@ class CheckoutController extends Controller
                 $request->session()->put($duplicateKey, true);
                 $this->cart->clear();
 
-                return redirect()->route('checkout.confirmation', $order)
-                    ->with('success', 'Your order has been confirmed!');
+                $order->load('items.product');
+                session()->flash('success', 'Your order has been confirmed!');
+
+                return view('checkout.confirmation', compact('order'));
             } catch (\Throwable $e) {
                 DB::rollBack();
                 return redirect()->route('checkout.index')

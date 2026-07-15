@@ -22,7 +22,7 @@ $_ENV['DB_CONNECTION'] = 'sqlite';
 $_ENV['DB_DATABASE'] = '/tmp/edumarket.sqlite';
 $seedDb = "$root/database/seed.sqlite";
 $runtimeDb = '/tmp/edumarket.sqlite';
-if (file_exists($seedDb)) {
+if (file_exists($seedDb) && !file_exists($runtimeDb)) {
     copy($seedDb, $runtimeDb);
 }
 
